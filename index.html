@@ -271,7 +271,6 @@
     border-left: 2px solid transparent;
   }
   .service:hover { background: var(--bg3); border-left-color: var(--accent); }
-  .service-num { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: var(--gray); margin-bottom: 16px; }
   .service-title { font-size: 17px; font-weight: 500; margin-bottom: 10px; line-height: 1.4; }
   .service-desc { font-size: 13px; color: var(--gray); line-height: 1.75; }
 
@@ -289,9 +288,7 @@
   .process-list { display: flex; flex-direction: column; gap: 2px; }
   .process-step {
     background: var(--bg2); padding: 24px 20px;
-    display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
   }
-  .process-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--border); line-height: 1; }
   .process-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
   .process-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
   .process-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
@@ -588,37 +585,30 @@
   <div class="section-label">Услуги</div>
   <div class="services-grid reveal">
     <div class="service">
-      <div class="service-num">01</div>
       <div class="service-title">SMM под ключ</div>
       <div class="service-desc">Берёте нас в команду — мы закрываем весь контент: стратегия, производство, публикации и аналитика. Вы фокусируетесь на бизнесе.</div>
     </div>
     <div class="service">
-      <div class="service-num">02</div>
       <div class="service-title">Дизайн постов и сторис</div>
       <div class="service-desc">Готовый контент под ваш бренд — от 5 до 50 изображений. Берёте и публикуете сразу, без лишних итераций.</div>
     </div>
     <div class="service">
-      <div class="service-num">03</div>
       <div class="service-title">Контент-стратегия</div>
       <div class="service-desc">Получаете чёткий план: кому, о чём и когда. Анализ ниши, конкурентов и аудитории — основа для всего остального.</div>
     </div>
     <div class="service">
-      <div class="service-num">04</div>
       <div class="service-title">ИИ-генерация визуала</div>
-      <div class="service-desc">Уникальные изображения специально под ваш бренд — без стоков, шаблонов и банальщины, которую все уже видели.</div>
+      <div class="service-desc">ИИ — инструмент для технически сложных задач: уникальные образы и композиции, которые долго рисовать с нуля. Финальный визуал всегда дорабатываю вручную под ваш бренд и стиль — на выходе готовый контент, а не сырая генерация.</div>
     </div>
     <div class="service">
-      <div class="service-num">05</div>
       <div class="service-title">Маркетплейс-контент</div>
       <div class="service-desc">Карточки для Wildberries, Ozon, Авито, которые продают — за счёт правильного визуала и доверия, а не просто красивых фото.</div>
     </div>
     <div class="service">
-      <div class="service-num">06</div>
       <div class="service-title">Сайты под задачу</div>
       <div class="service-desc">Лендинг, который реально работает: дизайн, вёрстка и Telegram-бот для автоматического приёма заявок прямо в мессенджер.</div>
     </div>
     <div class="service">
-      <div class="service-num">07</div>
       <div class="service-title">Оформление профиля</div>
       <div class="service-desc">Единый визуальный стиль от первого взгляда: обложка, хайлайты, шапка и карточки — чтобы профиль работал как витрина.</div>
     </div>
@@ -645,52 +635,34 @@
   <div class="section-label">Как мы работаем</div>
   <div class="process-list reveal">
     <div class="process-step">
-      <div class="process-num">01</div>
-      <div>
-        <div class="process-tag">Знакомство</div>
-        <div class="process-title">Обсуждаем задачу</div>
-        <div class="process-desc">Вы рассказываете о бизнесе и целях. Отвечаем в течение 2–5 часов. Предлагаем решение и называем стоимость.</div>
-      </div>
+      <div class="process-tag">Знакомство</div>
+      <div class="process-title">Обсуждаем задачу</div>
+      <div class="process-desc">Вы рассказываете о бизнесе и целях. Отвечаем в течение 2–5 часов. Предлагаем решение и называем стоимость.</div>
     </div>
     <div class="process-step">
-      <div class="process-num">02</div>
-      <div>
-        <div class="process-tag">Предоплата</div>
-        <div class="process-title">Фиксируем договор</div>
-        <div class="process-desc">Вносится предоплата — гарантия для обеих сторон. Сумма зависит от объёма.</div>
-      </div>
+      <div class="process-tag">Предоплата</div>
+      <div class="process-title">Фиксируем договор</div>
+      <div class="process-desc">Вносится предоплата — гарантия для обеих сторон. Сумма зависит от объёма.</div>
     </div>
     <div class="process-step">
-      <div class="process-num">03</div>
-      <div>
-        <div class="process-tag">Стратегия</div>
-        <div class="process-title">Разрабатываем план</div>
-        <div class="process-desc">Анализируем нишу и конкурентов, формируем контент-план и расписание публикаций под вашу аудиторию.</div>
-      </div>
+      <div class="process-tag">Стратегия</div>
+      <div class="process-title">Разрабатываем план</div>
+      <div class="process-desc">Анализируем нишу и конкурентов, формируем контент-план и расписание публикаций под вашу аудиторию.</div>
     </div>
     <div class="process-step">
-      <div class="process-num">04</div>
-      <div>
-        <div class="process-tag">Производство</div>
-        <div class="process-title">Создаём и согласовываем</div>
-        <div class="process-desc">Делаем черновик → вы смотрите и даёте правки → финальная версия. Количество итераций согласовывается заранее и зависит от сложности задачи и ТЗ.</div>
-      </div>
+      <div class="process-tag">Производство</div>
+      <div class="process-title">Создаём и согласовываем</div>
+      <div class="process-desc">Делаем черновик → вы смотрите и даёте правки → финальная версия. Количество итераций согласовывается заранее и зависит от сложности задачи и ТЗ.</div>
     </div>
     <div class="process-step">
-      <div class="process-num">05</div>
-      <div>
-        <div class="process-tag">Результат</div>
-        <div class="process-title">Сдача и оплата</div>
-        <div class="process-desc">Публикуем, смотрим аналитику. После приёмки вносится оставшаяся часть.</div>
-      </div>
+      <div class="process-tag">Результат</div>
+      <div class="process-title">Сдача и оплата</div>
+      <div class="process-desc">Публикуем, смотрим аналитику. После приёмки вносится оставшаяся часть.</div>
     </div>
     <div class="process-step" style="border-bottom: 2px solid var(--accent);">
-      <div class="process-num">06</div>
-      <div>
-        <div class="process-tag">После проекта</div>
-        <div class="process-title">Поддержка</div>
-        <div class="process-desc">По запросу — сопровождение после сдачи: правки, вопросы, развитие. Формат и условия обсуждаются индивидуально в зависимости от проекта.</div>
-      </div>
+      <div class="process-tag">После проекта</div>
+      <div class="process-title">Поддержка</div>
+      <div class="process-desc">По запросу — сопровождение после сдачи: правки, вопросы, развитие. Формат и условия обсуждаются индивидуально в зависимости от проекта.</div>
     </div>
   </div>
 </section>
@@ -920,15 +892,9 @@
     <div class="platforms-info">
       <div class="platforms-title">Платформы</div>
       <div class="platforms-tags">
-        <span class="platform-tag">Instagram</span>
         <span class="platform-tag">TikTok</span>
         <span class="platform-tag">Telegram</span>
-        <span class="platform-tag">VK</span>
-        <span class="platform-tag">YouTube</span>
         <span class="platform-tag">Макс</span>
-        <span class="platform-tag">Rutube</span>
-        <span class="platform-tag">ОК</span>
-        <span class="platform-tag">Дзен</span>
         <span class="platform-tag">Авито</span>
       </div>
     </div>
