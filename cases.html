@@ -173,6 +173,17 @@
     font-size: 14px; color: var(--gray); line-height: 1.8;
     margin-bottom: 32px;
   }
+  .case-desc p { margin: 0 0 14px; }
+  .case-desc p:last-child { margin-bottom: 0; }
+  .case-list { margin: 0 0 14px; padding-left: 20px; }
+  .case-list li { margin-bottom: 6px; }
+  .case-list:last-child { margin-bottom: 0; }
+  .private-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border); color: var(--gray);
+    padding: 10px 20px; font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 
   /* STATS GRID */
   .stats-grid {
@@ -443,6 +454,7 @@
 <footer>
   <a class="footer-logo" href="index.html"><span>A</span>UVIX Studio</a>
   <p class="footer-copy">Контент · Дизайн · SMM · Сайты<br>Полный цикл. Один партнёр.</p>
+  <p class="footer-copy" style="margin-top:8px;"><a href="privacy-policy.html" style="color:inherit;">Политика конфиденциальности</a></p>
 </footer>
 
 <a class="back-to-top" id="backToTop" href="#hero">↑</a>
@@ -480,21 +492,45 @@
   }
   function nl2br(str) { return esc(str).replace(/\n/g, '<br>'); }
 
+  // Превращает текст с "* пункт" / "- пункт" в настоящие маркированные списки,
+  // остальные строки — в абзацы.
+  function formatDescription(str) {
+    const lines = (str || '').toString().split('\n');
+    let html = '';
+    let listOpen = false;
+    for (const raw of lines) {
+      const line = raw.trim();
+      const isBullet = /^[*\-•]\s+/.test(line);
+      if (isBullet) {
+        if (!listOpen) { html += '<ul class="case-list">'; listOpen = true; }
+        html += `<li>${esc(line.replace(/^[*\-•]\s+/, ''))}</li>`;
+      } else {
+        if (listOpen) { html += '</ul>'; listOpen = false; }
+        if (line) html += `<p>${esc(line)}</p>`;
+      }
+    }
+    if (listOpen) html += '</ul>';
+    return html;
+  }
+
   function renderCase(data) {
     const images = (data.images || [])
       .map(url => `<img class="case-img reveal" src="${esc(url)}" alt="${esc(data.title || '')}">`)
       .join('\n');
 
-    const linkHtml = data.link ? `
-      <div class="reveal" style="margin-top: 24px;">
+    const linkHtml = data.link
+      ? `<div class="reveal" style="margin-top: 24px;">
         <a class="cta-btn" href="${esc(data.link)}" target="_blank" rel="noopener">Смотреть проект →</a>
-      </div>` : '';
+      </div>`
+      : `<div class="reveal" style="margin-top: 24px;">
+        <span class="private-badge">🔒 Приватный проект — доступ ограничен клиентом</span>
+      </div>`;
 
     return `
     <section class="case-section" id="case-${esc(data._id)}">
       <div class="reveal">
         <h2 class="case-title">${nl2br(data.title)}</h2>
-        <p class="case-desc">${esc(data.description || '')}</p>
+        <div class="case-desc">${formatDescription(data.description)}</div>
       </div>
       ${images}
       ${linkHtml}
