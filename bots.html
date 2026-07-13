@@ -13,7 +13,7 @@
     }
   })();
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&family=Oswald:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -131,7 +131,7 @@
     <div class="plan-row">
       <div class="plan-head">
         <div class="plan-left"><div class="plan-tag">Простой</div><div class="plan-name">Бот-приёмщик заявок</div></div>
-        <div class="plan-right"><div class="plan-price">от 4 000 ₽</div></div>
+        <div class="plan-right"><div class="plan-price">от&nbsp;4&nbsp;000&nbsp;₽</div></div>
       </div>
       <div class="plan-features">
         <span class="feat-tag">Пересылка заявок в чат</span>
@@ -145,7 +145,7 @@
     <div class="plan-row popular">
       <div class="plan-head">
         <div class="plan-left"><div class="plan-tag">Средний <span class="popular-badge">Популярный</span></div><div class="plan-name">Бот с меню и логикой</div></div>
-        <div class="plan-right"><div class="plan-price">от 12 000 ₽</div></div>
+        <div class="plan-right"><div class="plan-price">от&nbsp;12&nbsp;000&nbsp;₽</div></div>
       </div>
       <div class="plan-features">
         <span class="feat-tag">Инлайн-кнопки и сценарии</span>
@@ -159,7 +159,7 @@
     <div class="plan-row">
       <div class="plan-head">
         <div class="plan-left"><div class="plan-tag">Продвинутый</div><div class="plan-name">Бот с админкой и базой</div></div>
-        <div class="plan-right"><div class="plan-price">от 28 000 ₽</div></div>
+        <div class="plan-right"><div class="plan-price">от&nbsp;28&nbsp;000&nbsp;₽</div></div>
       </div>
       <div class="plan-features">
         <span class="feat-tag">Хранение данных</span>
@@ -189,11 +189,11 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Нужен ли отдельный номер телефона?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">Нет. Бот работает как отдельный Telegram-аккаунт-бот, привязанный к вашему username в @BotFather — личный номер не используется и не виден клиентам.</div>
+      <div class="faq-a">Нет. Бот создаётся через официальный @BotFather и работает как отдельный аккаунт со своим именем — ваш личный номер нигде не используется и не виден клиентам.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Сколько стоит и сколько занимает по времени?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">От 4 000 ₽ за простого приёмщика заявок до 28 000+ ₽ за бота с базой данных и админкой. Срок называю после брифа — зависит от сложности сценариев.</div>
+      <div class="faq-a">От 4&nbsp;000&nbsp;₽ за простого приёмщика заявок до 28&nbsp;000&nbsp;₽ и выше за бота с базой данных и админкой. Срок называю после брифа — зависит от сложности сценариев.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Что если понадобятся доработки после запуска?</span><span class="faq-arrow">+</span></div>
@@ -240,6 +240,7 @@
       <input type="text" id="f_business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги...">
     </div>
     <div class="form-field" id="field_service">
+      <label class="form-label">Что вас интересует</label>
       <select id="f_service">
         <option value="">Выберите...</option>
         <option>Бот-приёмщик заявок</option>
@@ -249,6 +250,7 @@
       </select>
     </div>
     <div class="form-field" id="field_budget">
+      <label class="form-label">Бюджет</label>
       <select id="f_budget">
         <option value="">Выберите...</option>
         <option>до 10 000 ₽</option>
@@ -279,7 +281,7 @@
     <div class="success-title">Заявка отправлена!</div>
     <div id="successPackageBlock" style="display:none; background:var(--bg3); border-left:3px solid var(--accent); padding:12px 16px; margin:16px 0; text-align:left;">
       <div style="font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:4px;">Выбранный пакет</div>
-      <div id="successPackageName" style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--white);"></div>
+      <div id="successPackageName" style="font-family:'Bebas Neue','Oswald',sans-serif; font-size:16px; color:var(--white);"></div>
     </div>
     <div class="success-text">Заявка получена — свяжемся с вами в течение дня, уточним детали и стартуем.<br><br>Или напишите прямо сейчас:</div>
     <a href="https://t.me/idwvw" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#0a0a0a; padding:14px 28px; font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; margin-top:8px;">

@@ -13,7 +13,7 @@
     }
   })();
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&family=Oswald:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -144,7 +144,7 @@
     <div class="plan-row">
       <div class="plan-head">
         <div class="plan-left"><div class="plan-tag">Базовый</div><div class="plan-name">Лендинг</div></div>
-        <div class="plan-right"><div class="plan-price">от 10 000 ₽</div><div class="plan-per">1 страница</div></div>
+        <div class="plan-right"><div class="plan-price">от&nbsp;10&nbsp;000&nbsp;₽</div><div class="plan-per">1 страница</div></div>
       </div>
       <a href="prices.html?package=Лендинг+·+Базовый+·+от+10+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить сайт</span>
@@ -154,7 +154,7 @@
     <div class="plan-row popular">
       <div class="plan-head">
         <div class="plan-left"><div class="plan-tag">Продвинутый <span class="popular-badge">Популярный</span></div><div class="plan-name">Лендинг + интеграции</div></div>
-        <div class="plan-right"><div class="plan-price">от 22 000 ₽</div><div class="plan-per">1 страница</div></div>
+        <div class="plan-right"><div class="plan-price">от&nbsp;22&nbsp;000&nbsp;₽</div><div class="plan-per">1 страница</div></div>
       </div>
       <a href="prices.html?package=Лендинг+·+Продвинутый+·+от+22+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить сайт</span>
@@ -164,7 +164,7 @@
     <div class="plan-row">
       <div class="plan-head">
         <div class="plan-left"><div class="plan-tag">Индивидуально по брифу</div><div class="plan-name">PWA-приложение</div></div>
-        <div class="plan-right"><div class="plan-price">от 30 000 ₽</div></div>
+        <div class="plan-right"><div class="plan-price">от&nbsp;30&nbsp;000&nbsp;₽</div></div>
       </div>
       <a href="prices.html?package=PWA-приложение+·+от+30+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить проект</span>
@@ -186,7 +186,7 @@
   <div class="reveal">
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Сколько стоит сайт?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">Базовый лендинг — от 10 000 ₽. С интеграциями (бот, аналитика, админка) — от 22 000 ₽. PWA-приложение с базой данных и личным кабинетом — от 30 000 ₽, точная цена после брифа.</div>
+      <div class="faq-a">Базовый лендинг — от 10&nbsp;000&nbsp;₽. С интеграциями (бот, аналитика, админка) — от 22&nbsp;000&nbsp;₽. PWA-приложение с базой данных и личным кабинетом — от 30&nbsp;000&nbsp;₽, точная цена после брифа.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Сколько занимает разработка?</span><span class="faq-arrow">+</span></div>
@@ -213,7 +213,7 @@
 
   <div id="formContainer">
     <h2 class="apply-title">Обсудим<br><span>ваш сайт?</span></h2>
-    <p class="apply-desc">Заполните форму — свяжемся с вами в течение дня и предложим решение и стоимость.</p>
+    <p class="apply-desc">Заполните форму — свяжемся с вами в течение дня, предложим решение и назовём стоимость.</p>
 
     <div class="package-banner hidden" id="packageBanner">
       <div class="package-banner-icon"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5.5 7h9l-.7 8.5a1.5 1.5 0 01-1.5 1.4H7.7a1.5 1.5 0 01-1.5-1.4L5.5 7z" stroke="#c8f060" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.5 7V5.5a2.5 2.5 0 015 0V7" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round"/></svg></div>
@@ -241,6 +241,7 @@
       <input type="text" id="f_business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги...">
     </div>
     <div class="form-field" id="field_service">
+      <label class="form-label">Что вас интересует</label>
       <select id="f_service">
         <option value="">Выберите...</option>
         <option>Лендинг</option>
@@ -251,6 +252,7 @@
       </select>
     </div>
     <div class="form-field" id="field_budget">
+      <label class="form-label">Бюджет</label>
       <select id="f_budget">
         <option value="">Выберите...</option>
         <option>до 10 000 ₽</option>
@@ -281,7 +283,7 @@
     <div class="success-title">Заявка отправлена!</div>
     <div id="successPackageBlock" style="display:none; background:var(--bg3); border-left:3px solid var(--accent); padding:12px 16px; margin:16px 0; text-align:left;">
       <div style="font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:4px;">Выбранный пакет</div>
-      <div id="successPackageName" style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--white);"></div>
+      <div id="successPackageName" style="font-family:'Bebas Neue','Oswald',sans-serif; font-size:16px; color:var(--white);"></div>
     </div>
     <div class="success-text">Заявка получена — свяжемся с вами в течение дня, уточним детали и стартуем.<br><br>Или напишите прямо сейчас:</div>
     <a href="https://t.me/idwvw" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#0a0a0a; padding:14px 28px; font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; margin-top:8px;">

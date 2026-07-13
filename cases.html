@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Кейсы — AUVIX Studio</title>
 <meta name="description" content="Реальные результаты — кейсы AUVIX Studio по SMM, сайтам и Telegram-ботам.">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&family=Oswald:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,7 +25,7 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a class="logo" href="index.html"><span>A</span>UVIX</a>
+  <a class="logo" href="index.html">AUVIX<span>.</span></a>
   <div class="nav-desktop">
     <a href="index.html">Главная</a>
     <a href="smm.html">SMM</a>
@@ -34,7 +34,12 @@
     <a href="prices.html">Цены</a>
     <a href="index.html#apply">Заявка</a>
   </div>
-  <a class="nav-back" href="index.html">← На главную</a>
+  <div class="nav-right">
+    <a class="nav-back" href="index.html">← На главную</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -42,7 +47,7 @@
   <div class="hero-grid"></div>
   <p class="hero-tag">AUVIX Studio · Портфолио</p>
   <h1 class="hero-title">Реальные<br><span class="accent">результаты</span></h1>
-  <p class="hero-sub">Реальные проекты — фото, описание и результат каждой работы. Без прикрас. Отфильтруйте по направлению, если ищете что-то конкретное.</p>
+  <p class="hero-sub">Каждый проект — с фото, описанием и результатом. Без прикрас. Отфильтруйте по направлению, если ищете что-то конкретное.</p>
 </section>
 
 <!-- FILTER TABS + THUMBNAIL PREVIEW -->
@@ -75,9 +80,15 @@
 
 <!-- FOOTER -->
 <footer>
-  <a class="footer-logo" href="index.html"><span>A</span>UVIX Studio</a>
-  <p class="footer-copy">Контент · Сайты · Telegram-боты<br>Полный цикл. Один партнёр.</p>
-  <p class="footer-copy" style="margin-top:8px;"><a href="privacy-policy.html" style="color:inherit;">Политика конфиденциальности</a></p>
+  <div class="footer-logo">AUVIX STUDIO</div>
+  <div class="footer-links">
+    <a href="https://t.me/idwvw" target="_blank">TG</a>
+    <a href="https://t.me/auvixs" target="_blank">Portfolio</a>
+    <a href="https://www.instagram.com/ivan988682" target="_blank">IG</a>
+    <a href="https://www.avito.ru/brands/676eaa5e4c9947e60a90efe94a3f6d5d" target="_blank">AVITO</a>
+    <a href="privacy-policy.html">Политика конфиденциальности</a>
+  </div>
+  <div class="footer-copy">© 2026 — Все права защищены</div>
 </footer>
 
 <a class="back-to-top" id="backToTop" href="#hero">↑</a>
