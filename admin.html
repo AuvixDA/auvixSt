@@ -203,15 +203,36 @@ const loginScreen = document.getElementById('loginScreen');
 const appEl = document.getElementById('app');
 const errorMsg = document.getElementById('errorMsg');
 
-document.getElementById('loginBtn').addEventListener('click', async () => {
+const loginBtn = document.getElementById('loginBtn');
+const loginEmailEl = document.getElementById('loginEmail');
+const loginPasswordEl = document.getElementById('loginPassword');
+
+async function attemptLogin() {
   errorMsg.textContent = '';
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value;
+  const email = loginEmailEl.value.trim();
+  const password = loginPasswordEl.value;
+  if (!email || !password) {
+    errorMsg.textContent = 'Введи email и пароль.';
+    return;
+  }
+  loginBtn.disabled = true;
+  loginBtn.textContent = 'Вхожу…';
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (e) {
     errorMsg.textContent = 'Не удалось войти: проверь email и пароль.';
+  } finally {
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'Войти';
   }
+}
+
+loginBtn.addEventListener('click', attemptLogin);
+// Форма без <form>-обёртки — Enter в полях иначе никак не сабмитится.
+[loginEmailEl, loginPasswordEl].forEach(el => {
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); attemptLogin(); }
+  });
 });
 
 document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
