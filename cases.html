@@ -84,7 +84,7 @@
 
 <!-- CHAT BUTTON -->
 <button class="ai-chat-btn" id="aiChatBtn" onclick="toggleAiChat()" aria-label="AI-ассистент">
-  💬
+  <svg width="22" height="22" viewBox="0 0 20 20" fill="none"><path d="M3 4.5C3 3.67 3.67 3 4.5 3h11c.83 0 1.5.67 1.5 1.5v8c0 .83-.67 1.5-1.5 1.5H8l-3.5 3v-3H4.5C3.67 14 3 13.33 3 12.5v-8z" stroke="#0a0a0a" stroke-width="1.5" stroke-linejoin="round"/></svg>
   <span class="chat-tooltip">Спросить ассистента</span>
 </button>
 
@@ -172,7 +172,7 @@
         <a class="cta-btn" href="${esc(data.link)}" target="_blank" rel="noopener">Смотреть проект →</a>
       </div>`
       : `<div class="reveal" style="margin-top: 24px;">
-        <span class="private-badge">🔒 Приватный проект — доступ ограничен клиентом</span>
+        <span class="private-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;"><rect x="3" y="6.5" width="8" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 6.5V4.5a2.5 2.5 0 015 0v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Приватный проект — доступ ограничен клиентом</span>
       </div>`;
 
     return `
