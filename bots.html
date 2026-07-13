@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Telegram-боты — AUVIX Studio</title>
+<meta name="description" content="Telegram-бот для приёма заявок, каталога и автоматизации общения с клиентами. От простого приёмщика заявок до бота с админкой и базой данных.">
+<script>
+  (function () {
+    var isTelegram = /tgWebApp/.test(location.href) || !!window.TelegramWebviewProxy || /Telegram/i.test(navigator.userAgent);
+    if (isTelegram) {
+      document.write('<script src="https://telegram.org/js/telegram-web-app.js"><\/script>');
+    }
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(109533947, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109533947" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMobileNav()">Главная</a>
+  <a href="smm.html" onclick="closeMobileNav()">SMM</a>
+  <a href="web.html" onclick="closeMobileNav()">Сайты</a>
+  <a href="cases.html" onclick="closeMobileNav()">Кейсы</a>
+  <a href="#apply" onclick="closeMobileNav()">Заявка</a>
+  <a href="https://t.me/auvixs" target="_blank" class="nav-tg-mob" onclick="closeMobileNav()">Telegram канал</a>
+</div>
+
+<a href="#" class="back-to-top" id="backToTop" aria-label="Наверх">↑</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">AUVIX<span>.</span></a>
+  <div class="nav-desktop">
+    <a href="index.html">Главная</a>
+    <a href="smm.html">SMM</a>
+    <a href="web.html">Сайты</a>
+    <a href="bots.html" class="active">Боты</a>
+    <a href="cases.html">Кейсы</a>
+    <a href="#apply">Заявка</a>
+  </div>
+  <div class="nav-right">
+    <a href="cases.html" class="nav-tg-portfolio">Кейсы</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero-bordered">
+  <div class="hero-grid"></div>
+  <div style="position:relative; z-index:1;">
+    <div class="hero-tag">Направление · Telegram-боты</div>
+    <h1 class="hero-title">ЗАЯВКИ САМИ<br><span class="accent">ПАДАЮТ</span><br>В TELEGRAM</h1>
+    <p class="hero-sub">Бот принимает заявки с сайта или напрямую, ведёт каталог, отвечает по сценарию — круглосуточно, без выходных и пропущенных сообщений. От простого приёмщика заявок до бота с админ-панелью и базой данных.</p>
+    <div class="hero-btns" style="margin-top:28px; max-width:420px;">
+      <button class="hero-cta" onclick="scrollToApply()">
+        Оставить заявку
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="https://t.me/idwvw" target="_blank" class="hero-cta-ghost">
+        Написать в Telegram
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l10-5-3 5 3 5-10-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="direction-switch">
+      <a href="smm.html">SMM и дизайн</a>
+      <a href="web.html">Сайты и PWA</a>
+      <a href="bots.html" class="active">Telegram-боты</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">Что умеет бот</div>
+  <div class="services-grid reveal">
+    <div class="service">
+      <div class="service-title">Бот-приёмщик заявок</div>
+      <div class="service-desc">Простой сценарий: заявка с сайта или формы мгновенно пересылается вам в чат. Без базы данных, без лишней сложности — если нужно просто не терять заявки.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">Бот с меню и логикой</div>
+      <div class="service-desc">Инлайн-кнопки, каталог товаров или услуг, приём заказов, условные сценарии в зависимости от выбора клиента.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">Бот с админкой и базой</div>
+      <div class="service-desc">Хранение данных клиентов и заказов, панель администратора, роли пользователей, отчётность по обращениям.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF / HONEST NOTE -->
+<section id="cases-preview">
+  <div class="section-label">Кейсы ботов</div>
+  <div class="reveal" style="background:var(--bg2); padding:24px 20px; border-left:2px solid var(--accent);">
+    <div style="font-size:15px; font-weight:500; color:var(--white); margin-bottom:10px;">Отдельных публичных кейсов ботов пока нет</div>
+    <div style="font-size:13px; color:var(--gray); line-height:1.7;">Чаще всего бот идёт в связке с сайтом — как в пакете «Лендинг + интеграции», где заявки с формы летят прямо в Telegram. Похожая логика приёма и обработки заказов через панель администратора реализована в кейсе «Веб-система для караоке-бара» (гость сканирует QR, бот/система мгновенно показывает заказ диджею). Если нужны примеры конкретных сценариев и диалогов — покажу в переписке или соберу демо под вашу задачу.</div>
+  </div>
+  <div class="reveal" style="margin-top:2px;">
+    <a href="cases.html?filter=web" class="case-teaser">
+      <div>
+        <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Похожий кейс</div>
+        <div style="font-size:16px; font-weight:500; color:var(--white);">Смотреть «Веб-система для караоке-бара» →</div>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- PRICING PREVIEW -->
+<section id="pricing-preview">
+  <div class="section-label">Цены</div>
+  <div class="pricing-table reveal">
+    <div class="plan-row">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">Простой</div><div class="plan-name">Бот-приёмщик заявок</div></div>
+        <div class="plan-right"><div class="plan-price">от 4 000 ₽</div></div>
+      </div>
+      <div class="plan-features">
+        <span class="feat-tag">Пересылка заявок в чат</span>
+        <span class="feat-tag">Без базы данных</span>
+      </div>
+      <a href="prices.html?package=ТГ-бот+·+Приёмщик+заявок+·+от+4+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Обсудить бота</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="plan-row popular">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">Средний <span class="popular-badge">Популярный</span></div><div class="plan-name">Бот с меню и логикой</div></div>
+        <div class="plan-right"><div class="plan-price">от 12 000 ₽</div></div>
+      </div>
+      <div class="plan-features">
+        <span class="feat-tag">Инлайн-кнопки и сценарии</span>
+        <span class="feat-tag">Каталог / приём заказов</span>
+      </div>
+      <a href="prices.html?package=ТГ-бот+·+С+меню+и+логикой+·+от+12+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Обсудить бота</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="plan-row">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">Продвинутый</div><div class="plan-name">Бот с админкой и базой</div></div>
+        <div class="plan-right"><div class="plan-price">от 28 000 ₽</div></div>
+      </div>
+      <div class="plan-features">
+        <span class="feat-tag">Хранение данных</span>
+        <span class="feat-tag">Панель администратора</span>
+      </div>
+      <a href="prices.html?package=ТГ-бот+·+С+админкой+и+базой+·+от+28+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Обсудить бота</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="reveal" style="margin-top:2px;">
+    <a href="prices.html#dev-bots" class="case-teaser">
+      <div><div style="font-size:15px; font-weight:500; color:var(--white);">Полная сетка цен на разработку →</div></div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">Вопросы про ботов</div>
+  <div class="reveal">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Куда приходят заявки от бота?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">В ваш личный или рабочий Telegram-чат, мгновенно, без почты и лишних шагов. Можно настроить пересылку сразу нескольким людям.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Нужен ли отдельный номер телефона?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Нет. Бот работает как отдельный Telegram-аккаунт-бот, привязанный к вашему username в @BotFather — личный номер не используется и не виден клиентам.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Сколько стоит и сколько занимает по времени?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">От 4 000 ₽ за простого приёмщика заявок до 28 000+ ₽ за бота с базой данных и админкой. Срок называю после брифа — зависит от сложности сценариев.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Что если понадобятся доработки после запуска?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">По запросу — сопровождение: новые сценарии, кнопки, интеграции. Формат и условия обсуждаются индивидуально под проект.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Бот можно связать с сайтом?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Да, это самый частый сценарий — форма на сайте отправляет заявку прямо в бота. Подробнее в пакете «Лендинг + интеграции» на странице «<a href="web.html" style="color:var(--accent);">Сайты</a>».</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section id="apply" data-direction="bots" data-direction-label="Telegram-боты">
+  <div class="section-label">Заявка</div>
+
+  <div id="formContainer">
+    <h2 class="apply-title">Обсудим<br><span>вашего бота?</span></h2>
+    <p class="apply-desc">Опишите, что бот должен делать — предложу сценарий и стоимость в течение дня.</p>
+
+    <div class="package-banner hidden" id="packageBanner">
+      <div class="package-banner-icon">🛒</div>
+      <div>
+        <div class="package-banner-label">Выбранный пакет</div>
+        <div class="package-banner-name" id="packageBannerName"></div>
+      </div>
+      <button class="package-banner-close" onclick="clearPackage()" title="Убрать">✕</button>
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Ваше имя *</label>
+      <input type="text" id="f_name" placeholder="Как вас зовут?" autocomplete="name">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Номер телефона *</label>
+      <input type="tel" id="f_phone" placeholder="+7 999 123 45 67" autocomplete="tel">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Telegram / Instagram / другая соцсеть</label>
+      <input type="text" id="f_contact" placeholder="@username">
+    </div>
+    <div class="form-field">
+      <label class="form-label">О вашем бизнесе *</label>
+      <input type="text" id="f_business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги...">
+    </div>
+    <div class="form-field" id="field_service">
+      <select id="f_service">
+        <option value="">Выберите...</option>
+        <option>Бот-приёмщик заявок</option>
+        <option>Бот с меню и логикой</option>
+        <option>Бот с админкой и базой</option>
+        <option>Ещё не знаю — нужна консультация</option>
+      </select>
+    </div>
+    <div class="form-field" id="field_budget">
+      <select id="f_budget">
+        <option value="">Выберите...</option>
+        <option>до 10 000 ₽</option>
+        <option>10 000 — 25 000 ₽</option>
+        <option>25 000 — 50 000 ₽</option>
+        <option>от 50 000 ₽</option>
+        <option>Обсуждаем</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Комментарий (необязательно)</label>
+      <textarea id="f_comment" placeholder="Что должен делать бот? Куда пересылать заявки?"></textarea>
+    </div>
+
+    <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
+      <input type="checkbox" id="f_consent" style="width:16px; height:16px; margin-top:2px; flex-shrink:0; accent-color:var(--accent); cursor:pointer;">
+      <label for="f_consent" style="font-size:12px; color:var(--gray); line-height:1.6; cursor:pointer;">
+        Согласен(на) на обработку персональных данных в соответствии с <a href="privacy-policy.html" target="_blank" style="color:var(--white); text-decoration:underline; text-underline-offset:2px;">Политикой конфиденциальности</a> *
+      </label>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitApplication()">Отправить заявку →</button>
+    <p id="formError" style="color:#ff6b6b; font-size:12px; margin-top:10px; display:none;"></p>
+  </div>
+
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Заявка отправлена!</div>
+    <div id="successPackageBlock" style="display:none; background:var(--bg3); border-left:3px solid var(--accent); padding:12px 16px; margin:16px 0; text-align:left;">
+      <div style="font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:4px;">Выбранный пакет</div>
+      <div id="successPackageName" style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--white);"></div>
+    </div>
+    <div class="success-text">Заявка получена — свяжемся с вами в течение дня, уточним детали и стартуем.<br><br>Или напишите прямо сейчас:</div>
+    <a href="https://t.me/idwvw" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#0a0a0a; padding:14px 28px; font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; margin-top:8px;">
+      Написать в Telegram →
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Контакт</div>
+  <div>
+    <h2 class="contact-title">Готовы<br><span>стартовать?</span></h2>
+    <div class="contact-links">
+      <a href="https://t.me/idwvw" class="contact-link" target="_blank"><span>Telegram</span><span class="link-arrow">→</span></a>
+      <a href="mailto:auvixda@gmail.com" class="contact-link"><span>auvixda@gmail.com</span><span class="link-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">AUVIX STUDIO</div>
+  <div class="footer-links">
+    <a href="https://t.me/idwvw" target="_blank">TG</a>
+    <a href="https://t.me/auvixs" target="_blank">Portfolio</a>
+    <a href="https://www.instagram.com/ivan988682" target="_blank">IG</a>
+    <a href="https://www.avito.ru/brands/676eaa5e4c9947e60a90efe94a3f6d5d" target="_blank">AVITO</a>
+    <a href="privacy-policy.html">Политика конфиденциальности</a>
+  </div>
+  <div class="footer-copy">© 2026 — Все права защищены</div>
+</footer>
+
+<!-- CHAT BUTTON -->
+<button class="ai-chat-btn" id="aiChatBtn" onclick="toggleAiChat()" aria-label="AI-ассистент">
+  💬
+  <span class="chat-tooltip">Спросить ассистента</span>
+</button>
+
+<!-- CHAT WINDOW -->
+<div class="ai-chat-window" id="aiChatWindow">
+  <div class="chat-header">
+    <div class="chat-header-dot"></div>
+    <div>
+      <div class="chat-header-title">AUVIX STUDIO · Ассистент</div>
+      <div class="chat-header-sub">Отвечает на вопросы об услугах</div>
+    </div>
+    <button class="chat-close" onclick="toggleAiChat()">✕</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="chat-bubble">Привет! Я знаю всё об услугах и ценах AUVIX Studio. Спрашивай — отвечу быстро 👋</div>
+      <div class="chat-msg-time">сейчас</div>
+    </div>
+  </div>
+
+  <div class="chat-typing" id="chatTyping">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="chat-hints" id="chatHints">
+    <button class="chat-hint" onclick="sendHint(this)">Сколько стоит?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Что входит в пакет?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Как начать?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Сроки?</button>
+  </div>
+
+  <div class="chat-footer">
+    <textarea class="chat-input" id="chatInput"
+      placeholder="Задайте вопрос..."
+      rows="1"
+      onkeydown="handleChatKey(event)"></textarea>
+    <button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">→</button>
+  </div>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>

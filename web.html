@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Сайты и PWA — AUVIX Studio</title>
+<meta name="description" content="Лендинги и веб-сервисы под задачу: адаптивная вёрстка, приём заявок в Telegram, PWA-приложения с базой данных и админкой. Кейсы: Амур Гид, Мой транспорт, Pulse.">
+<script>
+  (function () {
+    var isTelegram = /tgWebApp/.test(location.href) || !!window.TelegramWebviewProxy || /Telegram/i.test(navigator.userAgent);
+    if (isTelegram) {
+      document.write('<script src="https://telegram.org/js/telegram-web-app.js"><\/script>');
+    }
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(109533947, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109533947" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMobileNav()">Главная</a>
+  <a href="smm.html" onclick="closeMobileNav()">SMM</a>
+  <a href="bots.html" onclick="closeMobileNav()">Боты</a>
+  <a href="cases.html?filter=web" onclick="closeMobileNav()">Кейсы сайтов</a>
+  <a href="#apply" onclick="closeMobileNav()">Заявка</a>
+  <a href="https://t.me/auvixs" target="_blank" class="nav-tg-mob" onclick="closeMobileNav()">Telegram канал</a>
+</div>
+
+<a href="#" class="back-to-top" id="backToTop" aria-label="Наверх">↑</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">AUVIX<span>.</span></a>
+  <div class="nav-desktop">
+    <a href="index.html">Главная</a>
+    <a href="smm.html">SMM</a>
+    <a href="web.html" class="active">Сайты</a>
+    <a href="bots.html">Боты</a>
+    <a href="cases.html?filter=web">Кейсы</a>
+    <a href="#apply">Заявка</a>
+  </div>
+  <div class="nav-right">
+    <a href="cases.html?filter=web" class="nav-tg-portfolio">Кейсы</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero-bordered">
+  <div class="hero-grid"></div>
+  <div style="position:relative; z-index:1;">
+    <div class="hero-tag">Направление · Сайты и PWA</div>
+    <h1 class="hero-title">САЙТ,<br><span class="accent">КОТОРЫЙ</span><br>ПРИНОСИТ ЗАЯВКИ</h1>
+    <p class="hero-sub">Лендинги и веб-сервисы под задачу — от простой страницы с формой до системы с личным кабинетом, авторизацией и базой данных. Дизайн, вёрстка и логика — от одного человека, без передачи между отделами.</p>
+    <div class="hero-btns" style="margin-top:28px; max-width:420px;">
+      <button class="hero-cta" onclick="scrollToApply()">
+        Оставить заявку
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="https://t.me/idwvw" target="_blank" class="hero-cta-ghost">
+        Написать в Telegram
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l10-5-3 5 3 5-10-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="direction-switch">
+      <a href="smm.html">SMM и дизайн</a>
+      <a href="web.html" class="active">Сайты и PWA</a>
+      <a href="bots.html">Telegram-боты</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section style="padding-top:40px; padding-bottom:40px;">
+  <div class="stats reveal-group reveal">
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">запущенных веб-проектов и PWA</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">своя разработка — дизайн, код, логика</div></div>
+    <div class="stat"><div class="stat-num">5.0</div><div class="stat-label">рейтинг на Авито</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">Услуги</div>
+  <div class="services-grid reveal">
+    <div class="service">
+      <div class="service-title">Лендинг под задачу</div>
+      <div class="service-desc">Одностраничный сайт, который реально работает: адаптивная вёрстка, до 10 блоков, форма заявки прямо в Telegram.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">Лендинг + интеграции</div>
+      <div class="service-desc">Всё из базового плюс приём заявок через Telegram-бота, аналитика (Метрика) и простая админка для самостоятельных правок.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">PWA-приложение</div>
+      <div class="service-desc">Устанавливается как приложение, без App Store. При необходимости — база данных, авторизация, личный кабинет, уникальная логика под вашу задачу.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">Веб-системы под задачу</div>
+      <div class="service-desc">Индивидуальные сервисы вроде системы приёма заказов по QR-коду с админ-панелью — по образцу кейса «Караоке-бар».</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES PREVIEW -->
+<section id="cases-preview">
+  <div class="section-label">Кейсы сайтов и PWA</div>
+  <div id="thumbGrid" class="case-thumb-grid reveal">
+    <div class="cases-status"><span class="dot-pulse"></span>Загружаю кейсы…</div>
+  </div>
+  <div class="reveal" style="margin-top:2px;">
+    <a href="cases.html?filter=web" class="case-teaser">
+      <div>
+        <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Портфолио</div>
+        <div style="font-size:16px; font-weight:500; color:var(--white);">Все веб-кейсы →</div>
+        <div style="font-size:12px; color:var(--gray); margin-top:4px;">«Амур Гид», «Караоке-бар», «Мой транспорт», «Pulse Тренировки»</div>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- PRICING PREVIEW -->
+<section id="pricing-preview">
+  <div class="section-label">Цены</div>
+  <div class="pricing-table reveal">
+    <div class="plan-row">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">Базовый</div><div class="plan-name">Лендинг</div></div>
+        <div class="plan-right"><div class="plan-price">от 10 000 ₽</div><div class="plan-per">1 страница</div></div>
+      </div>
+      <a href="prices.html?package=Лендинг+·+Базовый+·+от+10+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Обсудить сайт</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="plan-row popular">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">Продвинутый <span class="popular-badge">Популярный</span></div><div class="plan-name">Лендинг + интеграции</div></div>
+        <div class="plan-right"><div class="plan-price">от 22 000 ₽</div><div class="plan-per">1 страница</div></div>
+      </div>
+      <a href="prices.html?package=Лендинг+·+Продвинутый+·+от+22+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Обсудить сайт</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="plan-row">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">Индивидуально по брифу</div><div class="plan-name">PWA-приложение</div></div>
+        <div class="plan-right"><div class="plan-price">от 30 000 ₽</div></div>
+      </div>
+      <a href="prices.html?package=PWA-приложение+·+от+30+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Обсудить проект</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="reveal" style="margin-top:2px;">
+    <a href="prices.html#dev-sites" class="case-teaser">
+      <div><div style="font-size:15px; font-weight:500; color:var(--white);">Полная сетка цен на разработку →</div></div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">Вопросы про сайты и PWA</div>
+  <div class="reveal">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Сколько стоит сайт?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Базовый лендинг — от 10 000 ₽. С интеграциями (бот, аналитика, админка) — от 22 000 ₽. PWA-приложение с базой данных и личным кабинетом — от 30 000 ₽, точная цена после брифа.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Сколько занимает разработка?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Сроки индивидуальны — зависят от объёма и сложности логики. Называю их сразу на созвоне или в переписке после брифа, без расплывчатых обещаний.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Что нужно от меня для старта?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Кратко опишите задачу и то, что сайт должен делать: собирать заявки, показывать каталог, вести личный кабинет и т.д. Дизайн, тексты-заготовки и структуру предложу сам — вы согласовываете и правите.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Куда приходят заявки с сайта?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">В пакете «Лендинг + интеграции» и выше — сразу в Telegram, без почты и лишних шагов. Подробнее — на странице «<a href="bots.html" style="color:var(--accent);">Telegram-боты</a>».</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Что после сдачи сайта?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">По запросу — сопровождение: правки, доработки, развитие. Формат и условия обсуждаются индивидуально под проект.</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section id="apply" data-direction="web" data-direction-label="Сайты и PWA">
+  <div class="section-label">Заявка</div>
+
+  <div id="formContainer">
+    <h2 class="apply-title">Обсудим<br><span>ваш сайт?</span></h2>
+    <p class="apply-desc">Заполните форму — свяжемся с вами в течение дня и предложим решение и стоимость.</p>
+
+    <div class="package-banner hidden" id="packageBanner">
+      <div class="package-banner-icon">🛒</div>
+      <div>
+        <div class="package-banner-label">Выбранный пакет</div>
+        <div class="package-banner-name" id="packageBannerName"></div>
+      </div>
+      <button class="package-banner-close" onclick="clearPackage()" title="Убрать">✕</button>
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Ваше имя *</label>
+      <input type="text" id="f_name" placeholder="Как вас зовут?" autocomplete="name">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Номер телефона *</label>
+      <input type="tel" id="f_phone" placeholder="+7 999 123 45 67" autocomplete="tel">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Telegram / Instagram / другая соцсеть</label>
+      <input type="text" id="f_contact" placeholder="@username">
+    </div>
+    <div class="form-field">
+      <label class="form-label">О вашем бизнесе *</label>
+      <input type="text" id="f_business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги...">
+    </div>
+    <div class="form-field" id="field_service">
+      <select id="f_service">
+        <option value="">Выберите...</option>
+        <option>Лендинг</option>
+        <option>Лендинг + интеграции</option>
+        <option>PWA-приложение</option>
+        <option>Веб-система под задачу</option>
+        <option>Ещё не знаю — нужна консультация</option>
+      </select>
+    </div>
+    <div class="form-field" id="field_budget">
+      <select id="f_budget">
+        <option value="">Выберите...</option>
+        <option>до 10 000 ₽</option>
+        <option>10 000 — 25 000 ₽</option>
+        <option>25 000 — 50 000 ₽</option>
+        <option>от 50 000 ₽</option>
+        <option>Обсуждаем</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Комментарий (необязательно)</label>
+      <textarea id="f_comment" placeholder="Что должен делать сайт? Какие есть примеры, которые нравятся?"></textarea>
+    </div>
+
+    <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
+      <input type="checkbox" id="f_consent" style="width:16px; height:16px; margin-top:2px; flex-shrink:0; accent-color:var(--accent); cursor:pointer;">
+      <label for="f_consent" style="font-size:12px; color:var(--gray); line-height:1.6; cursor:pointer;">
+        Согласен(на) на обработку персональных данных в соответствии с <a href="privacy-policy.html" target="_blank" style="color:var(--white); text-decoration:underline; text-underline-offset:2px;">Политикой конфиденциальности</a> *
+      </label>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitApplication()">Отправить заявку →</button>
+    <p id="formError" style="color:#ff6b6b; font-size:12px; margin-top:10px; display:none;"></p>
+  </div>
+
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Заявка отправлена!</div>
+    <div id="successPackageBlock" style="display:none; background:var(--bg3); border-left:3px solid var(--accent); padding:12px 16px; margin:16px 0; text-align:left;">
+      <div style="font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:4px;">Выбранный пакет</div>
+      <div id="successPackageName" style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--white);"></div>
+    </div>
+    <div class="success-text">Заявка получена — свяжемся с вами в течение дня, уточним детали и стартуем.<br><br>Или напишите прямо сейчас:</div>
+    <a href="https://t.me/idwvw" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#0a0a0a; padding:14px 28px; font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; margin-top:8px;">
+      Написать в Telegram →
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Контакт</div>
+  <div>
+    <h2 class="contact-title">Готовы<br><span>стартовать?</span></h2>
+    <div class="contact-links">
+      <a href="https://t.me/idwvw" class="contact-link" target="_blank"><span>Telegram</span><span class="link-arrow">→</span></a>
+      <a href="mailto:auvixda@gmail.com" class="contact-link"><span>auvixda@gmail.com</span><span class="link-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">AUVIX STUDIO</div>
+  <div class="footer-links">
+    <a href="https://t.me/idwvw" target="_blank">TG</a>
+    <a href="https://t.me/auvixs" target="_blank">Portfolio</a>
+    <a href="https://www.instagram.com/ivan988682" target="_blank">IG</a>
+    <a href="https://www.avito.ru/brands/676eaa5e4c9947e60a90efe94a3f6d5d" target="_blank">AVITO</a>
+    <a href="privacy-policy.html">Политика конфиденциальности</a>
+  </div>
+  <div class="footer-copy">© 2026 — Все права защищены</div>
+</footer>
+
+<!-- CHAT BUTTON -->
+<button class="ai-chat-btn" id="aiChatBtn" onclick="toggleAiChat()" aria-label="AI-ассистент">
+  💬
+  <span class="chat-tooltip">Спросить ассистента</span>
+</button>
+
+<!-- CHAT WINDOW -->
+<div class="ai-chat-window" id="aiChatWindow">
+  <div class="chat-header">
+    <div class="chat-header-dot"></div>
+    <div>
+      <div class="chat-header-title">AUVIX STUDIO · Ассистент</div>
+      <div class="chat-header-sub">Отвечает на вопросы об услугах</div>
+    </div>
+    <button class="chat-close" onclick="toggleAiChat()">✕</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="chat-bubble">Привет! Я знаю всё об услугах и ценах AUVIX Studio. Спрашивай — отвечу быстро 👋</div>
+      <div class="chat-msg-time">сейчас</div>
+    </div>
+  </div>
+
+  <div class="chat-typing" id="chatTyping">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="chat-hints" id="chatHints">
+    <button class="chat-hint" onclick="sendHint(this)">Сколько стоит?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Что входит в пакет?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Как начать?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Сроки?</button>
+  </div>
+
+  <div class="chat-footer">
+    <textarea class="chat-input" id="chatInput"
+      placeholder="Задайте вопрос..."
+      rows="1"
+      onkeydown="handleChatKey(event)"></textarea>
+    <button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">→</button>
+  </div>
+</div>
+
+<script src="app.js" defer></script>
+<script type="module">
+  import { db, collection, getDocs, query, orderBy } from './firebase-init.js';
+  function esc(s){return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function firstLine(s){return (s||'').toString().split('\n').map(x=>x.trim()).find(Boolean)||'';}
+  (async function loadPreview(){
+    const grid = document.getElementById('thumbGrid');
+    try {
+      const snap = await getDocs(query(collection(db,'cases'), orderBy('createdAt','desc')));
+      const classify = window.__auvixClassifyCase || (()=>'other');
+      const labels = window.__auvixCaseCategoryLabels || {};
+      const items = [];
+      snap.forEach(d => { const data = {...d.data(), _id: d.id}; if (classify(data)==='web') items.push(data); });
+      if (!items.length) { grid.innerHTML = '<div class="cases-status">Кейсы скоро появятся здесь.</div>'; return; }
+      grid.innerHTML = items.map(data => {
+        const img = (data.images||[])[0];
+        const thumb = img ? `<img class="case-thumb-img" src="${esc(img)}" alt="${esc(data.title||'')}">` : `<div class="case-thumb-noimg">Фото в кейсе</div>`;
+        return `<a class="case-thumb-card reveal" href="cases.html?filter=web#case-${esc(data._id)}">${thumb}<div class="case-thumb-body"><div class="case-thumb-cat">${esc(labels.web||'Сайты и PWA')}</div><div class="case-thumb-title">${esc(firstLine(data.title))}</div><div class="case-thumb-result">${esc(firstLine(data.description))}</div></div></a>`;
+      }).join('\n');
+      window.__auvixInitReveal?.();
+    } catch(e) {
+      grid.innerHTML = '<div class="cases-status">Не удалось загрузить кейсы.</div>';
+    }
+  })();
+</script>
+</body>
+</html>

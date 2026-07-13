@@ -4,396 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Пакеты и цены — AUVIX Studio</title>
-<meta name="description" content="Прозрачные цены на контент, дизайн и SMM. Пакеты от 1 500 ₽. Полное ведение под ключ.">
+<meta name="description" content="Прозрачные цены на контент, дизайн, сайты и Telegram-ботов. Пакеты от 1 500 ₽. Полное ведение под ключ.">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    .reveal { opacity: 1 !important; transform: none !important; }
-  }
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #181818;
-    --white: #f0ede8;
-    --gray: #5a5a5a;
-    --accent: #c8f060;
-    --border: #222222;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'Geologica', sans-serif;
-    font-weight: 400;
-    overflow-x: hidden;
-    font-size: 16px;
-    letter-spacing: 0.01em;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s, background 0.3s;
-  }
-  nav.scrolled {
-    border-color: var(--border);
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(12px);
-  }
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 0.12em;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .logo span { color: var(--accent); }
-
-  .nav-right { display: flex; align-items: center; gap: 16px; }
-
-  .nav-back {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gray);
-    text-decoration: none;
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
-  .nav-back:hover { color: var(--accent); }
-
-  /* BURGER */
-  .burger {
-    display: flex; flex-direction: column; gap: 5px;
-    background: none; border: none; cursor: pointer; padding: 4px; z-index: 200;
-  }
-  .burger span {
-    display: block; width: 24px; height: 1px;
-    background: var(--white);
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  .burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .burger.open span:nth-child(2) { opacity: 0; }
-  .burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-  /* MOBILE NAV */
-  .mobile-nav {
-    display: none; position: fixed; inset: 0;
-    background: rgba(10,10,10,0.97);
-    z-index: 150;
-    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
-  }
-  .mobile-nav.open { display: flex; }
-  .mobile-nav a {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 44px; letter-spacing: 0.08em;
-    color: var(--white); text-decoration: none;
-    transition: color 0.2s;
-  }
-  .mobile-nav a:hover { color: var(--accent); }
-  .mobile-nav .nav-tg-mob {
-    font-family: 'Geologica', sans-serif;
-    font-size: 13px; letter-spacing: 0.1em;
-    color: var(--gray); text-transform: uppercase;
-  }
-
-  /* SCROLL PROGRESS */
-  .scroll-line {
-    position: fixed; top: 0; left: 0;
-    height: 2px; width: 0;
-    background: var(--accent);
-    z-index: 200; will-change: width;
-  }
-
-  /* BACK TO TOP */
-  .back-to-top {
-    position: fixed; bottom: 24px; right: 16px;
-    width: 40px; height: 40px;
-    background: var(--bg2); border: 1px solid var(--border);
-    color: var(--white); font-size: 16px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 90; opacity: 0;
-    transition: opacity 0.3s, background 0.2s;
-    text-decoration: none;
-  }
-  .back-to-top.visible { opacity: 1; }
-  .back-to-top:hover { background: var(--accent); color: #0a0a0a; }
-
-  /* HERO */
-  #hero {
-    min-height: 56vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 20px 56px;
-    position: relative;
-    overflow: hidden;
-    padding-top: 80px;
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(200,240,96,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,240,96,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridFade 3s ease forwards;
-  }
-  @keyframes gridFade { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
-
-  .hero-tag {
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 20px;
-    opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
-  }
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 14vw, 110px);
-    line-height: 0.92; letter-spacing: -0.01em;
-    opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
-  }
-  .hero-title .accent { color: var(--accent); }
-  .hero-desc {
-    font-size: 14px; line-height: 1.75; color: var(--gray);
-    max-width: 480px; margin-top: 20px;
-    opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards;
-  }
-
-  /* SECTIONS */
-  section { padding: 64px 20px; border-top: 1px solid var(--border); }
-  .section-label {
-    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 40px;
-  }
-
-  /* PRICING TABLE */
-  .pricing-table { display: flex; flex-direction: column; gap: 2px; }
-
-  .plan-row {
-    background: var(--bg2);
-    border-left: 2px solid transparent;
-    transition: background 0.2s, border-color 0.2s;
-    position: relative;
-  }
-  .plan-row:hover { background: var(--bg3); border-left-color: var(--accent); }
-  .plan-row.popular { border-left-color: var(--accent); background: var(--bg3); }
-
-  .plan-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 16px 16px;
-    gap: 12px;
-  }
-  .plan-left { flex: 1; }
-  .plan-tag {
-    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 6px;
-  }
-  .plan-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px; letter-spacing: 0.05em;
-    color: var(--white); line-height: 1;
-  }
-  .plan-count {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px; color: var(--accent); line-height: 1;
-  }
-  .plan-count-label {
-    font-size: 12px; color: var(--gray); margin-top: 2px;
-  }
-  .plan-right { text-align: right; flex-shrink: 0; }
-  .plan-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px; color: var(--white); line-height: 1;
-  }
-  .plan-per { font-size: 12px; color: var(--gray); margin-top: 3px; }
-
-  .plan-features {
-    padding: 0 16px 16px;
-    display: flex; flex-wrap: wrap; gap: 6px;
-  }
-  .feat-tag {
-    font-size: 11px; padding: 4px 10px;
-    border: 1px solid var(--border);
-    color: var(--gray); letter-spacing: 0.04em;
-  }
-  .plan-row.popular .feat-tag { border-color: rgba(200,240,96,0.2); color: var(--white); }
-
-  .plan-cta {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 16px;
-    border-top: 1px solid var(--border);
-    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gray);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .plan-cta:hover { color: var(--accent); }
-  .plan-row.popular .plan-cta { color: var(--accent); }
-
-  .popular-badge {
-    display: inline-block;
-    background: var(--accent); color: #0a0a0a;
-    font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
-    font-weight: 500;
-    padding: 3px 8px;
-    margin-left: 10px;
-    vertical-align: middle;
-  }
-
-  /* VIP BLOCK */
-  .vip-block {
-    background: var(--bg2);
-    border-left: 2px solid var(--accent);
-    padding: 28px 20px;
-    margin-top: 2px;
-  }
-  .vip-label {
-    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 12px;
-  }
-  .vip-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px; line-height: 1; margin-bottom: 8px;
-  }
-  .vip-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
-  .vip-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
-  .vip-feat {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 13px; color: var(--white); line-height: 1.5;
-  }
-  .vip-feat::before {
-    content: '—'; color: var(--accent); flex-shrink: 0;
-    font-family: 'Bebas Neue', sans-serif;
-  }
-  .vip-price-row {
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 16px;
-    padding-top: 20px; border-top: 1px solid var(--border);
-  }
-  .vip-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 44px; color: var(--accent); line-height: 1;
-  }
-  .vip-price-sub { font-size: 12px; color: var(--gray); margin-top: 4px; }
-  .btn-accent {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--accent); color: #0a0a0a;
-    padding: 14px 28px;
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none;
-    transition: box-shadow 0.2s;
-  }
-  .btn-accent:hover { box-shadow: 0 12px 40px rgba(200,240,96,0.25); }
-
-  /* NICHE GRID */
-  .niche-grid { display: flex; flex-direction: column; gap: 2px; }
-  .niche-card {
-    background: var(--bg2); padding: 24px 16px;
-    border-left: 2px solid transparent;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .niche-card:hover { background: var(--bg3); border-left-color: var(--accent); }
-  .niche-cat {
-    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 8px;
-  }
-  .niche-name { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-  .niche-desc { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 10px; }
-  .niche-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px; color: var(--accent);
-  }
-
-  /* COMPARE TABLE */
-  .compare-table { width: 100%; border-collapse: collapse; }
-  .compare-table th, .compare-table td {
-    padding: 12px 14px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-  .compare-table th {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px; letter-spacing: 0.08em;
-    color: var(--accent); background: var(--bg3);
-    font-weight: 400;
-  }
-  .compare-table td:first-child { color: var(--gray); }
-  .compare-table tr:hover td { background: var(--bg3); }
-  .check { color: var(--accent); font-size: 16px; }
-  .dash { color: var(--border); }
-
-  /* PROCESS */
-  .process-list { display: flex; flex-direction: column; gap: 2px; }
-  .process-step {
-    background: var(--bg2); padding: 24px 20px;
-  }
-  .process-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-  .process-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-  .process-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
-
-  /* FOOTER CTA */
-  .footer-cta {
-    background: var(--bg2);
-    border-top: 2px solid var(--accent);
-    padding: 56px 20px;
-    text-align: center;
-  }
-  .footer-cta-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 10vw, 64px);
-    line-height: 0.95; margin-bottom: 12px;
-  }
-  .footer-cta-title span { color: var(--accent); }
-  .footer-cta-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto; }
-  .footer-cta-btns { display: flex; flex-direction: column; gap: 10px; max-width: 360px; margin: 0 auto; }
-  .btn-ghost {
-    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    background: transparent; color: var(--white);
-    padding: 13px 28px;
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    transition: border-color 0.2s, color 0.2s;
-    font-family: 'Geologica', sans-serif;
-  }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* FOOTER */
-  footer {
-    padding: 24px 20px; border-top: 1px solid var(--border);
-    display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center;
-  }
-  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.12em; color: var(--gray); }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a { font-size: 11px; color: var(--gray); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--accent); }
-  .footer-copy { font-size: 11px; color: var(--gray); }
-
-  /* SCROLL REVEAL */
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-</style>
+<link rel="stylesheet" href="styles.css">
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -418,17 +31,25 @@
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <a href="index.html" onclick="closeMobileNav()">Главная</a>
+  <a href="smm.html" onclick="closeMobileNav()">SMM</a>
+  <a href="web.html" onclick="closeMobileNav()">Сайты</a>
+  <a href="bots.html" onclick="closeMobileNav()">Боты</a>
   <a href="cases.html" onclick="closeMobileNav()">Кейсы</a>
-  <a href="prices.html" onclick="closeMobileNav()" style="color:var(--accent);">Пакеты</a>
   <a href="index.html#apply" onclick="closeMobileNav()">Заявка</a>
   <a href="https://t.me/auvixs" target="_blank" class="nav-tg-mob" onclick="closeMobileNav()">Telegram канал</a>
 </div>
 
-<a href="#" class="back-to-top" id="backToTop" aria-label="Наверх">↑</a>
-
 <!-- NAV -->
 <nav id="navbar">
   <a href="index.html" class="logo">AUVIX<span>.</span></a>
+  <div class="nav-desktop">
+    <a href="index.html">Главная</a>
+    <a href="smm.html">SMM</a>
+    <a href="web.html">Сайты</a>
+    <a href="bots.html">Боты</a>
+    <a href="cases.html">Кейсы</a>
+    <a href="index.html#apply">Заявка</a>
+  </div>
   <div class="nav-right">
     <a href="index.html" class="nav-back">← Назад</a>
     <button class="burger" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Меню">
@@ -446,7 +67,7 @@
       ПАКЕТЫ<br>
       <span class="accent">И ЦЕНЫ</span>
     </h1>
-    <p class="hero-desc">Контент, который работает на ваш бренд. Выберите объём — от пробного пакета до полного ведения под ключ. Без скрытых доплат.</p>
+    <p class="hero-desc">Контент, сайты и Telegram-боты в одном месте. Выберите объём — от пробного пакета до полного ведения под ключ. Ищете конкретное направление? Смотрите цены сразу на его странице: <a href="smm.html" style="color:var(--accent);">SMM</a>, <a href="web.html" style="color:var(--accent);">сайты</a>, <a href="bots.html" style="color:var(--accent);">боты</a>.</p>
   </div>
 </section>
 
@@ -460,7 +81,7 @@
     <div class="plan-row">
       <div class="plan-head">
         <div class="plan-left">
-          <div class="plan-tag">Начало</div>
+          <div class="plan-tag">Пробный формат</div>
           <div class="plan-name">Тест</div>
         </div>
         <div>
@@ -469,14 +90,13 @@
         </div>
         <div class="plan-right">
           <div class="plan-price">1 500 ₽</div>
-          <div class="plan-per">300 ₽ / шт</div>
         </div>
       </div>
       <div class="plan-features">
         <span class="feat-tag">Уникальные изображения</span>
         <span class="feat-tag">Под ваш стиль</span>
       </div>
-      <a href="index.html?package=Тест+·+5+изображений+·+1+500+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="smm.html?package=Тест+·+5+изображений+·+1+500+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Заказать пакет</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -503,7 +123,7 @@
         <span class="feat-tag">Под ваш стиль</span>
         <span class="feat-tag">Готовы к публикации</span>
       </div>
-      <a href="index.html?package=Старт+·+10+изображений+·+2+700+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="smm.html?package=Старт+·+10+изображений+·+2+700+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Заказать пакет</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -531,7 +151,7 @@
         <span class="feat-tag">Готовы к публикации</span>
         <span class="feat-tag">Приоритетная обработка</span>
       </div>
-      <a href="index.html?package=Оптимальный+·+30+изображений+·+8+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="smm.html?package=Оптимальный+·+30+изображений+·+8+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Заказать пакет</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -560,7 +180,7 @@
         <span class="feat-tag">Приоритетная обработка</span>
         <span class="feat-tag">Скидка за объём</span>
       </div>
-      <a href="index.html?package=Максимум+·+50+изображений+·+12+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="smm.html?package=Максимум+·+50+изображений+·+12+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Заказать пакет</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -589,7 +209,7 @@
         <span class="feat-tag">Единый стиль</span>
         <span class="feat-tag">Экономия времени</span>
       </div>
-      <a href="index.html?package=Месячный+пак+·+60–90+изображений+·+от+14+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="smm.html?package=Месячный+пак+·+60–90+изображений+·+от+14+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить объём</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -613,7 +233,7 @@
         <div class="vip-price">25 000 ₽</div>
         <div class="vip-price-sub">/ месяц · тариф обсуждается</div>
       </div>
-      <a href="index.html?package=VIP+·+Индивидуальное+ведение+·+от+25+000+₽#apply" class="btn-accent" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="smm.html?package=VIP+·+Индивидуальное+ведение+·+от+25+000+₽#apply" class="btn-accent" onclick="ym(109533947,'reachGoal','package_click')">
         Обсудить проект
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -721,7 +341,7 @@
   <div class="section-label">Разработка: сайты, боты, PWA</div>
   <p style="font-size:14px; color:var(--gray); line-height:1.7; margin-bottom:32px;">Сроки на разработку — индивидуально по брифу и текущей загрузке, обычно называю их сразу на созвоне/в переписке.</p>
 
-  <p style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); margin-bottom:12px;">Сайты</p>
+  <p id="dev-sites" style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); margin-bottom:12px; scroll-margin-top:90px;">Сайты</p>
   <div class="pricing-table reveal" style="margin-bottom:32px;">
 
     <div class="plan-row">
@@ -740,7 +360,7 @@
         <span class="feat-tag">До 6 блоков</span>
         <span class="feat-tag">Форма заявки → Telegram</span>
       </div>
-      <a href="index.html?package=Лендинг+·+Базовый+·+от+10+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="web.html?package=Лендинг+·+Базовый+·+от+10+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить сайт</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -764,7 +384,7 @@
         <span class="feat-tag">Аналитика (Метрика)</span>
         <span class="feat-tag">Простая админка для правок</span>
       </div>
-      <a href="index.html?package=Лендинг+·+Продвинутый+·+от+22+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="web.html?package=Лендинг+·+Продвинутый+·+от+22+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить сайт</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -772,7 +392,7 @@
 
   </div>
 
-  <p style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); margin-bottom:12px;">Telegram-боты</p>
+  <p id="dev-bots" style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); margin-bottom:12px; scroll-margin-top:90px;">Telegram-боты</p>
   <div class="pricing-table reveal" style="margin-bottom:32px;">
 
     <div class="plan-row">
@@ -789,7 +409,7 @@
         <span class="feat-tag">Пересылка заявок в чат</span>
         <span class="feat-tag">Без базы данных</span>
       </div>
-      <a href="index.html?package=ТГ-бот+·+Приёмщик+заявок+·+от+4+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="bots.html?package=ТГ-бот+·+Приёмщик+заявок+·+от+4+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить бота</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -810,7 +430,7 @@
         <span class="feat-tag">Каталог / приём заказов</span>
         <span class="feat-tag">Условная логика</span>
       </div>
-      <a href="index.html?package=ТГ-бот+·+С+меню+и+логикой+·+от+12+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="bots.html?package=ТГ-бот+·+С+меню+и+логикой+·+от+12+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить бота</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -832,7 +452,7 @@
         <span class="feat-tag">Роли пользователей</span>
         <span class="feat-tag">Отчётность</span>
       </div>
-      <a href="index.html?package=ТГ-бот+·+С+админкой+и+базой+·+от+28+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="bots.html?package=ТГ-бот+·+С+админкой+и+базой+·+от+28+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
         <span>Обсудить бота</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -840,7 +460,7 @@
 
   </div>
 
-  <p style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); margin-bottom:12px;">PWA-приложения</p>
+  <p id="dev-pwa" style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--white); margin-bottom:12px; scroll-margin-top:90px;">PWA-приложения</p>
   <div class="vip-block reveal">
     <div class="vip-label">Индивидуально по брифу</div>
     <div class="vip-title">PWA-приложение под задачу</div>
@@ -856,7 +476,7 @@
         <div class="vip-price">от 30 000 ₽</div>
         <div class="vip-price-sub">точная цена — после брифа</div>
       </div>
-      <a href="index.html?package=PWA-приложение+·+от+30+000+₽#apply" class="btn-accent" onclick="ym(109533947,'reachGoal','package_click')">
+      <a href="web.html?package=PWA-приложение+·+от+30+000+₽#apply" class="btn-accent" onclick="ym(109533947,'reachGoal','package_click')">
         Обсудить проект
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -918,48 +538,52 @@
   <div class="footer-copy">© 2026 — Все права защищены</div>
 </footer>
 
-<script>
-  // NAV SCROLL
-  const navbar = document.getElementById('navbar');
-  const backToTop = document.getElementById('backToTop');
-  const scrollLine = document.getElementById('scrollLine');
+<a class="back-to-top" id="backToTop" href="#hero">↑</a>
 
-  window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    scrollLine.style.width = pct + '%';
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-    backToTop.classList.toggle('visible', window.scrollY > 400);
-  }, { passive: true });
+<!-- CHAT BUTTON -->
+<button class="ai-chat-btn" id="aiChatBtn" onclick="toggleAiChat()" aria-label="AI-ассистент">
+  💬
+  <span class="chat-tooltip">Спросить ассистента</span>
+</button>
 
-  backToTop.addEventListener('click', e => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+<!-- CHAT WINDOW -->
+<div class="ai-chat-window" id="aiChatWindow">
+  <div class="chat-header">
+    <div class="chat-header-dot"></div>
+    <div>
+      <div class="chat-header-title">AUVIX STUDIO · Ассистент</div>
+      <div class="chat-header-sub">Отвечает на вопросы об услугах</div>
+    </div>
+    <button class="chat-close" onclick="toggleAiChat()">✕</button>
+  </div>
 
-  // MOBILE NAV
-  function toggleMobileNav() {
-    const nav = document.getElementById('mobileNav');
-    const btn = document.getElementById('burgerBtn');
-    nav.classList.toggle('open');
-    btn.classList.toggle('open');
-    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-  }
-  function closeMobileNav() {
-    document.getElementById('mobileNav').classList.remove('open');
-    document.getElementById('burgerBtn').classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="chat-bubble">Привет! Я знаю всё об услугах и ценах AUVIX Studio. Спрашивай — отвечу быстро 👋</div>
+      <div class="chat-msg-time">сейчас</div>
+    </div>
+  </div>
 
-  // SCROLL REVEAL
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-</script>
+  <div class="chat-typing" id="chatTyping">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="chat-hints" id="chatHints">
+    <button class="chat-hint" onclick="sendHint(this)">Сколько стоит?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Что входит в пакет?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Как начать?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Сроки?</button>
+  </div>
+
+  <div class="chat-footer">
+    <textarea class="chat-input" id="chatInput"
+      placeholder="Задайте вопрос..."
+      rows="1"
+      onkeydown="handleChatKey(event)"></textarea>
+    <button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">→</button>
+  </div>
+</div>
+
+<script src="app.js" defer></script>
 </body>
 </html>

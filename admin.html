@@ -157,6 +157,18 @@
       </div>
 
       <div class="field">
+        <label>Направление</label>
+        <select id="fCategory" style="width:100%; background:var(--bg2); border:1px solid var(--border); color:var(--white); padding:12px 14px; font-size:14px; font-family:inherit; border-radius:2px;">
+          <option value="">Определить автоматически по названию</option>
+          <option value="smm">SMM и дизайн</option>
+          <option value="web">Сайты и PWA</option>
+          <option value="bots">Telegram-боты</option>
+          <option value="other">Другое</option>
+        </select>
+        <div class="hint">Влияет на то, в каком фильтре на странице «Кейсы» и на каком лендинге направления появится кейс.</div>
+      </div>
+
+      <div class="field">
         <label>Фото</label>
         <div class="gallery-list" id="galleryList"></div>
         <input type="file" id="photoInput" accept="image/*" multiple>
@@ -279,12 +291,14 @@ async function openEditor(caseId) {
     const d = snap.data();
     document.getElementById('fTitle').value = d.title || '';
     document.getElementById('fDescription').value = d.description || '';
+    document.getElementById('fCategory').value = d.category || '';
     document.getElementById('fLink').value = d.link || '';
     currentImages = [...(d.images || [])];
   } else {
     document.getElementById('editorHeading').textContent = 'Новый кейс';
     document.getElementById('fTitle').value = '';
     document.getElementById('fDescription').value = '';
+    document.getElementById('fCategory').value = '';
     document.getElementById('fLink').value = '';
     currentImages = [];
   }
@@ -354,6 +368,7 @@ document.getElementById('saveCaseBtn').addEventListener('click', async () => {
   const payload = {
     title,
     description: document.getElementById('fDescription').value.trim(),
+    category: document.getElementById('fCategory').value,
     link: document.getElementById('fLink').value.trim(),
     images: currentImages,
     updatedAt: serverTimestamp()

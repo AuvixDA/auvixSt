@@ -1,0 +1,808 @@
+/* ============================================================
+   AUVIX STUDIO — общие стили сайта
+   Подключается на всех страницах: <link rel="stylesheet" href="styles.css">
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal, .reveal-group > * { opacity: 1 !important; transform: none !important; }
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #181818;
+  --white: #f0ede8;
+  --gray: #5a5a5a;
+  --accent: #c8f060;
+  --border: #222222;
+  --danger: #ff6b6b;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Geologica', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+}
+nav.scrolled {
+  border-color: var(--border);
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-decoration: none;
+}
+.logo span { color: var(--accent); }
+
+.nav-right { display: flex; align-items: center; gap: 16px; }
+
+.nav-tg-portfolio, .nav-back {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.nav-tg-portfolio:hover, .nav-back:hover { color: var(--accent); }
+
+/* Горизонтальное меню — видно только на широких экранах, см. медиа-запросы внизу файла */
+.nav-desktop { display: none; align-items: center; gap: 28px; }
+.nav-desktop a {
+  font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none; transition: color 0.2s;
+  white-space: nowrap;
+}
+.nav-desktop a:hover, .nav-desktop a.active { color: var(--accent); }
+
+/* BURGER */
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 200;
+}
+.burger span {
+  display: block; width: 24px; height: 1px;
+  background: var(--white);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* MOBILE NAV OVERLAY */
+.mobile-nav {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(10,10,10,0.97);
+  z-index: 150;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-nav a:hover { color: var(--accent); }
+.mobile-nav .nav-tg-mob {
+  font-family: 'Geologica', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+/* SCROLL PROGRESS */
+.scroll-line {
+  position: fixed; top: 0; left: 0;
+  height: 2px; width: 0;
+  background: var(--accent);
+  z-index: 200;
+  will-change: width;
+}
+
+/* BACK TO TOP */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 16px;
+  width: 40px; height: 40px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  z-index: 90; opacity: 0;
+  transition: opacity 0.3s, background 0.2s;
+  text-decoration: none;
+}
+.back-to-top.visible { opacity: 1; }
+.back-to-top:hover { background: var(--accent); color: #0a0a0a; }
+
+/* ============================================================
+   HERO — базовый (короткий, для внутренних страниц)
+   На главной добавляется модификатор .hero-full
+   ============================================================ */
+#hero {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 20px 56px;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+#hero.hero-full { min-height: 100vh; padding: 0 20px 72px; }
+#hero.hero-bordered { border-bottom: 1px solid var(--border); }
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(200,240,96,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,240,96,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridFade 3s ease forwards;
+}
+@keyframes gridFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-tag {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 20px;
+  opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 15vw, 120px);
+  line-height: 0.92; letter-spacing: -0.01em;
+  opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
+}
+.hero-title .line2, .hero-title .accent { color: var(--accent); }
+
+.hero-bottom {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
+  margin-top: 48px;
+  opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards;
+}
+.hero-desc, .hero-sub {
+  font-size: 15px; line-height: 1.7; color: var(--gray); font-weight: 400;
+  max-width: 560px;
+}
+.hero-sub { font-size: 14px; margin-top: 20px; opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards; }
+
+.hero-btns {
+  display: flex; flex-direction: column; gap: 10px; width: 100%;
+}
+
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent); color: #0a0a0a;
+  padding: 14px 28px;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%; justify-content: center;
+  border: none; cursor: pointer; font-family: 'Geologica', sans-serif;
+}
+.hero-cta:hover { box-shadow: 0 12px 40px rgba(200,240,96,0.25); }
+
+.hero-cta-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: var(--white);
+  padding: 13px 28px;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, color 0.2s;
+  width: 100%; justify-content: center;
+  font-family: 'Geologica', sans-serif;
+}
+.hero-cta-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+section { padding: 64px 20px; border-top: 1px solid var(--border); }
+
+.section-label {
+  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 40px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+#about { display: flex; flex-direction: column; gap: 36px; }
+.about-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 10vw, 72px);
+  line-height: 0.95; margin-bottom: 24px;
+}
+.about-text { font-size: 15px; line-height: 1.8; color: var(--gray); margin-bottom: 16px; max-width: 640px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.stat { background: var(--bg3); padding: 28px 16px; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+.stat-label { font-size: 11px; color: var(--gray); line-height: 1.4; }
+
+/* ============================================================
+   DIRECTION SELECTOR (хаб-карточки "SMM · Сайты · Боты")
+   ============================================================ */
+.direction-grid { display: flex; flex-direction: column; gap: 2px; }
+.direction-card {
+  display: flex; flex-direction: column; gap: 10px;
+  background: var(--bg2); padding: 28px 22px;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+.direction-card:hover { background: var(--bg3); border-left-color: var(--accent); }
+.direction-card-icon { font-size: 26px; }
+.direction-card-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+.direction-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--white); line-height: 1.05; }
+.direction-card-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.direction-card-arrow { color: var(--accent); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+
+/* Переключатель направлений в хиро внутренних страниц (SMM · Сайты · Боты) */
+.direction-switch { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.direction-switch a {
+  font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none;
+  border: 1px solid var(--border); padding: 8px 14px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.direction-switch a:hover { border-color: var(--accent); color: var(--white); }
+.direction-switch a.active { border-color: var(--accent); color: var(--accent); }
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services-grid { display: flex; flex-direction: column; gap: 2px; }
+.service {
+  background: var(--bg2); padding: 28px 20px;
+  position: relative; transition: background 0.3s;
+  border-left: 2px solid transparent;
+}
+.service:hover { background: var(--bg3); border-left-color: var(--accent); }
+.service-title { font-size: 17px; font-weight: 500; margin-bottom: 10px; line-height: 1.4; }
+.service-desc { font-size: 13px; color: var(--gray); line-height: 1.75; }
+
+/* ============================================================
+   CASE TEASER (ссылка "Смотреть кейсы →" на лендингах)
+   ============================================================ */
+.case-teaser {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg2); padding: 24px 20px; text-decoration: none;
+  border-left: 2px solid var(--accent); transition: background 0.2s;
+  color: inherit;
+}
+.case-teaser:hover { background: var(--bg3); }
+
+/* ============================================================
+   CASE THUMBNAIL GRID (превью-карточки на странице "Кейсы")
+   ============================================================ */
+.filter-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.filter-tab {
+  background: var(--bg2); border: 1px solid var(--border); color: var(--gray);
+  padding: 10px 18px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s; font-family: 'Geologica', sans-serif;
+  text-decoration: none; display: inline-flex; align-items: center;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--white); }
+.filter-tab.active { background: var(--accent); border-color: var(--accent); color: #0a0a0a; font-weight: 500; }
+
+.case-thumb-grid { display: grid; grid-template-columns: 1fr; gap: 2px; }
+.case-thumb-card {
+  display: block; background: var(--bg2); text-decoration: none; color: inherit;
+  border-left: 2px solid transparent; transition: background 0.2s, border-color 0.2s;
+}
+.case-thumb-card:hover { background: var(--bg3); border-left-color: var(--accent); }
+.case-thumb-img { width: 100%; height: 200px; object-fit: cover; display: block; background: var(--bg3); }
+.case-thumb-noimg {
+  width: 100%; height: 120px; display: flex; align-items: center; justify-content: center;
+  background: var(--bg3); color: var(--gray); font-size: 12px; letter-spacing: 0.05em;
+}
+.case-thumb-body { padding: 18px 20px; }
+.case-thumb-cat { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.case-thumb-title { font-size: 16px; font-weight: 500; line-height: 1.3; margin-bottom: 6px; }
+.case-thumb-result { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+/* ============================================================
+   CASE PAGE (детальный кейс — cases.html)
+   ============================================================ */
+.case-section { padding: 64px 20px; border-top: 1px solid var(--border); }
+.case-cat {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 12px;
+}
+.case-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 9vw, 72px);
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+.case-desc { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 32px; max-width: 720px; }
+.case-desc p { margin: 0 0 14px; }
+.case-desc p:last-child { margin-bottom: 0; }
+.case-bullets { margin: 0 0 14px; padding-left: 20px; }
+.case-bullets li { margin-bottom: 6px; }
+.case-bullets:last-child { margin-bottom: 0; }
+.private-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border); color: var(--gray);
+  padding: 10px 20px; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.case-img {
+  display: block;
+  width: auto;
+  max-width: min(480px, 100%);
+  height: auto;
+  max-height: 55vh;
+  margin: 0 auto 12px;
+  object-fit: contain;
+  background: var(--bg2);
+  border-radius: 4px;
+}
+.case-video-embed {
+  max-width: 420px; margin: 0 auto 12px; border: 1px solid var(--border);
+  background: var(--bg2); overflow: hidden;
+}
+.cases-status {
+  padding: 64px 20px;
+  text-align: center;
+  color: var(--gray);
+  font-size: 14px;
+  letter-spacing: 0.03em;
+}
+.cases-status .dot-pulse {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  animation: pulse 1s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+.divider { height: 1px; background: var(--border); margin: 0 20px; }
+
+.cta-block {
+  background: var(--bg3);
+  border-left: 2px solid var(--accent);
+  padding: 24px 20px;
+  margin-top: 2px;
+}
+.cta-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.cta-text { font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+.cta-sub { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 18px; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent); color: #0a0a0a;
+  padding: 13px 24px;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  border: none; cursor: pointer;
+  font-family: 'Geologica', sans-serif;
+  transition: box-shadow 0.2s;
+}
+.cta-btn:hover { box-shadow: 0 8px 32px rgba(200,240,96,0.25); }
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.process-list { display: flex; flex-direction: column; gap: 2px; }
+.process-step { background: var(--bg2); padding: 24px 20px; }
+.process-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.process-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+.process-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.reviews-list { display: flex; flex-direction: column; gap: 2px; }
+.review-card { background: var(--bg2); padding: 28px 20px; }
+.review-author { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.review-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg3); display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--accent);
+  flex-shrink: 0;
+}
+.review-name { font-size: 14px; font-weight: 400; }
+.review-meta { font-size: 11px; color: var(--gray); margin-top: 2px; }
+.review-text { font-size: 14px; line-height: 1.8; color: var(--white); }
+.review-text2 { font-size: 13px; line-height: 1.8; color: var(--gray); margin-top: 12px; }
+.review-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--gray); }
+.rating-block { background: var(--bg3); padding: 28px 20px; margin-top: 2px; text-align: center; border: 1px dashed var(--border); }
+.rating-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--accent); line-height: 1; }
+.rating-stars { font-size: 18px; margin: 6px 0; }
+.rating-label { font-size: 12px; color: var(--gray); line-height: 1.7; }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 0; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: color 0.2s; user-select: none;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-arrow { font-size: 22px; font-weight: 300; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
+.faq-arrow.open { transform: rotate(45deg); }
+.faq-a { font-size: 14px; color: var(--gray); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+.faq-a.open { max-height: 400px; padding-bottom: 20px; }
+
+/* ============================================================
+   PRICING TABLE (используется на prices.html и тизерах направлений)
+   ============================================================ */
+.pricing-table { display: flex; flex-direction: column; gap: 2px; }
+.plan-row {
+  background: var(--bg2);
+  border-left: 2px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+  position: relative;
+}
+.plan-row:hover { background: var(--bg3); border-left-color: var(--accent); }
+.plan-row.popular { border-left-color: var(--accent); background: var(--bg3); }
+.plan-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 16px 16px; gap: 12px; }
+.plan-left { flex: 1; }
+.plan-tag { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.plan-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em; color: var(--white); line-height: 1; }
+.plan-count { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--accent); line-height: 1; }
+.plan-count-label { font-size: 12px; color: var(--gray); margin-top: 2px; }
+.plan-right { text-align: right; flex-shrink: 1; min-width: 0; }
+.plan-price { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); line-height: 1; }
+.plan-per { font-size: 11px; color: var(--gray); margin-top: 3px; opacity: 0.8; overflow-wrap: break-word; }
+.plan-features { padding: 0 16px 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+.feat-tag { font-size: 11px; padding: 4px 10px; border: 1px solid var(--border); color: var(--gray); letter-spacing: 0.04em; }
+.plan-row.popular .feat-tag { border-color: rgba(200,240,96,0.2); color: var(--white); }
+.plan-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-top: 1px solid var(--border);
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none; transition: color 0.2s;
+}
+.plan-cta:hover { color: var(--accent); }
+.plan-row.popular .plan-cta { color: var(--accent); }
+.popular-badge {
+  display: inline-block; background: var(--accent); color: #0a0a0a;
+  font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
+  padding: 3px 8px; margin-left: 10px; vertical-align: middle;
+}
+
+/* VIP / крупный блок */
+.vip-block { background: var(--bg2); border-left: 2px solid var(--accent); padding: 28px 20px; margin-top: 2px; }
+.vip-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.vip-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; margin-bottom: 8px; }
+.vip-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+.vip-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.vip-feat { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--white); line-height: 1.5; }
+.vip-feat::before { content: '—'; color: var(--accent); flex-shrink: 0; font-family: 'Bebas Neue', sans-serif; }
+.vip-price-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-top: 20px; border-top: 1px solid var(--border); }
+.vip-price { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--accent); line-height: 1; }
+.vip-price-sub { font-size: 12px; color: var(--gray); margin-top: 4px; }
+.btn-accent {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent); color: #0a0a0a; padding: 14px 28px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; transition: box-shadow 0.2s; border: none; cursor: pointer;
+  font-family: 'Geologica', sans-serif;
+}
+.btn-accent:hover { box-shadow: 0 12px 40px rgba(200,240,96,0.25); }
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: transparent; color: var(--white); padding: 13px 28px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; border: 1px solid var(--border);
+  transition: border-color 0.2s, color 0.2s; font-family: 'Geologica', sans-serif;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* NICHE GRID */
+.niche-grid { display: flex; flex-direction: column; gap: 2px; }
+.niche-card { background: var(--bg2); padding: 24px 16px; border-left: 2px solid transparent; transition: background 0.2s, border-color 0.2s; }
+.niche-card:hover { background: var(--bg3); border-left-color: var(--accent); }
+.niche-cat { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.niche-name { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+.niche-desc { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 10px; }
+.niche-price { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--accent); }
+
+/* COMPARE TABLE */
+.compare-table { width: 100%; border-collapse: collapse; }
+.compare-table th, .compare-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
+.compare-table th { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.08em; color: var(--accent); background: var(--bg3); font-weight: 400; }
+.compare-table td:first-child { color: var(--gray); }
+.compare-table tr:hover td { background: var(--bg3); }
+.check { color: var(--accent); font-size: 16px; }
+.dash { color: var(--border); }
+
+/* FOOTER CTA */
+.footer-cta { background: var(--bg2); border-top: 2px solid var(--accent); padding: 56px 20px; text-align: center; }
+.footer-cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 64px); line-height: 0.95; margin-bottom: 12px; }
+.footer-cta-title span { color: var(--accent); }
+.footer-cta-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto; }
+.footer-cta-btns { display: flex; flex-direction: column; gap: 10px; max-width: 360px; margin: 0 auto; }
+
+/* ============================================================
+   APPLICATION FORM
+   ============================================================ */
+#apply { background: var(--bg2); border-top: 2px solid var(--accent); }
+.apply-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 60px); line-height: 0.95; margin-bottom: 12px; }
+.apply-title span { color: var(--accent); }
+.apply-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 32px; max-width: 560px; }
+
+.form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.form-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  color: var(--white);
+  font-family: 'Geologica', sans-serif;
+  font-size: 14px; font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+.form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5a5a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+.form-field select option { background: var(--bg3); color: var(--white); }
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus { border-color: var(--accent); }
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: var(--gray); }
+.form-field textarea { height: 100px; resize: none; }
+
+.platforms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 12px; }
+.platform-btn {
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--gray); padding: 10px 6px;
+  font-size: 12px; letter-spacing: 0.05em;
+  text-align: center; cursor: pointer;
+  transition: all 0.2s; font-family: 'Geologica', sans-serif;
+}
+.platform-btn.selected { background: var(--accent); border-color: var(--accent); color: #0a0a0a; font-weight: 500; }
+
+.package-banner {
+  background: var(--bg3);
+  border-left: 3px solid var(--accent);
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.package-banner.hidden { display: none !important; }
+.package-banner-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.package-banner-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.package-banner-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--white); line-height: 1.2; }
+.package-banner-close { margin-left: auto; flex-shrink: 0; background: none; border: none; color: var(--gray); font-size: 18px; cursor: pointer; padding: 0 0 0 12px; line-height: 1; transition: color 0.2s; }
+.package-banner-close:hover { color: var(--accent); }
+
+.submit-btn {
+  width: 100%; padding: 18px;
+  background: var(--accent); color: #0a0a0a;
+  border: none; font-family: 'Geologica', sans-serif;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  cursor: pointer; margin-top: 16px;
+  display: block; text-align: center;
+  transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+.submit-btn:hover { box-shadow: 0 12px 40px rgba(200,240,96,0.3); }
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.success-screen { display: none; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px; gap: 16px; }
+.success-screen.show { display: flex; }
+.success-icon { font-size: 56px; margin-bottom: 8px; }
+.success-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--accent); }
+.success-text { font-size: 14px; color: var(--gray); line-height: 1.8; }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact { display: flex; flex-direction: column; gap: 20px; }
+.contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 60px); line-height: 0.95; margin-bottom: 16px; }
+.contact-title span { color: var(--accent); }
+.contact-desc { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 24px; max-width: 560px; }
+.contact-links { display: flex; flex-direction: column; gap: 2px; }
+.contact-link {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; background: var(--bg2);
+  color: var(--white); text-decoration: none;
+  font-size: 14px; letter-spacing: 0.05em;
+  transition: background 0.2s, color 0.2s;
+}
+.contact-link:hover { background: var(--accent); color: #0a0a0a; }
+.link-arrow { color: var(--gray); font-size: 16px; }
+
+.platforms-info { background: var(--bg2); padding: 24px 20px; margin-top: 2px; }
+.platforms-title { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: var(--gray); margin-bottom: 14px; }
+.platforms-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.platform-tag { padding: 6px 12px; border: 1px solid var(--border); font-size: 12px; letter-spacing: 0.06em; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  padding: 24px 20px; border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center;
+}
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.12em; color: var(--gray); text-decoration: none; }
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.footer-links a { font-size: 11px; color: var(--gray); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-copy { font-size: 11px; color: var(--gray); }
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   AI CHAT WIDGET
+   ============================================================ */
+.ai-chat-btn {
+  position: fixed; bottom: 80px; right: 16px;
+  width: 48px; height: 48px;
+  background: var(--accent); color: #0a0a0a;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; z-index: 95;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.25s;
+  box-shadow: 0 4px 20px rgba(200,240,96,0.3);
+  opacity: 0; pointer-events: none; transform: scale(0.85);
+}
+.ai-chat-btn.visible { opacity: 1; pointer-events: auto; transform: scale(1); }
+.ai-chat-btn.chat-open { opacity: 1; pointer-events: auto; transform: scale(1); }
+.ai-chat-btn:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(200,240,96,0.45); }
+.ai-chat-btn .chat-tooltip {
+  position: absolute; right: 56px; top: 50%; transform: translateY(-50%);
+  background: var(--bg2); border: 1px solid var(--border);
+  color: var(--white); font-family: 'Geologica', sans-serif;
+  font-size: 12px; white-space: nowrap;
+  padding: 6px 12px; pointer-events: none;
+  opacity: 0; transition: opacity 0.2s;
+}
+.ai-chat-btn:hover .chat-tooltip { opacity: 1; }
+
+.ai-chat-window {
+  position: fixed; bottom: 136px; right: 16px;
+  width: min(360px, calc(100vw - 32px));
+  height: min(480px, calc(100vh - 160px));
+  background: var(--bg2); border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  z-index: 95; opacity: 0; pointer-events: none;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.25s, transform 0.25s;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+}
+.ai-chat-window.open { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+
+.chat-header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.chat-header-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px rgba(200,240,96,0.7); animation: chatPulse 2s infinite; }
+@keyframes chatPulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.chat-header-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.08em; flex: 1; }
+.chat-header-sub { font-size: 10px; color: var(--gray); letter-spacing: 0.05em; }
+.chat-close { background: none; border: none; color: var(--gray); font-size: 18px; cursor: pointer; padding: 0; transition: color 0.2s; line-height: 1; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+.chat-close:hover { color: var(--accent); }
+
+.chat-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border); }
+
+.chat-msg { max-width: 85%; display: flex; flex-direction: column; gap: 4px; }
+.chat-msg.user { align-self: flex-end; align-items: flex-end; }
+.chat-msg.bot { align-self: flex-start; align-items: flex-start; }
+.chat-bubble { padding: 10px 14px; font-size: 13px; line-height: 1.6; font-family: 'Geologica', sans-serif; }
+.chat-msg.user .chat-bubble { background: var(--accent); color: #0a0a0a; font-weight: 500; }
+.chat-msg.bot .chat-bubble { background: var(--bg3); color: var(--white); border-left: 2px solid var(--accent); }
+.chat-msg-time { font-size: 10px; color: var(--gray); letter-spacing: 0.05em; }
+
+.chat-typing { align-self: flex-start; display: none; gap: 5px; align-items: center; padding: 12px 16px; background: var(--bg3); border-left: 2px solid var(--accent); }
+.chat-typing.show { display: flex; }
+.chat-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.4; animation: typingDot 1.2s infinite; }
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot { 0%,60%,100%{opacity:0.4; transform:scale(1)} 30%{opacity:1; transform:scale(1.3)} }
+
+.chat-footer { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; }
+.chat-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); padding: 10px 14px; color: var(--white); font-family: 'Geologica', sans-serif; font-size: 13px; outline: none; resize: none; height: 40px; transition: border-color 0.2s; border-radius: 0; line-height: 1.4; }
+.chat-input:focus { border-color: var(--accent); }
+.chat-input::placeholder { color: var(--gray); }
+.chat-send { width: 40px; height: 40px; flex-shrink: 0; background: var(--accent); color: #0a0a0a; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: opacity 0.2s; }
+.chat-send:hover { opacity: 0.85; }
+.chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.chat-hints { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; flex-shrink: 0; }
+.chat-hint { font-size: 11px; padding: 5px 10px; border: 1px solid var(--border); color: var(--gray); cursor: pointer; font-family: 'Geologica', sans-serif; transition: border-color 0.2s, color 0.2s; background: none; letter-spacing: 0.03em; }
+.chat-hint:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ============================================================
+   RESPONSIVE — планшет / десктоп
+   Мобильная раскладка остаётся base-стилями выше без изменений.
+   ============================================================ */
+@media (min-width: 860px) {
+  nav { padding: 22px 48px; }
+  .burger, .nav-tg-portfolio { display: none; }
+  .nav-desktop { display: flex; }
+
+  section, #hero { padding-left: 64px; padding-right: 64px; }
+
+  .hero-btns { flex-direction: row; width: auto; }
+  .hero-cta, .hero-cta-ghost { width: auto; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .process-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .reviews-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; align-items: start; }
+  .direction-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .case-thumb-grid { grid-template-columns: repeat(2, 1fr); }
+  .case-thumb-img { height: 180px; }
+  .pricing-table { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; align-items: start; }
+  .niche-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .done-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .ps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .stats { grid-template-columns: repeat(3, 1fr); }
+
+  #apply #formContainer, #apply .success-screen { max-width: 600px; }
+  .footer-links { gap: 28px; }
+}
+
+@media (min-width: 1200px) {
+  section, #hero { padding-left: 96px; padding-right: 96px; }
+  .services-grid { grid-template-columns: repeat(3, 1fr); }
+  .case-thumb-grid { grid-template-columns: repeat(3, 1fr); }
+}

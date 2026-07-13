@@ -4,432 +4,59 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Кейсы — AUVIX Studio</title>
-<meta name="description" content="Реальные результаты — кейсы AUVIX Studio по SMM, TikTok и веб-разработке.">
+<meta name="description" content="Реальные результаты — кейсы AUVIX Studio по SMM, сайтам и Telegram-ботам.">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #181818;
-    --white: #f0ede8;
-    --gray: #5a5a5a;
-    --accent: #c8f060;
-    --border: #222222;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'Geologica', sans-serif;
-    font-weight: 400;
-    overflow-x: hidden;
-    font-size: 16px;
-    letter-spacing: 0.01em;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s, background 0.3s;
-  }
-  nav.scrolled {
-    border-color: var(--border);
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(12px);
-  }
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 0.12em;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .logo span { color: var(--accent); }
-
-  .nav-back {
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gray);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.2s;
-  }
-  .nav-back:hover { color: var(--accent); }
-
-  /* SCROLL PROGRESS */
-  .scroll-line {
-    position: fixed; top: 0; left: 0;
-    height: 2px; width: 0;
-    background: var(--accent);
-    z-index: 200;
-    will-change: width;
-  }
-
-  /* BACK TO TOP */
-  .back-to-top {
-    position: fixed; bottom: 24px; right: 16px;
-    width: 40px; height: 40px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    color: var(--white);
-    font-size: 16px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    z-index: 90; opacity: 0;
-    transition: opacity 0.3s, background 0.2s;
-    text-decoration: none;
-  }
-  .back-to-top.visible { opacity: 1; }
-  .back-to-top:hover { background: var(--accent); color: #0a0a0a; }
-
-  /* HERO */
-  #hero {
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 20px 64px;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(200,240,96,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,240,96,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridFade 3s ease forwards;
-  }
-  @keyframes gridFade { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes reveal {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-tag {
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 20px;
-    opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
-  }
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(52px, 14vw, 120px);
-    line-height: 0.92; letter-spacing: -0.01em;
-    opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
-  }
-  .hero-title .accent { color: var(--accent); }
-  .hero-sub {
-    font-size: 14px; color: var(--gray); line-height: 1.7; margin-top: 24px;
-    opacity: 0; animation: fadeUp 0.8s 0.7s ease forwards;
-    max-width: 480px;
-  }
-
-  /* SECTION */
-  .case-section {
-    padding: 64px 20px;
-    border-top: 1px solid var(--border);
-  }
-
-  .section-label {
-    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 40px;
-  }
-
-  /* CASE HEADER */
-  .case-cat {
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 12px;
-  }
-  .case-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 9vw, 72px);
-    line-height: 0.95;
-    margin-bottom: 16px;
-  }
-  .case-desc {
-    font-size: 14px; color: var(--gray); line-height: 1.8;
-    margin-bottom: 32px;
-  }
-  .case-desc p { margin: 0 0 14px; }
-  .case-desc p:last-child { margin-bottom: 0; }
-  .case-list { margin: 0 0 14px; padding-left: 20px; }
-  .case-list li { margin-bottom: 6px; }
-  .case-list:last-child { margin-bottom: 0; }
-  .private-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid var(--border); color: var(--gray);
-    padding: 10px 20px; font-size: 12px; letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* STATS GRID */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    margin-bottom: 2px;
-  }
-  .stat-block {
-    background: var(--bg3);
-    padding: 24px 18px;
-  }
-  .stat-block.wide {
-    grid-column: span 2;
-  }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .stat-label {
-    font-size: 12px;
-    color: var(--gray);
-    line-height: 1.4;
-  }
-  .stat-growth {
-    font-size: 11px;
-    color: var(--accent);
-    margin-top: 4px;
-    letter-spacing: 0.05em;
-  }
-
-  /* IMAGE */
-  .case-img {
-    display: block;
-    width: auto;
-    max-width: min(480px, 100%);
-    height: auto;
-    max-height: 55vh;
-    margin: 0 auto 12px;
-    object-fit: contain;
-    background: var(--bg2);
-    border-radius: 4px;
-  }
-
-  /* WHAT WAS DONE */
-  .done-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 2px;
-  }
-  .done-item {
-    background: var(--bg2);
-    padding: 18px 16px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    border-left: 2px solid transparent;
-    transition: border-color 0.2s;
-  }
-  .done-item:hover { border-left-color: var(--accent); }
-  .done-arrow {
-    color: var(--accent);
-    flex-shrink: 0;
-    margin-top: 1px;
-    font-size: 14px;
-  }
-  .done-text {
-    font-size: 14px;
-    color: var(--white);
-    line-height: 1.6;
-  }
-  .done-sub {
-    font-size: 12px;
-    color: var(--gray);
-    margin-top: 3px;
-    line-height: 1.5;
-  }
-
-  /* PROBLEM / SOLUTION BLOCK */
-  .ps-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-bottom: 2px;
-  }
-  .ps-block {
-    background: var(--bg2);
-    padding: 24px 18px;
-  }
-  .ps-label {
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--gray); margin-bottom: 14px;
-  }
-  .ps-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .ps-item {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .ps-icon { color: var(--accent); flex-shrink: 0; font-size: 13px; margin-top: 2px; }
-  .ps-text { font-size: 13px; color: var(--gray); line-height: 1.6; }
-  .ps-text strong { color: var(--white); font-weight: 500; display: block; margin-bottom: 2px; }
-
-  /* SITE PREVIEW */
-  .site-preview {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    padding: 0;
-    overflow: hidden;
-    margin-bottom: 2px;
-  }
-  .site-preview-bar {
-    background: var(--bg3);
-    padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
-  .url-bar {
-    flex: 1;
-    background: var(--bg);
-    border-radius: 2px;
-    padding: 4px 10px;
-    font-size: 11px;
-    color: var(--gray);
-    letter-spacing: 0.03em;
-  }
-  .site-preview img {
-    width: 100%;
-    display: block;
-    object-fit: contain;
-    background: #111;
-  }
-
-  /* CTA block */
-  .cta-block {
-    background: var(--bg3);
-    border-left: 2px solid var(--accent);
-    padding: 24px 20px;
-    margin-top: 2px;
-  }
-  .cta-label {
-    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 10px;
-  }
-  .cta-text {
-    font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 6px;
-  }
-  .cta-sub {
-    font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 18px;
-  }
-  .cta-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--accent); color: #0a0a0a;
-    padding: 13px 24px;
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none;
-    border: none; cursor: pointer;
-    font-family: 'Geologica', sans-serif;
-    transition: box-shadow 0.2s;
-  }
-  .cta-btn:hover { box-shadow: 0 8px 32px rgba(200,240,96,0.25); }
-
-  /* DIVIDER */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 0 20px;
-  }
-
-  /* LOADING / EMPTY STATE */
-  .cases-status {
-    padding: 64px 20px;
-    text-align: center;
-    color: var(--gray);
-    font-size: 14px;
-    letter-spacing: 0.03em;
-  }
-  .cases-status .dot-pulse {
-    display: inline-block;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    margin-right: 8px;
-    animation: pulse 1s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
-
-  /* REVEAL animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 40px 20px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 0.12em;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .footer-logo span { color: var(--accent); }
-  .footer-copy {
-    font-size: 12px;
-    color: var(--gray);
-    line-height: 1.6;
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="scroll-line" id="scrollLine"></div>
 
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMobileNav()">Главная</a>
+  <a href="smm.html" onclick="closeMobileNav()">SMM</a>
+  <a href="web.html" onclick="closeMobileNav()">Сайты</a>
+  <a href="bots.html" onclick="closeMobileNav()">Боты</a>
+  <a href="prices.html" onclick="closeMobileNav()">Цены</a>
+  <a href="index.html#apply" onclick="closeMobileNav()">Заявка</a>
+  <a href="https://t.me/auvixs" target="_blank" class="nav-tg-mob" onclick="closeMobileNav()">Telegram канал</a>
+</div>
+
 <!-- NAV -->
 <nav id="navbar">
   <a class="logo" href="index.html"><span>A</span>UVIX</a>
+  <div class="nav-desktop">
+    <a href="index.html">Главная</a>
+    <a href="smm.html">SMM</a>
+    <a href="web.html">Сайты</a>
+    <a href="bots.html">Боты</a>
+    <a href="prices.html">Цены</a>
+    <a href="index.html#apply">Заявка</a>
+  </div>
   <a class="nav-back" href="index.html">← На главную</a>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
+<section id="hero" class="hero-bordered">
   <div class="hero-grid"></div>
   <p class="hero-tag">AUVIX Studio · Портфолио</p>
   <h1 class="hero-title">Реальные<br><span class="accent">результаты</span></h1>
-  <p class="hero-sub">Реальные проекты — фото, описание и результат каждой работы. Без прикрас.</p>
+  <p class="hero-sub">Реальные проекты — фото, описание и результат каждой работы. Без прикрас. Отфильтруйте по направлению, если ищете что-то конкретное.</p>
 </section>
+
+<!-- FILTER TABS + THUMBNAIL PREVIEW -->
+<section class="case-section" style="padding-bottom:32px;">
+  <div class="filter-tabs reveal" id="filterTabs">
+    <a href="cases.html" class="filter-tab" data-filter="">Все</a>
+    <a href="cases.html?filter=smm" class="filter-tab" data-filter="smm">SMM и дизайн</a>
+    <a href="cases.html?filter=web" class="filter-tab" data-filter="web">Сайты и PWA</a>
+    <a href="cases.html?filter=bots" class="filter-tab" data-filter="bots">Telegram-боты</a>
+  </div>
+  <div id="thumbGrid" class="case-thumb-grid reveal"></div>
+</section>
+
+<div class="divider"></div>
 
 <!-- ===== КЕЙСЫ (подгружаются из Firestore) ===== -->
 <div id="casesContainer">
@@ -449,35 +76,57 @@
 <!-- FOOTER -->
 <footer>
   <a class="footer-logo" href="index.html"><span>A</span>UVIX Studio</a>
-  <p class="footer-copy">Контент · Дизайн · SMM · Сайты<br>Полный цикл. Один партнёр.</p>
+  <p class="footer-copy">Контент · Сайты · Telegram-боты<br>Полный цикл. Один партнёр.</p>
   <p class="footer-copy" style="margin-top:8px;"><a href="privacy-policy.html" style="color:inherit;">Политика конфиденциальности</a></p>
 </footer>
 
 <a class="back-to-top" id="backToTop" href="#hero">↑</a>
 
-<script>
-  // Scroll progress + navbar (не зависит от загрузки кейсов)
-  const scrollLine = document.getElementById('scrollLine');
-  const navbar = document.getElementById('navbar');
-  const backToTop = document.getElementById('backToTop');
+<!-- CHAT BUTTON -->
+<button class="ai-chat-btn" id="aiChatBtn" onclick="toggleAiChat()" aria-label="AI-ассистент">
+  💬
+  <span class="chat-tooltip">Спросить ассистента</span>
+</button>
 
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const total = document.body.scrollHeight - window.innerHeight;
-    scrollLine.style.width = (scrolled / Math.max(total, 1) * 100) + '%';
-    navbar.classList.toggle('scrolled', scrolled > 20);
-    backToTop.classList.toggle('visible', scrolled > 400);
-  });
+<!-- CHAT WINDOW -->
+<div class="ai-chat-window" id="aiChatWindow">
+  <div class="chat-header">
+    <div class="chat-header-dot"></div>
+    <div>
+      <div class="chat-header-title">AUVIX STUDIO · Ассистент</div>
+      <div class="chat-header-sub">Отвечает на вопросы об услугах</div>
+    </div>
+    <button class="chat-close" onclick="toggleAiChat()">✕</button>
+  </div>
 
-  function initReveal() {
-    const reveals = document.querySelectorAll('.reveal:not(.reveal-bound)');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, { threshold: 0.08 });
-    reveals.forEach(el => { el.classList.add('reveal-bound'); observer.observe(el); });
-  }
-  document.addEventListener('DOMContentLoaded', initReveal);
-</script>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="chat-bubble">Привет! Я знаю всё об услугах и ценах AUVIX Studio. Спрашивай — отвечу быстро 👋</div>
+      <div class="chat-msg-time">сейчас</div>
+    </div>
+  </div>
+
+  <div class="chat-typing" id="chatTyping">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="chat-hints" id="chatHints">
+    <button class="chat-hint" onclick="sendHint(this)">Сколько стоит?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Что входит в пакет?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Как начать?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Сроки?</button>
+  </div>
+
+  <div class="chat-footer">
+    <textarea class="chat-input" id="chatInput"
+      placeholder="Задайте вопрос..."
+      rows="1"
+      onkeydown="handleChatKey(event)"></textarea>
+    <button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">→</button>
+  </div>
+</div>
+
+<script src="app.js" defer></script>
 
 <script type="module">
   import { db, collection, getDocs, query, orderBy } from './firebase-init.js';
@@ -498,7 +147,7 @@
       const line = raw.trim();
       const isBullet = /^[*\-•]\s+/.test(line);
       if (isBullet) {
-        if (!listOpen) { html += '<ul class="case-list">'; listOpen = true; }
+        if (!listOpen) { html += '<ul class="case-bullets">'; listOpen = true; }
         html += `<li>${esc(line.replace(/^[*\-•]\s+/, ''))}</li>`;
       } else {
         if (listOpen) { html += '</ul>'; listOpen = false; }
@@ -509,7 +158,11 @@
     return html;
   }
 
-  function renderCase(data) {
+  function firstLine(str) {
+    return (str || '').toString().split('\n').map(s => s.trim()).find(Boolean) || '';
+  }
+
+  function renderCase(data, categoryLabel) {
     const images = (data.images || [])
       .map(url => `<img class="case-img reveal" src="${esc(url)}" alt="${esc(data.title || '')}">`)
       .join('\n');
@@ -525,6 +178,7 @@
     return `
     <section class="case-section" id="case-${esc(data._id)}">
       <div class="reveal">
+        <div class="case-cat">${esc(categoryLabel)}</div>
         <h2 class="case-title">${nl2br(data.title)}</h2>
         <div class="case-desc">${formatDescription(data.description)}</div>
       </div>
@@ -533,8 +187,33 @@
     </section>`;
   }
 
+  function renderThumb(data, categoryLabel) {
+    const img = (data.images || [])[0];
+    const thumb = img
+      ? `<img class="case-thumb-img" src="${esc(img)}" alt="${esc(data.title || '')}">`
+      : `<div class="case-thumb-noimg">Фото в кейсе ниже</div>`;
+    return `
+    <a class="case-thumb-card" href="#case-${esc(data._id)}">
+      ${thumb}
+      <div class="case-thumb-body">
+        <div class="case-thumb-cat">${esc(categoryLabel)}</div>
+        <div class="case-thumb-title">${esc(firstLine(data.title))}</div>
+        <div class="case-thumb-result">${esc(firstLine(data.description))}</div>
+      </div>
+    </a>`;
+  }
+
   async function loadCases() {
     const container = document.getElementById('casesContainer');
+    const thumbGrid = document.getElementById('thumbGrid');
+    const params = new URLSearchParams(window.location.search);
+    const activeFilter = params.get('filter') || '';
+
+    // Подсветить активный таб фильтра
+    document.querySelectorAll('#filterTabs .filter-tab').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.filter === activeFilter);
+    });
+
     try {
       const q = query(collection(db, 'cases'), orderBy('createdAt', 'desc'));
       const snap = await getDocs(q);
@@ -544,12 +223,34 @@
         return;
       }
 
-      let html = '';
+      const labels = window.__auvixCaseCategoryLabels || { smm: 'SMM и дизайн', web: 'Сайты и PWA', bots: 'Telegram-боты', other: 'Другое' };
+      const classify = window.__auvixClassifyCase || (() => 'other');
+
+      let all = [];
       snap.forEach(docSnap => {
-        html += renderCase({ ...docSnap.data(), _id: docSnap.id });
+        const data = { ...docSnap.data(), _id: docSnap.id };
+        all.push({ data, category: classify(data) });
       });
-      container.innerHTML = html;
-      initReveal();
+
+      const filtered = activeFilter ? all.filter(c => c.category === activeFilter) : all;
+
+      if (!filtered.length) {
+        container.innerHTML = `<div class="cases-status">По этому направлению пока нет опубликованных кейсов. <a href="cases.html" style="color:var(--accent);">Смотреть все →</a></div>`;
+        thumbGrid.innerHTML = '';
+        return;
+      }
+
+      thumbGrid.innerHTML = filtered.map(c => renderThumb(c.data, labels[c.category])).join('\n');
+      container.innerHTML = filtered.map(c => renderCase(c.data, labels[c.category])).join('\n');
+      window.__auvixInitReveal?.();
+
+      // Кейсы рендерятся асинхронно, поэтому браузер не успевает сам
+      // проскроллить к #case-ID из ссылки, пришедшей со страницы направления —
+      // докручиваем вручную, когда нужный элемент наконец появился в DOM.
+      if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     } catch (err) {
       console.error(err);
       container.innerHTML = `<div class="cases-status">Не удалось загрузить кейсы. Попробуйте обновить страницу.</div>`;

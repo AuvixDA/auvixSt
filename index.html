@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>AUVIX STUDIO — Контент, дизайн и digital-решения</title>
-<meta name="description" content="AUVIX Studio — полный цикл digital-услуг: контент, SMM, дизайн, сайты и AI-автоматизация. Один партнёр вместо цепочки подрядчиков.">
+<title>AUVIX STUDIO — Контент, сайты и Telegram-боты</title>
+<meta name="description" content="AUVIX Studio — три направления: SMM и дизайн, сайты и PWA, Telegram-боты. Выберите нужное и увидите кейсы и цены только по вашей задаче.">
 <script>
   // Грузим Telegram Mini App SDK только если сайт реально открыт внутри Telegram —
   // иначе это лишний запрос и спам предупреждений в консоли для обычных посетителей.
@@ -16,455 +16,7 @@
   })();
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-    .reveal, .reveal-group > * { opacity: 1 !important; transform: none !important; }
-  }
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #181818;
-    --white: #f0ede8;
-    --gray: #5a5a5a;
-    --accent: #c8f060;
-    --border: #222222;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'Geologica', sans-serif;
-    font-weight: 400;
-    overflow-x: hidden;
-    font-size: 16px;
-    letter-spacing: 0.01em;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 20px;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s, background 0.3s;
-  }
-  nav.scrolled {
-    border-color: var(--border);
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(12px);
-  }
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 0.12em;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .logo span { color: var(--accent); }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .nav-tg-portfolio {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gray);
-    text-decoration: none;
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
-  .nav-tg-portfolio:hover { color: var(--accent); }
-
-  /* BURGER */
-  .burger {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    z-index: 200;
-  }
-  .burger span {
-    display: block; width: 24px; height: 1px;
-    background: var(--white);
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  .burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .burger.open span:nth-child(2) { opacity: 0; }
-  .burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-  /* MOBILE NAV OVERLAY */
-  .mobile-nav {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(10,10,10,0.97);
-    z-index: 150;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 32px;
-  }
-  .mobile-nav.open { display: flex; }
-  .mobile-nav a {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 44px;
-    letter-spacing: 0.08em;
-    color: var(--white);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .mobile-nav a:hover { color: var(--accent); }
-  .mobile-nav .nav-tg-mob {
-    font-family: 'Geologica', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    color: var(--gray);
-    text-transform: uppercase;
-  }
-
-  /* SCROLL PROGRESS */
-  .scroll-line {
-    position: fixed; top: 0; left: 0;
-    height: 2px; width: 0;
-    background: var(--accent);
-    z-index: 200;
-    will-change: width;
-  }
-
-  /* BACK TO TOP */
-  .back-to-top {
-    position: fixed; bottom: 24px; right: 16px;
-    width: 40px; height: 40px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    color: var(--white);
-    font-size: 16px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    z-index: 90; opacity: 0;
-    transition: opacity 0.3s, background 0.2s;
-    text-decoration: none;
-  }
-  .back-to-top.visible { opacity: 1; }
-  .back-to-top:hover { background: var(--accent); color: #0a0a0a; }
-
-  /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 20px 72px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(200,240,96,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,240,96,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridFade 3s ease forwards;
-  }
-  @keyframes gridFade { from { opacity: 0; } to { opacity: 1; } }
-
-  .hero-tag {
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 20px;
-    opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
-  }
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(60px, 16vw, 140px);
-    line-height: 0.92; letter-spacing: -0.01em;
-    opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
-  }
-  .hero-title .line2 { color: var(--accent); }
-
-  .hero-bottom {
-    display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
-    margin-top: 48px;
-    opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards;
-  }
-  .hero-desc {
-    font-size: 15px; line-height: 1.7; color: var(--gray); font-weight: 400;
-  }
-
-  .hero-btns {
-    display: flex; flex-direction: column; gap: 10px; width: 100%;
-  }
-
-  .hero-cta {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--accent); color: #0a0a0a;
-    padding: 14px 28px;
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    width: 100%; justify-content: center;
-    border: none; cursor: pointer; font-family: 'Geologica', sans-serif;
-  }
-  .hero-cta:hover { box-shadow: 0 12px 40px rgba(200,240,96,0.25); }
-
-  .hero-cta-ghost {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: transparent; color: var(--white);
-    padding: 13px 28px;
-    font-size: 12px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    transition: border-color 0.2s, color 0.2s;
-    width: 100%; justify-content: center;
-    font-family: 'Geologica', sans-serif;
-  }
-  .hero-cta-ghost:hover { border-color: var(--accent); color: var(--accent); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* SECTIONS */
-  section { padding: 64px 20px; border-top: 1px solid var(--border); }
-
-  .section-label {
-    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 40px;
-    display: flex; align-items: center; gap: 12px;
-  }
-
-  /* ABOUT */
-  #about { display: flex; flex-direction: column; gap: 36px; }
-  .about-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 10vw, 72px);
-    line-height: 0.95; margin-bottom: 24px;
-  }
-  .about-text { font-size: 15px; line-height: 1.8; color: var(--gray); margin-bottom: 16px; }
-  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-  .stat { background: var(--bg3); padding: 28px 20px; }
-  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
-  .stat-label { font-size: 12px; color: var(--gray); line-height: 1.4; }
-
-  /* SERVICES */
-  .services-grid { display: flex; flex-direction: column; gap: 2px; }
-  .service {
-    background: var(--bg2); padding: 28px 20px;
-    position: relative; transition: background 0.3s;
-    border-left: 2px solid transparent;
-  }
-  .service:hover { background: var(--bg3); border-left-color: var(--accent); }
-  .service-title { font-size: 17px; font-weight: 500; margin-bottom: 10px; line-height: 1.4; }
-  .service-desc { font-size: 13px; color: var(--gray); line-height: 1.75; }
-
-  /* CASES */
-  .case-list { display: flex; flex-direction: column; gap: 2px; }
-  .case-row { background: var(--bg2); padding: 20px 16px; display: flex; flex-direction: column; gap: 6px; border-left: 2px solid transparent; transition: border-color 0.2s; }
-  .case-row:hover { border-left-color: var(--accent); }
-  .case-row-cat { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-  .case-row-title { font-size: 16px; font-weight: 500; line-height: 1.3; }
-  .case-row-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
-  .case-row-metric-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--accent); margin-top: 8px; }
-  .case-row-metric-label { font-size: 11px; color: var(--gray); }
-
-  /* PROCESS */
-  .process-list { display: flex; flex-direction: column; gap: 2px; }
-  .process-step {
-    background: var(--bg2); padding: 24px 20px;
-  }
-  .process-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-  .process-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-  .process-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
-
-  /* REVIEWS */
-  .reviews-list { display: flex; flex-direction: column; gap: 2px; }
-  .review-card { background: var(--bg2); padding: 28px 20px; }
-  .review-author { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-  .review-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: var(--bg3); display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--accent);
-    flex-shrink: 0;
-  }
-  .review-name { font-size: 14px; font-weight: 400; }
-  .review-meta { font-size: 11px; color: var(--gray); margin-top: 2px; }
-  .review-text { font-size: 14px; line-height: 1.8; color: var(--white); }
-  .review-text2 { font-size: 13px; line-height: 1.8; color: var(--gray); margin-top: 12px; }
-  .review-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--gray); }
-  .rating-block { background: var(--bg3); padding: 28px 20px; margin-top: 2px; text-align: center; border: 1px dashed var(--border); }
-  .rating-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--accent); line-height: 1; }
-  .rating-stars { font-size: 18px; margin: 6px 0; }
-  .rating-label { font-size: 12px; color: var(--gray); line-height: 1.7; }
-
-  /* FAQ */
-  .faq-item { border-bottom: 1px solid var(--border); }
-  .faq-q {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 0; font-size: 15px; font-weight: 500;
-    cursor: pointer; transition: color 0.2s; user-select: none;
-  }
-  .faq-q:hover { color: var(--accent); }
-  .faq-arrow { font-size: 22px; font-weight: 300; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
-  .faq-arrow.open { transform: rotate(45deg); }
-  .faq-a { font-size: 14px; color: var(--gray); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
-  .faq-a.open { max-height: 400px; padding-bottom: 20px; }
-
-  /* APPLICATION FORM SECTION */
-  #apply {
-    background: var(--bg2);
-    border-top: 2px solid var(--accent);
-  }
-  .apply-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 10vw, 60px);
-    line-height: 0.95; margin-bottom: 12px;
-  }
-  .apply-title span { color: var(--accent); }
-  .apply-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 32px; }
-
-  .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-  .form-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
-  .form-field input,
-  .form-field textarea,
-  .form-field select {
-    width: 100%;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    padding: 14px 16px;
-    color: var(--white);
-    font-family: 'Geologica', sans-serif;
-    font-size: 14px; font-weight: 300;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-    border-radius: 0;
-  }
-  .form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5a5a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
-  .form-field select option { background: var(--bg3); color: var(--white); }
-  .form-field input:focus,
-  .form-field textarea:focus,
-  .form-field select:focus { border-color: var(--accent); }
-  .form-field input::placeholder,
-  .form-field textarea::placeholder { color: var(--gray); }
-  .form-field textarea { height: 100px; resize: none; }
-
-  .platforms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 12px; }
-  .platform-btn {
-    background: var(--bg3); border: 1px solid var(--border);
-    color: var(--gray); padding: 10px 6px;
-    font-size: 12px; letter-spacing: 0.05em;
-    text-align: center; cursor: pointer;
-    transition: all 0.2s; font-family: 'Geologica', sans-serif;
-  }
-  .platform-btn.selected { background: var(--accent); border-color: var(--accent); color: #0a0a0a; font-weight: 500; }
-
-  /* PACKAGE BANNER */
-  .package-banner {
-    display: none;
-    background: var(--bg3);
-    border-left: 3px solid var(--accent);
-    padding: 14px 16px;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .package-banner.hidden { display: none !important; }
-  .package-banner-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-  .package-banner-label {
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 4px;
-  }
-  .package-banner-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px; color: var(--white); line-height: 1.2;
-  }
-  .package-banner-close {
-    margin-left: auto; flex-shrink: 0;
-    background: none; border: none; color: var(--gray);
-    font-size: 18px; cursor: pointer; padding: 0 0 0 12px;
-    line-height: 1; transition: color 0.2s;
-  }
-  .package-banner-close:hover { color: var(--accent); }
-
-  /* SUBMIT BTN */
-  .submit-btn {
-    width: 100%; padding: 18px;
-    background: var(--accent); color: #0a0a0a;
-    border: none; font-family: 'Geologica', sans-serif;
-    font-size: 14px; font-weight: 600;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    cursor: pointer; margin-top: 16px;
-    display: block; text-align: center;
-    transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
-  }
-  .submit-btn:hover { box-shadow: 0 12px 40px rgba(200,240,96,0.3); }
-  .submit-btn:active { transform: scale(0.98); }
-  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  /* SUCCESS STATE */
-  .success-screen {
-    display: none;
-    flex-direction: column; align-items: center;
-    text-align: center; padding: 40px 20px; gap: 16px;
-  }
-  .success-screen.show { display: flex; }
-  .success-icon { font-size: 56px; margin-bottom: 8px; }
-  .success-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--accent); }
-  .success-text { font-size: 14px; color: var(--gray); line-height: 1.8; }
-
-  /* CONTACT */
-  #contact { display: flex; flex-direction: column; gap: 20px; }
-  .contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 60px); line-height: 0.95; margin-bottom: 16px; }
-  .contact-title span { color: var(--accent); }
-  .contact-desc { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 24px; }
-  .contact-links { display: flex; flex-direction: column; gap: 2px; }
-  .contact-link {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 16px 20px; background: var(--bg2);
-    color: var(--white); text-decoration: none;
-    font-size: 14px; letter-spacing: 0.05em;
-    transition: background 0.2s, color 0.2s;
-  }
-  .contact-link:hover { background: var(--accent); color: #0a0a0a; }
-  .link-arrow { color: var(--gray); font-size: 16px; }
-
-  .platforms-info { background: var(--bg2); padding: 24px 20px; margin-top: 2px; }
-  .platforms-title { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 0.15em; color: var(--gray); margin-bottom: 14px; }
-  .platforms-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .platform-tag { padding: 6px 12px; border: 1px solid var(--border); font-size: 12px; letter-spacing: 0.06em; }
-
-  /* FOOTER */
-  footer {
-    padding: 24px 20px; border-top: 1px solid var(--border);
-    display: flex; flex-direction: column; gap: 12px; align-items: center; text-align: center;
-  }
-  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.12em; color: var(--gray); }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a { font-size: 11px; color: var(--gray); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; }
-  .footer-copy { font-size: 11px; color: var(--gray); }
-
-  /* SCROLL REVEAL */
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-</style>
+<link rel="stylesheet" href="styles.css">
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -488,10 +40,10 @@
 
 <!-- MOBILE NAV OVERLAY -->
 <div class="mobile-nav" id="mobileNav">
+  <a href="#directions" onclick="closeMobileNav()">Направления</a>
   <a href="#about" onclick="closeMobileNav()">О себе</a>
-  <a href="#works" onclick="closeMobileNav()">Кейсы</a>
-  <a href="#services" onclick="closeMobileNav()">Услуги</a>
-  <a href="prices.html" onclick="closeMobileNav()">Пакеты</a>
+  <a href="cases.html" onclick="closeMobileNav()">Кейсы</a>
+  <a href="prices.html" onclick="closeMobileNav()">Цены</a>
   <a href="#apply" onclick="closeMobileNav()">Заявка</a>
   <a href="#contact" onclick="closeMobileNav()">Контакт</a>
   <a href="https://t.me/auvixs" target="_blank" class="nav-tg-mob" onclick="closeMobileNav()">Telegram канал</a>
@@ -502,6 +54,14 @@
 <!-- NAV -->
 <nav id="navbar">
   <a href="#" class="logo">AUVIX<span>.</span></a>
+  <div class="nav-desktop">
+    <a href="#directions">Направления</a>
+    <a href="#about">О себе</a>
+    <a href="cases.html">Кейсы</a>
+    <a href="prices.html">Цены</a>
+    <a href="#apply">Заявка</a>
+    <a href="https://t.me/auvixs" target="_blank">Telegram</a>
+  </div>
   <div class="nav-right">
     <a href="cases.html" class="nav-tg-portfolio">Кейсы</a>
     <a href="https://t.me/auvixs" target="_blank" class="nav-tg-portfolio">Telegram</a>
@@ -512,20 +72,20 @@
 </nav>
 
 <!-- HERO -->
-<section id="hero">
+<section id="hero" class="hero-full">
   <div class="hero-grid"></div>
   <div style="position:relative; z-index:1;">
-    <div class="hero-tag">Контент · Дизайн · SMM · Сайты</div>
+    <div class="hero-tag">Контент · Сайты · Telegram-боты</div>
     <h1 class="hero-title">
       AUVIX<br>
       <span class="line2">DIGITAL</span><br>
       STUDIO
     </h1>
     <div class="hero-bottom">
-      <p class="hero-desc">Ведём digital-проекты от постановки задачи до результата: контент, дизайн, SMM, сайты и автоматизация. Один партнёр вместо цепочки подрядчиков — меньше согласований, понятная ответственность.</p>
+      <p class="hero-desc">Веду проекты лично — от брифа до сдачи. Три направления: контент и SMM, сайты и веб-сервисы, Telegram-боты. Выберите своё ниже — покажу только те кейсы, цены и вопросы, которые относятся к вашей задаче.</p>
       <div class="hero-btns">
-        <button class="hero-cta" onclick="scrollToApply()">
-          Оставить заявку
+        <button class="hero-cta" onclick="document.getElementById('directions').scrollIntoView({behavior:'smooth'})">
+          Выбрать направление
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <a href="https://t.me/idwvw" target="_blank" class="hero-cta-ghost">
@@ -537,6 +97,34 @@
   </div>
 </section>
 
+<!-- DIRECTIONS -->
+<section id="directions">
+  <div class="section-label">Что вам нужно?</div>
+  <div class="direction-grid reveal">
+    <a href="smm.html" class="direction-card">
+      <div class="direction-card-icon">🎬</div>
+      <div class="direction-card-tag">Контент и дизайн</div>
+      <div class="direction-card-title">SMM и дизайн</div>
+      <div class="direction-card-desc">Ведение соцсетей под ключ, дизайн постов и сторис, контент-стратегия, карточки маркетплейсов, оформление профиля.</div>
+      <div class="direction-card-arrow">Смотреть направление →</div>
+    </a>
+    <a href="web.html" class="direction-card">
+      <div class="direction-card-icon">🖥️</div>
+      <div class="direction-card-tag">Разработка</div>
+      <div class="direction-card-title">Сайты и PWA</div>
+      <div class="direction-card-desc">Лендинги, которые продают, и веб-сервисы под задачу — от простой заявки до личного кабинета с базой данных.</div>
+      <div class="direction-card-arrow">Смотреть направление →</div>
+    </a>
+    <a href="bots.html" class="direction-card">
+      <div class="direction-card-icon">🤖</div>
+      <div class="direction-card-tag">Автоматизация</div>
+      <div class="direction-card-title">Telegram-боты</div>
+      <div class="direction-card-desc">Бот сам принимает заявки, ведёт каталог и отвечает клиентам — без выходных, без пропущенных сообщений.</div>
+      <div class="direction-card-arrow">Смотреть направление →</div>
+    </a>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about">
   <div class="section-label">О студии</div>
@@ -545,7 +133,7 @@
       <img src="photo.jpg" alt="Иван, основатель AUVIX Studio" style="width:160px; height:160px; object-fit:cover; object-position:center 15%; flex-shrink:0; border-radius:50%; border:2px solid var(--accent);">
       <div>
         <p style="font-size:13px; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:10px;">Иван · Основатель AUVIX Studio</p>
-        <p style="font-size:15px; line-height:1.85; color:var(--white);">Веду каждый проект лично — от брифа до сдачи. Когда объём задачи требует, подключаю проверенных специалистов под конкретные роли (дизайн, монтаж, разработка), но отвечаю за результат я один, без передачи между отделами и потери деталей по пути.</p>
+        <p style="font-size:15px; line-height:1.85; color:var(--white); max-width:640px;">Веду каждый проект лично — от брифа до сдачи. Когда объём задачи требует, подключаю проверенных специалистов под конкретные роли (дизайн, монтаж, разработка), но отвечаю за результат я один, без передачи между отделами и потери деталей по пути.</p>
       </div>
     </div>
   </div>
@@ -569,63 +157,23 @@
 <!-- WORKS -->
 <section id="works">
   <div class="reveal">
-    <a href="cases.html" style="display:flex; align-items:center; justify-content:space-between; background:var(--bg2); padding:24px 20px; text-decoration:none; border-left:2px solid var(--accent); transition:background 0.2s;" onmouseover="this.style.background='var(--bg3)';" onmouseout="this.style.background='var(--bg2)';">
+    <a href="cases.html" class="case-teaser">
       <div>
         <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Портфолио</div>
-        <div style="font-size:16px; font-weight:500; color:var(--white);">Смотреть кейсы →</div>
-        <div style="font-size:12px; color:var(--gray); margin-top:4px;">Реализованные проекты с результатами</div>
+        <div style="font-size:16px; font-weight:500; color:var(--white);">Смотреть все кейсы →</div>
+        <div style="font-size:12px; color:var(--gray); margin-top:4px;">Реализованные проекты с результатами, по всем направлениям</div>
       </div>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="section-label">Услуги</div>
-  <div class="services-grid reveal">
-    <div class="service">
-      <div class="service-title">SMM под ключ</div>
-      <div class="service-desc">Берёте нас в команду — мы закрываем весь контент: стратегия, производство, публикации и аналитика. Вы фокусируетесь на бизнесе.</div>
-    </div>
-    <div class="service">
-      <div class="service-title">Дизайн постов и сторис</div>
-      <div class="service-desc">Готовый контент под ваш бренд — от 5 до 50 изображений. Берёте и публикуете сразу, без лишних итераций.</div>
-    </div>
-    <div class="service">
-      <div class="service-title">Контент-стратегия</div>
-      <div class="service-desc">Получаете чёткий план: кому, о чём и когда. Анализ ниши, конкурентов и аудитории — основа для всего остального.</div>
-    </div>
-    <div class="service">
-      <div class="service-title">ИИ-генерация визуала</div>
-      <div class="service-desc">ИИ — инструмент для технически сложных задач: уникальные образы и композиции, которые долго рисовать с нуля. Финальный визуал всегда дорабатываю вручную под ваш бренд и стиль — на выходе готовый контент, а не сырая генерация.</div>
-    </div>
-    <div class="service">
-      <div class="service-title">Маркетплейс-контент</div>
-      <div class="service-desc">Карточки для Wildberries, Ozon, Авито, которые продают — за счёт правильного визуала и доверия, а не просто красивых фото.</div>
-    </div>
-    <div class="service">
-      <div class="service-title">Сайты под задачу</div>
-      <div class="service-desc">Лендинг, который реально работает: дизайн, вёрстка и Telegram-бот для автоматического приёма заявок прямо в мессенджер.</div>
-    </div>
-    <div class="service">
-      <div class="service-title">Оформление профиля</div>
-      <div class="service-desc">Единый визуальный стиль от первого взгляда: обложка, хайлайты, шапка и карточки — чтобы профиль работал как витрина.</div>
-    </div>
-  </div>
-
-  <!-- Кнопка перехода на страницу цен -->
   <div class="reveal" style="margin-top:2px;">
-    <a href="prices.html" style="display:flex; align-items:center; justify-content:space-between; background:var(--bg2); padding:20px 16px; text-decoration:none; border-left:2px solid var(--accent); transition:background 0.2s;" onmouseover="this.style.background='var(--bg3)';" onmouseout="this.style.background='var(--bg2)';">
+    <a href="prices.html" class="case-teaser">
       <div>
         <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Прозрачные цены</div>
-        <div style="font-size:15px; font-weight:500; color:var(--white);">Пакеты и стоимость услуг</div>
-        <div style="font-size:12px; color:var(--gray); margin-top:4px;">От 1 500 ₽ за пакет · SMM под ключ · VIP</div>
+        <div style="font-size:16px; font-weight:500; color:var(--white);">Все пакеты и стоимость →</div>
+        <div style="font-size:12px; color:var(--gray); margin-top:4px;">Контент · сайты · боты — в одном месте</div>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;margin-left:16px;">
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--accent);line-height:1;">от 1 500 ₽</span>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
   </div>
 </section>
@@ -724,32 +272,24 @@
   <div class="section-label">Вопросы</div>
   <div class="reveal">
     <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Как понять, какое направление мне нужно?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Если нужен контент, соцсети или дизайн — вам на страницу «SMM и дизайн». Если нужен сайт или веб-сервис — на «Сайты и PWA». Если нужно, чтобы заявки и заказы обрабатывались автоматически в Telegram — на «Telegram-боты». Не уверены — пишите в общую форму ниже, помогу определиться.</div>
+    </div>
+    <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Сколько стоят услуги?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">Пакеты изображений — от 1 500 ₽ (5 штук) до 12 000 ₽ (50 штук). Ведение под ключ — от 25 000 ₽/месяц. Разовые задачи обсуждаем отдельно — пишите, назову цену за 5 минут.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>Как быстро будет готов контент?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">Изображения — 1-3 рабочих дня. Стратегию и контент-план — 3-5 дней. Срочные задачи обсуждаем индивидуально.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>Как проходит согласование?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">Показываем черновик — вы смотрите, даёте правки, мы дорабатываем. Количество итераций фиксируем на старте: оно зависит от сложности задачи, объёма работы и вашего ТЗ. Финальная версия уходит в работу только после вашего подтверждения.</div>
+      <div class="faq-a">Зависит от направления. Пакеты изображений — от 1 500 ₽, ведение под ключ — от 25 000 ₽/мес, сайты — от 10 000 ₽, боты — от 4 000 ₽. Полная сетка цен — на странице «Пакеты и цены».</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Можно посмотреть примеры работ до старта?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">Да, конечно. Портфолио в Telegram — t.me/auvixs — там собраны реальные проекты: SMM, дизайн, сайты. Также детальные кейсы есть на странице «Кейсы».</div>
+      <div class="faq-a">Да, конечно. Детальные кейсы с фото и результатами — на странице «Кейсы», отфильтрованы по направлению. Портфолио также в Telegram — t.me/auvixs.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Кто ведёт проект?</span><span class="faq-arrow">+</span></div>
       <div class="faq-a">Проект от брифа до сдачи ведёт один и тот же специалист — вы всегда на связи с человеком, который непосредственно делает работу, без передачи между отделами и потери деталей по пути.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)"><span>Что нужно для старта?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">Достаточно рассказать о бизнесе, показать аккаунт и пояснить, что хотите получить. Остальное берём на себя — анализ, идеи, производство.</div>
-    </div>
-    <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)"><span>Гарантируете результат?</span><span class="faq-arrow">+</span></div>
-      <div class="faq-a">Гарантируем качество контента и соблюдение сроков. Конкретные цифры зависят от ниши и бюджета — говорим честно, без обещаний "1000 подписчиков за неделю".</div>
+      <div class="faq-a">Гарантируем качество работы и соблюдение сроков. Конкретные цифры зависят от ниши, бюджета и задачи — говорим честно, без нереалистичных обещаний.</div>
     </div>
   </div>
 </section>
@@ -759,8 +299,8 @@
   <div class="section-label">Заявка</div>
 
   <div id="formContainer">
-    <h2 class="apply-title">Оставить<br><span>заявку</span></h2>
-    <p class="apply-desc">Заполните форму — свяжемся с вами в течение дня и предложим решение.</p>
+    <h2 class="apply-title">Не уверены,<br><span>с чего начать?</span></h2>
+    <p class="apply-desc">Заполните общую форму — уточню детали и подскажу, какое направление и формат вам подойдут. Если уже знаете, что нужно, быстрее будет через страницу нужного направления: <a href="smm.html" style="color:var(--accent);">SMM</a>, <a href="web.html" style="color:var(--accent);">сайты</a> или <a href="bots.html" style="color:var(--accent);">боты</a>.</p>
 
     <!-- PACKAGE BANNER -->
     <div class="package-banner hidden" id="packageBanner">
@@ -794,14 +334,13 @@
 
     <div class="form-field" id="field_service">
       <select id="f_service">
-        <option value="">Выберите...</option>
+        <option value="">Что вас интересует...</option>
         <option>SMM под ключ</option>
         <option>Дизайн постов / сторис</option>
         <option>Контент-стратегия</option>
-        <option>ИИ-генерация визуала</option>
-        <option>Маркетплейс-контент</option>
         <option>Сайт под задачу</option>
-        <option>Оформление профиля</option>
+        <option>Telegram-бот</option>
+        <option>PWA-приложение</option>
         <option>Ещё не знаю — нужна консультация</option>
       </select>
     </div>
@@ -913,392 +452,6 @@
   <div class="footer-copy">© 2026 — Все права защищены</div>
 </footer>
 
-<script>
-  // ─── TELEGRAM MINI APP INIT ───────────────────────────────────────────────
-  const tg = window.Telegram?.WebApp;
-  if (tg) {
-    tg.ready();
-    tg.expand();
-    tg.setHeaderColor('#0a0a0a');
-    tg.setBackgroundColor('#0a0a0a');
-    tg.MainButton.setText('📋 Оставить заявку');
-    tg.MainButton.color = '#c8f060';
-    tg.MainButton.textColor = '#0a0a0a';
-    tg.MainButton.show();
-    tg.MainButton.onClick(() => scrollToApply());
-  }
-
-  // ─── PACKAGE FROM URL ────────────────────────────────────────────────────
-  let selectedPackage = '';
-
-  function applyPackageUI(pkg) {
-    const serviceField  = document.getElementById('field_service');
-    const budgetField   = document.getElementById('field_budget');
-    if (pkg) {
-      // Pre-fill service select with closest match if possible
-      if (serviceField) serviceField.style.display = 'none';
-      if (budgetField)  budgetField.style.display  = 'none';
-    } else {
-      if (serviceField) serviceField.style.display = '';
-      if (budgetField)  budgetField.style.display  = '';
-    }
-  }
-
-  (function initPackageBanner() {
-    const params = new URLSearchParams(window.location.search);
-    const pkg = params.get('package');
-    if (pkg) {
-      selectedPackage = decodeURIComponent(pkg);
-      const banner = document.getElementById('packageBanner');
-      document.getElementById('packageBannerName').textContent = selectedPackage;
-      banner.classList.remove('hidden');
-      applyPackageUI(selectedPackage);
-    }
-  })();
-
-  function clearPackage() {
-    selectedPackage = '';
-    const banner = document.getElementById('packageBanner');
-    banner.classList.add('hidden');
-    applyPackageUI('');
-    const url = new URL(window.location.href);
-    url.searchParams.delete('package');
-    history.replaceState(null, '', url.toString());
-  }
-
-  // ─── BOT CONFIG ───────────────────────────────────────────────────────────
-  const WORKER_URL = 'https://auvix.ivankatsan24954.workers.dev/';
-
-  // ─── HELPERS ──────────────────────────────────────────────────────────────
-  function scrollToApply() {
-    document.getElementById('apply').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  function togglePlatform(btn) {
-    btn.classList.toggle('selected');
-  }
-
-  function getSelectedPlatforms() {
-    return [...document.querySelectorAll('.platform-btn.selected')]
-      .map(b => b.textContent).join(', ') || 'не выбрано';
-  }
-
-  // ─── SUBMIT ───────────────────────────────────────────────────────────────
-  async function submitApplication() {
-    const name     = document.getElementById('f_name').value.trim();
-    const phone    = document.getElementById('f_phone').value.trim();
-    const contact  = document.getElementById('f_contact').value.trim();
-    const business = document.getElementById('f_business').value.trim();
-    const service  = document.getElementById('f_service').value;
-    const budget   = document.getElementById('f_budget').value;
-    const comment  = document.getElementById('f_comment').value.trim();
-    const isPromo  = document.getElementById('f_promo').checked;
-    const hasConsent = document.getElementById('f_consent').checked;
-    const platforms = getSelectedPlatforms();
-
-    const errEl = document.getElementById('formError');
-    const phoneDigits = phone.replace(/\D/g, '');
-    if (!name || !phone || !business) {
-      errEl.style.display = 'block';
-      errEl.textContent = 'Заполните обязательные поля: имя, номер телефона и описание бизнеса.';
-      return;
-    }
-    if (phoneDigits.length < 10) {
-      errEl.style.display = 'block';
-      errEl.textContent = 'Введите корректный номер телефона (минимум 10 цифр).';
-      return;
-    }
-    if (!hasConsent) {
-      errEl.style.display = 'block';
-      errEl.textContent = 'Подтвердите согласие на обработку персональных данных.';
-      return;
-    }
-    errEl.style.display = 'none';
-
-    const btn = document.getElementById('submitBtn');
-    btn.disabled = true;
-    btn.textContent = 'Отправляю...';
-
-    const tgUser = tg?.initDataUnsafe?.user;
-    const tgUsername = tgUser?.username ? `@${tgUser.username}` : null;
-    const tgName = tgUser ? `${tgUser.first_name || ''} ${tgUser.last_name || ''}`.trim() : '';
-
-    const clientLine = tgName ? `${name} · ${tgName}` : name;
-
-    const text = [
-      `Заявка | Auvix Studio`,
-      ``,
-      selectedPackage
-        ? `🛒 *ЗАЯВКА С ПАКЕТОМ*`
-        : `📋 *ОБЩАЯ ЗАЯВКА*`,
-      ``,
-      selectedPackage
-        ? `📦 *Пакет:* ${selectedPackage}`
-        : `🎯 *Интерес:* ${service || 'не указано'}`,
-      ``,
-      `━━━━━━━━━━━━━━━━━━`,
-      `👤 *Клиент:* ${clientLine}`,
-      `📞 *Телефон:* ${phone}`,
-      contact ? `💬 *Соцсеть:* ${contact}` : '',
-      tgUsername ? `🤖 *TG (Mini App):* ${tgUsername}` : '',
-      `🏢 *Бизнес:* ${business}`,
-      ``,
-      platforms !== 'не выбрано' ? `📱 *Платформы:* ${platforms}` : '',
-      selectedPackage && service ? `🎯 *Также интересует:* ${service}` : (!selectedPackage && budget ? `💰 *Бюджет:* ${budget}` : ''),
-      isPromo ? `🎁 *Хочет пробный проект за отзыв*` : '',
-      comment ? `💬 *Комментарий:* ${comment}` : '',
-      ``,
-      `━━━━━━━━━━━━━━━━━━`,
-      `⏰ ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`,
-      selectedPackage ? `🔗 Источник: страница пакетов` : `🔗 Источник: форма на главной`,
-    ].filter(Boolean).join('\n');
-
-    try {
-      const res = await fetch(WORKER_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text })
-      });
-      const data = await res.json();
-      if (data.ok) {
-        ym(109533947, 'reachGoal', 'form_submit', { package: selectedPackage || 'без пакета' });
-        // Show package in success screen if applicable
-        if (selectedPackage) {
-          document.getElementById('successPackageName').textContent = selectedPackage;
-          document.getElementById('successPackageBlock').style.display = 'block';
-        }
-        document.getElementById('formContainer').style.display = 'none';
-        document.getElementById('successScreen').classList.add('show');
-        tg?.MainButton.hide();
-        tg?.HapticFeedback?.notificationOccurred('success');
-      } else {
-        throw new Error(data.description);
-      }
-    } catch (e) {
-      btn.disabled = false;
-      btn.textContent = 'Отправить заявку →';
-      alert('Ошибка отправки. Напишите напрямую: t.me/idwvw');
-    }
-  }
-
-  // ─── FAQ ──────────────────────────────────────────────────────────────────
-  function toggleFaq(el) {
-    const answer = el.nextElementSibling;
-    const arrow  = el.querySelector('.faq-arrow');
-    const isOpen = answer.classList.contains('open');
-    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
-    document.querySelectorAll('.faq-arrow').forEach(a => a.classList.remove('open'));
-    if (!isOpen) { answer.classList.add('open'); arrow.classList.add('open'); }
-  }
-
-  // ─── MOBILE NAV ───────────────────────────────────────────────────────────
-  function toggleMobileNav() {
-    const nav = document.getElementById('mobileNav');
-    const btn = document.getElementById('burgerBtn');
-    nav.classList.toggle('open');
-    btn.classList.toggle('open');
-    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-  }
-  function closeMobileNav() {
-    document.getElementById('mobileNav').classList.remove('open');
-    document.getElementById('burgerBtn').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  // ─── SCROLL EFFECTS ───────────────────────────────────────────────────────
-  const scrollLine = document.getElementById('scrollLine');
-  const navbar     = document.getElementById('navbar');
-  const backToTop  = document.getElementById('backToTop');
-
-  window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    scrollLine.style.width = pct + '%';
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-    backToTop.classList.toggle('visible', window.scrollY > 400);
-    document.getElementById('aiChatBtn')?.classList.toggle('visible', window.scrollY > 500);
-  }, { passive: true });
-
-  backToTop.addEventListener('click', e => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // ─── SCROLL REVEAL ────────────────────────────────────────────────────────
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.07 });
-
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-</script>
-<!-- ═══════════════════════════════════════════════════════════════
-     AUVIX AI CHAT WIDGET
-     Вставить перед закрывающим </body> на каждой странице
-     Заменить CHAT_WORKER_URL на реальный URL твоего Worker'а
-═══════════════════════════════════════════════════════════════ -->
-
-<style>
-  /* ── CHAT WIDGET ─────────────────────────────────────── */
-  .ai-chat-btn {
-    position: fixed; bottom: 80px; right: 16px;
-    width: 48px; height: 48px;
-    background: var(--accent); color: #0a0a0a;
-    border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; z-index: 95;
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.25s;
-    box-shadow: 0 4px 20px rgba(200,240,96,0.3);
-    opacity: 0; pointer-events: none; transform: scale(0.85);
-  }
-  .ai-chat-btn.visible { opacity: 1; pointer-events: auto; transform: scale(1); }
-  .ai-chat-btn.chat-open { opacity: 1; pointer-events: auto; transform: scale(1); }
-  .ai-chat-btn:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(200,240,96,0.45); }
-  .ai-chat-btn .chat-tooltip {
-    position: absolute; right: 56px; top: 50%; transform: translateY(-50%);
-    background: var(--bg2); border: 1px solid var(--border);
-    color: var(--white); font-family: 'Geologica', sans-serif;
-    font-size: 12px; white-space: nowrap;
-    padding: 6px 12px; pointer-events: none;
-    opacity: 0; transition: opacity 0.2s;
-  }
-  .ai-chat-btn:hover .chat-tooltip { opacity: 1; }
-
-  .ai-chat-window {
-    position: fixed; bottom: 136px; right: 16px;
-    width: min(360px, calc(100vw - 32px));
-    height: min(480px, calc(100vh - 160px));
-    background: var(--bg2); border: 1px solid var(--border);
-    display: flex; flex-direction: column;
-    z-index: 95; opacity: 0; pointer-events: none;
-    transform: translateY(16px) scale(0.97);
-    transition: opacity 0.25s, transform 0.25s;
-    box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-  }
-  .ai-chat-window.open {
-    opacity: 1; pointer-events: all;
-    transform: translateY(0) scale(1);
-  }
-
-  .chat-header {
-    display: flex; align-items: center; gap: 10px;
-    padding: 14px 16px; border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-  .chat-header-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 6px rgba(200,240,96,0.7);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-  .chat-header-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px; letter-spacing: 0.08em; flex: 1;
-  }
-  .chat-header-sub {
-    font-size: 10px; color: var(--gray);
-    letter-spacing: 0.05em;
-  }
- .chat-close {
-    background: none; border: none; color: var(--gray);
-    font-size: 18px; cursor: pointer; padding: 0;
-    transition: color 0.2s; line-height: 1;
-    width: 28px; height: 28px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .chat-close:hover { color: var(--accent); }
-
-  .chat-messages {
-    flex: 1; overflow-y: auto; padding: 16px;
-    display: flex; flex-direction: column; gap: 12px;
-    scroll-behavior: smooth;
-  }
-  .chat-messages::-webkit-scrollbar { width: 4px; }
-  .chat-messages::-webkit-scrollbar-track { background: transparent; }
-  .chat-messages::-webkit-scrollbar-thumb { background: var(--border); }
-
-  .chat-msg {
-    max-width: 85%; display: flex; flex-direction: column; gap: 4px;
-  }
-  .chat-msg.user { align-self: flex-end; align-items: flex-end; }
-  .chat-msg.bot  { align-self: flex-start; align-items: flex-start; }
-
-  .chat-bubble {
-    padding: 10px 14px;
-    font-size: 13px; line-height: 1.6;
-    font-family: 'Geologica', sans-serif;
-  }
-  .chat-msg.user .chat-bubble {
-    background: var(--accent); color: #0a0a0a; font-weight: 500;
-  }
-  .chat-msg.bot .chat-bubble {
-    background: var(--bg3); color: var(--white);
-    border-left: 2px solid var(--accent);
-  }
-  .chat-msg-time {
-    font-size: 10px; color: var(--gray); letter-spacing: 0.05em;
-  }
-
-  .chat-typing {
-    align-self: flex-start;
-    display: none; gap: 5px; align-items: center;
-    padding: 12px 16px;
-    background: var(--bg3); border-left: 2px solid var(--accent);
-  }
-  .chat-typing.show { display: flex; }
-  .chat-typing span {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent); opacity: 0.4;
-    animation: typingDot 1.2s infinite;
-  }
-  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
-  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes typingDot { 0%,60%,100%{opacity:0.4; transform:scale(1)} 30%{opacity:1; transform:scale(1.3)} }
-
-  .chat-footer {
-    padding: 12px; border-top: 1px solid var(--border);
-    display: flex; gap: 8px; flex-shrink: 0;
-  }
-  .chat-input {
-    flex: 1; background: var(--bg3);
-    border: 1px solid var(--border);
-    padding: 10px 14px; color: var(--white);
-    font-family: 'Geologica', sans-serif; font-size: 13px;
-    outline: none; resize: none; height: 40px;
-    transition: border-color 0.2s; border-radius: 0;
-    line-height: 1.4;
-  }
-  .chat-input:focus { border-color: var(--accent); }
-  .chat-input::placeholder { color: var(--gray); }
-  .chat-send {
-    width: 40px; height: 40px; flex-shrink: 0;
-    background: var(--accent); color: #0a0a0a;
-    border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    transition: opacity 0.2s;
-  }
-  .chat-send:hover { opacity: 0.85; }
-  .chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  .chat-hints {
-    display: flex; flex-wrap: wrap; gap: 6px;
-    padding: 0 16px 12px; flex-shrink: 0;
-  }
-  .chat-hint {
-    font-size: 11px; padding: 5px 10px;
-    border: 1px solid var(--border); color: var(--gray);
-    cursor: pointer; font-family: 'Geologica', sans-serif;
-    transition: border-color 0.2s, color 0.2s; background: none;
-    letter-spacing: 0.03em;
-  }
-  .chat-hint:hover { border-color: var(--accent); color: var(--accent); }
-</style>
-
 <!-- CHAT BUTTON -->
 <button class="ai-chat-btn" id="aiChatBtn" onclick="toggleAiChat()" aria-label="AI-ассистент">
   💬
@@ -1313,7 +466,7 @@
       <div class="chat-header-title">AUVIX STUDIO · Ассистент</div>
       <div class="chat-header-sub">Отвечает на вопросы об услугах</div>
     </div>
-    <button class="chat-close" onclick="toggleAiChat()" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;">✕</button>
+    <button class="chat-close" onclick="toggleAiChat()">✕</button>
   </div>
 
   <div class="chat-messages" id="chatMessages">
@@ -1343,114 +496,6 @@
   </div>
 </div>
 
-<script>
-  // ── CONFIG ────────────────────────────────────────────────────────────────
-  const CHAT_WORKER_URL = 'https://keyai.ivankatsan24954.workers.dev/';
-
-  // ── STATE ─────────────────────────────────────────────────────────────────
-  let chatOpen = false;
-  let chatHistory = [];
-  let chatBusy = false;
-
-  // ── TOGGLE ────────────────────────────────────────────────────────────────
-  function toggleAiChat() {
-    chatOpen = !chatOpen;
-    document.getElementById('aiChatWindow').classList.toggle('open', chatOpen);
-    document.getElementById('aiChatBtn').classList.toggle('chat-open', chatOpen);
-    if (chatOpen) {
-      setTimeout(() => document.getElementById('chatInput').focus(), 250);
-    }
-  }
-
-  // ── HINTS ─────────────────────────────────────────────────────────────────
-  function sendHint(btn) {
-    document.getElementById('chatInput').value = btn.textContent;
-    // скрыть подсказки после первого использования
-    document.getElementById('chatHints').style.display = 'none';
-    sendChatMessage();
-  }
-
-  // ── KEY HANDLER ───────────────────────────────────────────────────────────
-  function handleChatKey(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendChatMessage();
-    }
-  }
-
-  // ── SEND ──────────────────────────────────────────────────────────────────
-  async function sendChatMessage() {
-    if (chatBusy) return;
-    const input = document.getElementById('chatInput');
-    const message = input.value.trim();
-    if (!message) return;
-
-    input.value = '';
-    chatBusy = true;
-    document.getElementById('chatSendBtn').disabled = true;
-    document.getElementById('chatHints').style.display = 'none';
-
-    // Добавляем сообщение пользователя
-    appendMessage('user', message);
-
-    // Показываем typing
-    const typing = document.getElementById('chatTyping');
-    typing.classList.add('show');
-    scrollChat();
-
-    try {
-      const res = await fetch(CHAT_WORKER_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, history: chatHistory })
-      });
-      const data = await res.json();
-
-      typing.classList.remove('show');
-
-      if (data.reply) {
-        appendMessage('bot', data.reply);
-        // Сохраняем в историю
-        chatHistory.push({ role: 'user', content: message });
-        chatHistory.push({ role: 'assistant', content: data.reply });
-      } else {
-        appendMessage('bot', 'Что-то пошло не так. Напишите нам напрямую: @idwvw');
-      }
-    } catch (err) {
-      typing.classList.remove('show');
-      appendMessage('bot', 'Нет связи. Попробуйте позже или напишите в Telegram: @idwvw');
-    }
-
-    chatBusy = false;
-    document.getElementById('chatSendBtn').disabled = false;
-    input.focus();
-  }
-
-  // ── APPEND MESSAGE ────────────────────────────────────────────────────────
-  function appendMessage(role, text) {
-    const messages = document.getElementById('chatMessages');
-    const time = new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-
-    const div = document.createElement('div');
-    div.className = `chat-msg ${role}`;
-    div.innerHTML = `
-      <div class="chat-bubble">${escapeHtml(text)}</div>
-      <div class="chat-msg-time">${time}</div>
-    `;
-    messages.appendChild(div);
-    scrollChat();
-  }
-
-  function scrollChat() {
-    const m = document.getElementById('chatMessages');
-    m.scrollTop = m.scrollHeight;
-  }
-
-  function escapeHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-              .replace(/\n/g,'<br>');
-  }
-</script>
-
+<script src="app.js" defer></script>
 </body>
 </html>

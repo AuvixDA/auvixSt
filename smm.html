@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SMM и дизайн — AUVIX Studio</title>
+<meta name="description" content="Ведение соцсетей под ключ, дизайн постов и сторис, контент-стратегия, карточки маркетплейсов. Кейс: 1,4 млн просмотров в TikTok без бюджета.">
+<script>
+  (function () {
+    var isTelegram = /tgWebApp/.test(location.href) || !!window.TelegramWebviewProxy || /Telegram/i.test(navigator.userAgent);
+    if (isTelegram) {
+      document.write('<script src="https://telegram.org/js/telegram-web-app.js"><\/script>');
+    }
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(109533947, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109533947" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<div class="scroll-line" id="scrollLine"></div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMobileNav()">Главная</a>
+  <a href="web.html" onclick="closeMobileNav()">Сайты</a>
+  <a href="bots.html" onclick="closeMobileNav()">Боты</a>
+  <a href="cases.html?filter=smm" onclick="closeMobileNav()">Кейсы SMM</a>
+  <a href="#apply" onclick="closeMobileNav()">Заявка</a>
+  <a href="https://t.me/auvixs" target="_blank" class="nav-tg-mob" onclick="closeMobileNav()">Telegram канал</a>
+</div>
+
+<a href="#" class="back-to-top" id="backToTop" aria-label="Наверх">↑</a>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="logo">AUVIX<span>.</span></a>
+  <div class="nav-desktop">
+    <a href="index.html">Главная</a>
+    <a href="smm.html" class="active">SMM</a>
+    <a href="web.html">Сайты</a>
+    <a href="bots.html">Боты</a>
+    <a href="cases.html?filter=smm">Кейсы</a>
+    <a href="#apply">Заявка</a>
+  </div>
+  <div class="nav-right">
+    <a href="cases.html?filter=smm" class="nav-tg-portfolio">Кейсы</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero-bordered">
+  <div class="hero-grid"></div>
+  <div style="position:relative; z-index:1;">
+    <div class="hero-tag">Направление · SMM и дизайн</div>
+    <h1 class="hero-title">КОНТЕНТ,<br><span class="accent">КОТОРЫЙ</span><br>РАБОТАЕТ</h1>
+    <p class="hero-sub">Ведение соцсетей, дизайн постов и сторис, контент-стратегия, карточки маркетплейсов, оформление профиля. Один человек ведёт весь контент — от идеи до публикации и аналитики.</p>
+    <div class="hero-btns" style="margin-top:28px; max-width:420px;">
+      <button class="hero-cta" onclick="scrollToApply()">
+        Оставить заявку
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="https://t.me/idwvw" target="_blank" class="hero-cta-ghost">
+        Написать в Telegram
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l10-5-3 5 3 5-10-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="direction-switch">
+      <a href="smm.html" class="active">SMM и дизайн</a>
+      <a href="web.html">Сайты и PWA</a>
+      <a href="bots.html">Telegram-боты</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<section style="padding-top:40px; padding-bottom:40px;">
+  <div class="stats reveal-group reveal">
+    <div class="stat"><div class="stat-num">1,4М+</div><div class="stat-label">органических просмотров в кейсе Geradog</div></div>
+    <div class="stat"><div class="stat-num">4 000+</div><div class="stat-label">подписчиков без рекламного бюджета</div></div>
+    <div class="stat"><div class="stat-num">5.0</div><div class="stat-label">рейтинг на Авито</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">Услуги</div>
+  <div class="services-grid reveal">
+    <div class="service">
+      <div class="service-title">SMM под ключ</div>
+      <div class="service-desc">Берёте нас в команду — мы закрываем весь контент: стратегия, производство, публикации и аналитика. Вы фокусируетесь на бизнесе.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">Дизайн постов и сторис</div>
+      <div class="service-desc">Готовый контент под ваш бренд — от 5 до 50 изображений. Берёте и публикуете сразу, без лишних итераций.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">Контент-стратегия</div>
+      <div class="service-desc">Получаете чёткий план: кому, о чём и когда. Анализ ниши, конкурентов и аудитории — основа для всего остального.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">ИИ-генерация визуала</div>
+      <div class="service-desc">ИИ — инструмент для технически сложных задач: уникальные образы и композиции, которые долго рисовать с нуля. Финальный визуал всегда дорабатываю вручную под ваш бренд и стиль — на выходе готовый контент, а не сырая генерация.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">Маркетплейс-контент</div>
+      <div class="service-desc">Карточки для Wildberries, Ozon, Авито, которые продают — за счёт правильного визуала и доверия, а не просто красивых фото.</div>
+    </div>
+    <div class="service">
+      <div class="service-title">Оформление профиля</div>
+      <div class="service-desc">Единый визуальный стиль от первого взгляда: обложка, хайлайты, шапка и карточки — чтобы профиль работал как витрина.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES PREVIEW -->
+<section id="cases-preview">
+  <div class="section-label">Кейсы SMM и дизайна</div>
+  <div id="thumbGrid" class="case-thumb-grid reveal">
+    <div class="cases-status"><span class="dot-pulse"></span>Загружаю кейсы…</div>
+  </div>
+  <div class="reveal" style="margin-top:2px;">
+    <a href="https://www.tiktok.com/@geradog" target="_blank" class="case-teaser">
+      <div>
+        <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Живое доказательство</div>
+        <div style="font-size:16px; font-weight:500; color:var(--white);">Смотреть аккаунт GeraDog в TikTok →</div>
+        <div style="font-size:12px; color:var(--gray); margin-top:4px;">Реальные ролики и цифры — не скриншоты, а живой аккаунт</div>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="reveal" style="margin-top:2px;">
+    <a href="cases.html?filter=smm" class="case-teaser">
+      <div>
+        <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Портфолио</div>
+        <div style="font-size:16px; font-weight:500; color:var(--white);">Все SMM-кейсы →</div>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- PRICING PREVIEW -->
+<section id="pricing-preview">
+  <div class="section-label">Цены</div>
+  <div class="pricing-table reveal">
+    <div class="plan-row">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">Пробный формат</div><div class="plan-name">Тест</div></div>
+        <div><div class="plan-count">5</div><div class="plan-count-label">изображений</div></div>
+        <div class="plan-right"><div class="plan-price">1 500 ₽</div></div>
+      </div>
+      <a href="prices.html?package=Тест+·+5+изображений+·+1+500+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Заказать пакет</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="plan-row popular">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">Оптимальный <span class="popular-badge">Популярный</span></div><div class="plan-name">Оптимальный</div></div>
+        <div><div class="plan-count">30</div><div class="plan-count-label">изображений</div></div>
+        <div class="plan-right"><div class="plan-price">8 000 ₽</div><div class="plan-per">270 ₽ / шт</div></div>
+      </div>
+      <a href="prices.html?package=Оптимальный+·+30+изображений+·+8+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Заказать пакет</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="plan-row">
+      <div class="plan-head">
+        <div class="plan-left"><div class="plan-tag">VIP / Под ключ</div><div class="plan-name">Ведение под ключ</div></div>
+        <div class="plan-right"><div class="plan-price">от 25 000 ₽</div><div class="plan-per">в месяц</div></div>
+      </div>
+      <a href="prices.html?package=VIP+·+Индивидуальное+ведение+·+от+25+000+₽#apply" class="plan-cta" onclick="ym(109533947,'reachGoal','package_click')">
+        <span>Обсудить проект</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="reveal" style="margin-top:2px;">
+    <a href="prices.html#pricing" class="case-teaser">
+      <div><div style="font-size:15px; font-weight:500; color:var(--white);">Все пакеты, нишевые форматы и сравнение →</div></div>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0; margin-left:16px;"><path d="M4 10h12M12 5l5 5-5 5" stroke="#c8f060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label">Вопросы про SMM</div>
+  <div class="reveal">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Сколько стоит ведение соцсетей?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Пакеты изображений — от 1 500 ₽ (5 штук) до 12 000 ₽ (50 штук). Ведение под ключ — от 25 000 ₽/месяц. Разовые задачи обсуждаем отдельно — пишите, назову цену за 5 минут.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Как быстро будет готов контент?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Изображения — 1-3 рабочих дня. Стратегию и контент-план — 3-5 дней. Срочные задачи обсуждаем индивидуально.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Как проходит согласование?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Показываем черновик — вы смотрите, даёте правки, мы дорабатываем. Количество итераций фиксируем на старте: оно зависит от сложности задачи, объёма работы и вашего ТЗ. Финальная версия уходит в работу только после вашего подтверждения.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Можно посмотреть примеры работ до старта?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Да. Живой аккаунт из кейса — t.me/auvixs и TikTok @geradog. Детальные кейсы с фото и метриками — на странице «Кейсы».</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>Мне нужен ещё и сайт или бот — это тоже вы?</span><span class="faq-arrow">+</span></div>
+      <div class="faq-a">Да, но это отдельные направления с отдельными ценами и кейсами — см. страницы «<a href="web.html" style="color:var(--accent);">Сайты</a>» и «<a href="bots.html" style="color:var(--accent);">Telegram-боты</a>». Можно заказать всё сразу — расскажите в заявке.</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section id="apply" data-direction="smm" data-direction-label="SMM и дизайн">
+  <div class="section-label">Заявка</div>
+
+  <div id="formContainer">
+    <h2 class="apply-title">Обсудим<br><span>ваш контент?</span></h2>
+    <p class="apply-desc">Заполните форму — свяжемся с вами в течение дня и предложим решение.</p>
+
+    <div class="package-banner hidden" id="packageBanner">
+      <div class="package-banner-icon">🛒</div>
+      <div>
+        <div class="package-banner-label">Выбранный пакет</div>
+        <div class="package-banner-name" id="packageBannerName"></div>
+      </div>
+      <button class="package-banner-close" onclick="clearPackage()" title="Убрать">✕</button>
+    </div>
+
+    <div class="form-field">
+      <label class="form-label">Ваше имя *</label>
+      <input type="text" id="f_name" placeholder="Как вас зовут?" autocomplete="name">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Номер телефона *</label>
+      <input type="tel" id="f_phone" placeholder="+7 999 123 45 67" autocomplete="tel">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Telegram / Instagram / другая соцсеть</label>
+      <input type="text" id="f_contact" placeholder="@username">
+    </div>
+    <div class="form-field">
+      <label class="form-label">О вашем бизнесе *</label>
+      <input type="text" id="f_business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги...">
+    </div>
+    <div class="form-field" id="field_service">
+      <select id="f_service">
+        <option value="">Выберите...</option>
+        <option>SMM под ключ</option>
+        <option>Дизайн постов / сторис</option>
+        <option>Контент-стратегия</option>
+        <option>ИИ-генерация визуала</option>
+        <option>Маркетплейс-контент</option>
+        <option>Оформление профиля</option>
+        <option>Ещё не знаю — нужна консультация</option>
+      </select>
+    </div>
+    <div class="form-field" id="field_budget">
+      <select id="f_budget">
+        <option value="">Выберите...</option>
+        <option>до 10 000 ₽</option>
+        <option>10 000 — 25 000 ₽</option>
+        <option>25 000 — 50 000 ₽</option>
+        <option>от 50 000 ₽</option>
+        <option>Обсуждаем</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Платформы</label>
+      <div class="platforms-grid">
+        <button class="platform-btn" onclick="togglePlatform(this)">Instagram</button>
+        <button class="platform-btn" onclick="togglePlatform(this)">TikTok</button>
+        <button class="platform-btn" onclick="togglePlatform(this)">Telegram</button>
+        <button class="platform-btn" onclick="togglePlatform(this)">VK</button>
+        <button class="platform-btn" onclick="togglePlatform(this)">YouTube</button>
+        <button class="platform-btn" onclick="togglePlatform(this)">Авито</button>
+      </div>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Комментарий (необязательно)</label>
+      <textarea id="f_comment" placeholder="Расскажите подробнее о задаче, целях, пожеланиях..."></textarea>
+    </div>
+
+    <div style="display:flex; align-items:flex-start; gap:12px; background:var(--bg3); border-left:2px solid var(--accent); padding:14px 16px; margin-bottom:4px;">
+      <input type="checkbox" id="f_promo" style="width:16px; height:16px; margin-top:2px; flex-shrink:0; accent-color:var(--accent); cursor:pointer;">
+      <label for="f_promo" style="font-size:13px; color:var(--white); line-height:1.6; cursor:pointer;">
+        <span style="font-weight:500;">Хочу пробный проект</span> — 3 поста или карточка товара в счёт знакомства (взамен честный отзыв)
+      </label>
+    </div>
+    <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
+      <input type="checkbox" id="f_consent" style="width:16px; height:16px; margin-top:2px; flex-shrink:0; accent-color:var(--accent); cursor:pointer;">
+      <label for="f_consent" style="font-size:12px; color:var(--gray); line-height:1.6; cursor:pointer;">
+        Согласен(на) на обработку персональных данных в соответствии с <a href="privacy-policy.html" target="_blank" style="color:var(--white); text-decoration:underline; text-underline-offset:2px;">Политикой конфиденциальности</a> *
+      </label>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitApplication()">Отправить заявку →</button>
+    <p id="formError" style="color:#ff6b6b; font-size:12px; margin-top:10px; display:none;"></p>
+  </div>
+
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Заявка отправлена!</div>
+    <div id="successPackageBlock" style="display:none; background:var(--bg3); border-left:3px solid var(--accent); padding:12px 16px; margin:16px 0; text-align:left;">
+      <div style="font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:4px;">Выбранный пакет</div>
+      <div id="successPackageName" style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--white);"></div>
+    </div>
+    <div class="success-text">Заявка получена — свяжемся с вами в течение дня, уточним детали и стартуем.<br><br>Или напишите прямо сейчас:</div>
+    <a href="https://t.me/idwvw" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#0a0a0a; padding:14px 28px; font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; margin-top:8px;">
+      Написать в Telegram →
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Контакт</div>
+  <div>
+    <h2 class="contact-title">Готовы<br><span>стартовать?</span></h2>
+    <div class="contact-links">
+      <a href="https://t.me/idwvw" class="contact-link" target="_blank"><span>Telegram</span><span class="link-arrow">→</span></a>
+      <a href="https://t.me/auvixs" class="contact-link" target="_blank"><span>TG Портфолио работ</span><span class="link-arrow">→</span></a>
+      <a href="https://www.instagram.com/ivan988682" class="contact-link" target="_blank"><span>Instagram</span><span class="link-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">AUVIX STUDIO</div>
+  <div class="footer-links">
+    <a href="https://t.me/idwvw" target="_blank">TG</a>
+    <a href="https://t.me/auvixs" target="_blank">Portfolio</a>
+    <a href="https://www.instagram.com/ivan988682" target="_blank">IG</a>
+    <a href="https://www.avito.ru/brands/676eaa5e4c9947e60a90efe94a3f6d5d" target="_blank">AVITO</a>
+    <a href="privacy-policy.html">Политика конфиденциальности</a>
+  </div>
+  <div class="footer-copy">© 2026 — Все права защищены</div>
+</footer>
+
+<!-- CHAT BUTTON -->
+<button class="ai-chat-btn" id="aiChatBtn" onclick="toggleAiChat()" aria-label="AI-ассистент">
+  💬
+  <span class="chat-tooltip">Спросить ассистента</span>
+</button>
+
+<!-- CHAT WINDOW -->
+<div class="ai-chat-window" id="aiChatWindow">
+  <div class="chat-header">
+    <div class="chat-header-dot"></div>
+    <div>
+      <div class="chat-header-title">AUVIX STUDIO · Ассистент</div>
+      <div class="chat-header-sub">Отвечает на вопросы об услугах</div>
+    </div>
+    <button class="chat-close" onclick="toggleAiChat()">✕</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">
+      <div class="chat-bubble">Привет! Я знаю всё об услугах и ценах AUVIX Studio. Спрашивай — отвечу быстро 👋</div>
+      <div class="chat-msg-time">сейчас</div>
+    </div>
+  </div>
+
+  <div class="chat-typing" id="chatTyping">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="chat-hints" id="chatHints">
+    <button class="chat-hint" onclick="sendHint(this)">Сколько стоит?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Что входит в пакет?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Как начать?</button>
+    <button class="chat-hint" onclick="sendHint(this)">Сроки?</button>
+  </div>
+
+  <div class="chat-footer">
+    <textarea class="chat-input" id="chatInput"
+      placeholder="Задайте вопрос..."
+      rows="1"
+      onkeydown="handleChatKey(event)"></textarea>
+    <button class="chat-send" id="chatSendBtn" onclick="sendChatMessage()">→</button>
+  </div>
+</div>
+
+<script src="app.js" defer></script>
+<script type="module">
+  import { db, collection, getDocs, query, orderBy } from './firebase-init.js';
+  function esc(s){return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function firstLine(s){return (s||'').toString().split('\n').map(x=>x.trim()).find(Boolean)||'';}
+  (async function loadPreview(){
+    const grid = document.getElementById('thumbGrid');
+    try {
+      const snap = await getDocs(query(collection(db,'cases'), orderBy('createdAt','desc')));
+      const classify = window.__auvixClassifyCase || (()=>'other');
+      const labels = window.__auvixCaseCategoryLabels || {};
+      const items = [];
+      snap.forEach(d => { const data = {...d.data(), _id: d.id}; if (classify(data)==='smm') items.push(data); });
+      if (!items.length) { grid.innerHTML = '<div class="cases-status">Кейсы скоро появятся здесь. Пока — живой аккаунт GeraDog ниже.</div>'; return; }
+      grid.innerHTML = items.map(data => {
+        const img = (data.images||[])[0];
+        const thumb = img ? `<img class="case-thumb-img" src="${esc(img)}" alt="${esc(data.title||'')}">` : `<div class="case-thumb-noimg">Фото в кейсе</div>`;
+        return `<a class="case-thumb-card reveal" href="cases.html?filter=smm#case-${esc(data._id)}">${thumb}<div class="case-thumb-body"><div class="case-thumb-cat">${esc(labels.smm||'SMM и дизайн')}</div><div class="case-thumb-title">${esc(firstLine(data.title))}</div><div class="case-thumb-result">${esc(firstLine(data.description))}</div></div></a>`;
+      }).join('\n');
+      window.__auvixInitReveal?.();
+    } catch(e) {
+      grid.innerHTML = '<div class="cases-status">Не удалось загрузить кейсы.</div>';
+    }
+  })();
+</script>
+</body>
+</html>
