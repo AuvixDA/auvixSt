@@ -18,6 +18,22 @@
   --accent: #c8f060;
   --border: #222222;
   --danger: #ff6b6b;
+
+  /* Type scale — Geologica (текст/UI). Одна роль — один токен. */
+  --fs-tag: 10px;    /* эйбраузы/лейблы заглавными */
+  --fs-meta: 11px;   /* метки, футер, таймстемпы */
+  --fs-sm: 13px;     /* мелкий/второстепенный текст в карточках */
+  --fs-body: 14px;   /* основной вводный/описательный текст */
+  --fs-title: 15px;  /* заголовки пунктов списка */
+  --fs-lg: 17px;     /* самый крупный не-дисплейный заголовок */
+
+  /* Type scale — Bebas Neue (цифры/заголовки) */
+  --fs-disp-sm: 20px;  /* мелкая цифра/имя пакета инлайн */
+  --fs-disp-md: 26px;  /* заголовок карточки */
+  --fs-disp-lg: 32px;  /* крупный акцент в карточке */
+  --fs-disp-xl: 44px;  /* главная цифра секции */
+  --fs-h2: clamp(36px, 9vw, 64px);   /* заголовок секции */
+  --fs-h1: clamp(52px, 15vw, 120px); /* хиро на главной */
 }
 
 html { scroll-behavior: smooth; }
@@ -63,7 +79,7 @@ nav.scrolled {
 .nav-right { display: flex; align-items: center; gap: 16px; }
 
 .nav-tg-portfolio, .nav-back {
-  font-size: 11px;
+  font-size: var(--fs-meta);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gray);
@@ -125,7 +141,7 @@ nav.scrolled {
 .mobile-nav a:hover { color: var(--accent); }
 .mobile-nav .nav-tg-mob {
   font-family: 'Geologica', sans-serif;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   letter-spacing: 0.1em;
   color: var(--gray);
   text-transform: uppercase;
@@ -189,13 +205,13 @@ nav.scrolled {
 }
 
 .hero-tag {
-  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 20px;
   opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
 }
 .hero-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(52px, 15vw, 120px);
+  font-size: var(--fs-h1);
   line-height: 0.92; letter-spacing: -0.01em;
   opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
 }
@@ -207,10 +223,10 @@ nav.scrolled {
   opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards;
 }
 .hero-desc, .hero-sub {
-  font-size: 15px; line-height: 1.7; color: var(--gray); font-weight: 400;
+  font-size: var(--fs-body); line-height: 1.7; color: var(--gray); font-weight: 400;
   max-width: 560px;
 }
-.hero-sub { font-size: 14px; margin-top: 20px; opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards; }
+.hero-sub { margin-top: 20px; opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards; }
 
 .hero-btns {
   display: flex; flex-direction: column; gap: 10px; width: 100%;
@@ -249,7 +265,7 @@ nav.scrolled {
 section { padding: 64px 20px; border-top: 1px solid var(--border); }
 
 .section-label {
-  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+  font-size: var(--fs-tag); letter-spacing: 0.25em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 40px;
   display: flex; align-items: center; gap: 12px;
 }
@@ -260,14 +276,14 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
 #about { display: flex; flex-direction: column; gap: 36px; }
 .about-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px, 10vw, 72px);
+  font-size: var(--fs-h2);
   line-height: 0.95; margin-bottom: 24px;
 }
-.about-text { font-size: 15px; line-height: 1.8; color: var(--gray); margin-bottom: 16px; max-width: 640px; }
+.about-text { font-size: var(--fs-body); line-height: 1.8; color: var(--gray); margin-bottom: 16px; max-width: 640px; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
 .stat { background: var(--bg3); padding: 28px 16px; }
-.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
-.stat-label { font-size: 11px; color: var(--gray); line-height: 1.4; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-xl); color: var(--accent); line-height: 1; margin-bottom: 6px; }
+.stat-label { font-size: var(--fs-meta); color: var(--gray); line-height: 1.4; }
 
 /* ============================================================
    DIRECTION SELECTOR (хаб-карточки "SMM · Сайты · Боты")
@@ -281,16 +297,15 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   transition: background 0.2s, border-color 0.2s;
 }
 .direction-card:hover { background: var(--bg3); border-left-color: var(--accent); }
-.direction-card-icon { font-size: 26px; }
-.direction-card-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-.direction-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--white); line-height: 1.05; }
-.direction-card-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.direction-card-tag { font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+.direction-card-title { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-md); color: var(--white); line-height: 1.05; }
+.direction-card-desc { font-size: var(--fs-sm); color: var(--gray); line-height: 1.6; }
 .direction-card-arrow { color: var(--accent); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
 
 /* Переключатель направлений в хиро внутренних страниц (SMM · Сайты · Боты) */
 .direction-switch { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .direction-switch a {
-  font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  font-size: var(--fs-meta); letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--gray); text-decoration: none;
   border: 1px solid var(--border); padding: 8px 14px;
   transition: border-color 0.2s, color 0.2s;
@@ -308,8 +323,8 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   border-left: 2px solid transparent;
 }
 .service:hover { background: var(--bg3); border-left-color: var(--accent); }
-.service-title { font-size: 17px; font-weight: 500; margin-bottom: 10px; line-height: 1.4; }
-.service-desc { font-size: 13px; color: var(--gray); line-height: 1.75; }
+.service-title { font-size: var(--fs-lg); font-weight: 500; margin-bottom: 10px; line-height: 1.4; }
+.service-desc { font-size: var(--fs-sm); color: var(--gray); line-height: 1.75; }
 
 /* ============================================================
    CASE TEASER (ссылка "Смотреть кейсы →" на лендингах)
@@ -348,25 +363,25 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   background: var(--bg3); color: var(--gray); font-size: 12px; letter-spacing: 0.05em;
 }
 .case-thumb-body { padding: 18px 20px; }
-.case-thumb-cat { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-.case-thumb-title { font-size: 16px; font-weight: 500; line-height: 1.3; margin-bottom: 6px; }
-.case-thumb-result { font-size: 12px; color: var(--gray); line-height: 1.5; }
+.case-thumb-cat { font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.case-thumb-title { font-size: var(--fs-lg); font-weight: 500; line-height: 1.3; margin-bottom: 6px; }
+.case-thumb-result { font-size: var(--fs-sm); color: var(--gray); line-height: 1.5; }
 
 /* ============================================================
    CASE PAGE (детальный кейс — cases.html)
    ============================================================ */
 .case-section { padding: 64px 20px; border-top: 1px solid var(--border); }
 .case-cat {
-  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 12px;
 }
 .case-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(36px, 9vw, 72px);
+  font-size: var(--fs-h2);
   line-height: 0.95;
   margin-bottom: 16px;
 }
-.case-desc { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 32px; max-width: 720px; }
+.case-desc { font-size: var(--fs-body); color: var(--gray); line-height: 1.8; margin-bottom: 32px; max-width: 720px; }
 .case-desc p { margin: 0 0 14px; }
 .case-desc p:last-child { margin-bottom: 0; }
 .case-bullets { margin: 0 0 14px; padding-left: 20px; }
@@ -398,7 +413,7 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   padding: 64px 20px;
   text-align: center;
   color: var(--gray);
-  font-size: 14px;
+  font-size: var(--fs-body);
   letter-spacing: 0.03em;
 }
 .cases-status .dot-pulse {
@@ -418,9 +433,9 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   padding: 24px 20px;
   margin-top: 2px;
 }
-.cta-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-.cta-text { font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
-.cta-sub { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 18px; }
+.cta-label { font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.cta-text { font-size: var(--fs-title); font-weight: 500; color: var(--white); margin-bottom: 6px; }
+.cta-sub { font-size: var(--fs-sm); color: var(--gray); line-height: 1.7; margin-bottom: 18px; }
 .cta-btn {
   display: inline-flex; align-items: center; gap: 10px;
   background: var(--accent); color: #0a0a0a;
@@ -439,9 +454,9 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
    ============================================================ */
 .process-list { display: flex; flex-direction: column; gap: 2px; }
 .process-step { background: var(--bg2); padding: 24px 20px; }
-.process-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-.process-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-.process-desc { font-size: 13px; color: var(--gray); line-height: 1.7; }
+.process-tag { font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.process-title { font-size: var(--fs-title); font-weight: 500; margin-bottom: 6px; }
+.process-desc { font-size: var(--fs-sm); color: var(--gray); line-height: 1.7; }
 
 /* ============================================================
    REVIEWS
@@ -455,15 +470,15 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--accent);
   flex-shrink: 0;
 }
-.review-name { font-size: 14px; font-weight: 400; }
-.review-meta { font-size: 11px; color: var(--gray); margin-top: 2px; }
-.review-text { font-size: 14px; line-height: 1.8; color: var(--white); }
-.review-text2 { font-size: 13px; line-height: 1.8; color: var(--gray); margin-top: 12px; }
-.review-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--gray); }
+.review-name { font-size: var(--fs-title); font-weight: 400; }
+.review-meta { font-size: var(--fs-meta); color: var(--gray); margin-top: 2px; }
+.review-text { font-size: var(--fs-body); line-height: 1.8; color: var(--white); }
+.review-text2 { font-size: var(--fs-sm); line-height: 1.8; color: var(--gray); margin-top: 12px; }
+.review-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: var(--fs-meta); color: var(--gray); }
 .rating-block { background: var(--bg3); padding: 28px 20px; margin-top: 2px; text-align: center; border: 1px dashed var(--border); }
-.rating-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--accent); line-height: 1; }
+.rating-num { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-xl); color: var(--accent); line-height: 1; }
 .rating-stars { font-size: 18px; margin: 6px 0; }
-.rating-label { font-size: 12px; color: var(--gray); line-height: 1.7; }
+.rating-label { font-size: var(--fs-sm); color: var(--gray); line-height: 1.7; }
 
 /* ============================================================
    FAQ
@@ -471,13 +486,13 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 0; font-size: 15px; font-weight: 500;
+  padding: 20px 0; font-size: var(--fs-title); font-weight: 500;
   cursor: pointer; transition: color 0.2s; user-select: none;
 }
 .faq-q:hover { color: var(--accent); }
 .faq-arrow { font-size: 22px; font-weight: 300; color: var(--accent); transition: transform 0.3s; flex-shrink: 0; margin-left: 16px; }
 .faq-arrow.open { transform: rotate(45deg); }
-.faq-a { font-size: 14px; color: var(--gray); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+.faq-a { font-size: var(--fs-body); color: var(--gray); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
 .faq-a.open { max-height: 400px; padding-bottom: 20px; }
 
 /* ============================================================
@@ -492,17 +507,17 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
 }
 .plan-row:hover { background: var(--bg3); border-left-color: var(--accent); }
 .plan-row.popular { border-left-color: var(--accent); background: var(--bg3); }
-.plan-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 16px 16px; gap: 12px; }
-.plan-left { flex: 1; }
-.plan-tag { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-.plan-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.05em; color: var(--white); line-height: 1; }
-.plan-count { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--accent); line-height: 1; }
-.plan-count-label { font-size: 12px; color: var(--gray); margin-top: 2px; }
-.plan-right { text-align: right; flex-shrink: 1; min-width: 0; }
-.plan-price { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--white); line-height: 1; }
-.plan-per { font-size: 11px; color: var(--gray); margin-top: 3px; overflow-wrap: break-word; }
+.plan-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 16px 16px; gap: 12px; flex-wrap: wrap; row-gap: 10px; }
+.plan-left { flex: 1 1 140px; min-width: 0; }
+.plan-tag { font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.plan-name { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-md); letter-spacing: 0.05em; color: var(--white); line-height: 1; }
+.plan-count { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-lg); color: var(--accent); line-height: 1; }
+.plan-count-label { font-size: var(--fs-sm); color: var(--gray); margin-top: 2px; }
+.plan-right { text-align: right; flex-shrink: 0; min-width: 100px; }
+.plan-price { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-lg); color: var(--white); line-height: 1; }
+.plan-per { font-size: var(--fs-meta); color: var(--gray); margin-top: 3px; overflow-wrap: break-word; }
 .plan-features { padding: 0 16px 16px; display: flex; flex-wrap: wrap; gap: 6px; }
-.feat-tag { font-size: 11px; padding: 4px 10px; border: 1px solid var(--border); color: var(--gray); letter-spacing: 0.04em; }
+.feat-tag { font-size: var(--fs-meta); padding: 4px 10px; border: 1px solid var(--border); color: var(--gray); letter-spacing: 0.04em; }
 .plan-row.popular .feat-tag { border-color: rgba(200,240,96,0.2); color: var(--white); }
 .plan-cta {
   display: flex; align-items: center; justify-content: space-between;
@@ -514,21 +529,21 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
 .plan-row.popular .plan-cta { color: var(--accent); }
 .popular-badge {
   display: inline-block; background: var(--accent); color: #0a0a0a;
-  font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
+  font-size: var(--fs-tag); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500;
   padding: 3px 8px; margin-left: 10px; vertical-align: middle;
 }
 
 /* VIP / крупный блок */
 .vip-block { background: var(--bg2); border-left: 2px solid var(--accent); padding: 28px 20px; margin-top: 2px; }
-.vip-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-.vip-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; margin-bottom: 8px; }
-.vip-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+.vip-label { font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.vip-title { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-lg); line-height: 1; margin-bottom: 8px; }
+.vip-desc { font-size: var(--fs-body); color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
 .vip-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
-.vip-feat { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--white); line-height: 1.5; }
+.vip-feat { display: flex; align-items: flex-start; gap: 10px; font-size: var(--fs-sm); color: var(--white); line-height: 1.5; }
 .vip-feat::before { content: '—'; color: var(--accent); flex-shrink: 0; font-family: 'Bebas Neue', sans-serif; }
 .vip-price-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-top: 20px; border-top: 1px solid var(--border); }
-.vip-price { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--accent); line-height: 1; }
-.vip-price-sub { font-size: 12px; color: var(--gray); margin-top: 4px; }
+.vip-price { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-xl); color: var(--accent); line-height: 1; }
+.vip-price-sub { font-size: var(--fs-sm); color: var(--gray); margin-top: 4px; }
 .btn-accent {
   display: inline-flex; align-items: center; gap: 10px;
   background: var(--accent); color: #0a0a0a; padding: 14px 28px;
@@ -550,14 +565,14 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
 .niche-grid { display: flex; flex-direction: column; gap: 2px; }
 .niche-card { background: var(--bg2); padding: 24px 16px; border-left: 2px solid transparent; transition: background 0.2s, border-color 0.2s; }
 .niche-card:hover { background: var(--bg3); border-left-color: var(--accent); }
-.niche-cat { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-.niche-name { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-.niche-desc { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 10px; }
-.niche-price { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--accent); }
+.niche-cat { font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.niche-name { font-size: var(--fs-title); font-weight: 500; margin-bottom: 6px; }
+.niche-desc { font-size: var(--fs-sm); color: var(--gray); line-height: 1.6; margin-bottom: 10px; }
+.niche-price { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-sm); color: var(--accent); }
 
 /* COMPARE TABLE */
 .compare-table { width: 100%; border-collapse: collapse; }
-.compare-table th, .compare-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
+.compare-table th, .compare-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); }
 .compare-table th { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.08em; color: var(--accent); background: var(--bg3); font-weight: 400; }
 .compare-table td:first-child { color: var(--gray); }
 .compare-table tr:hover td { background: var(--bg3); }
@@ -566,21 +581,21 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
 
 /* FOOTER CTA */
 .footer-cta { background: var(--bg2); border-top: 2px solid var(--accent); padding: 56px 20px; text-align: center; }
-.footer-cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 64px); line-height: 0.95; margin-bottom: 12px; }
+.footer-cta-title { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-h2); line-height: 0.95; margin-bottom: 12px; }
 .footer-cta-title span { color: var(--accent); }
-.footer-cta-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto; }
+.footer-cta-desc { font-size: var(--fs-body); color: var(--gray); line-height: 1.7; margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto; }
 .footer-cta-btns { display: flex; flex-direction: column; gap: 10px; max-width: 360px; margin: 0 auto; }
 
 /* ============================================================
    APPLICATION FORM
    ============================================================ */
 #apply { background: var(--bg2); border-top: 2px solid var(--accent); }
-.apply-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 60px); line-height: 0.95; margin-bottom: 12px; }
+.apply-title { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-h2); line-height: 0.95; margin-bottom: 12px; }
 .apply-title span { color: var(--accent); }
-.apply-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 32px; max-width: 560px; }
+.apply-desc { font-size: var(--fs-body); color: var(--gray); line-height: 1.7; margin-bottom: 32px; max-width: 560px; }
 
 .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-.form-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+.form-label { font-size: var(--fs-tag); letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
 .form-field input,
 .form-field textarea,
 .form-field select {
@@ -590,7 +605,7 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   padding: 14px 16px;
   color: var(--white);
   font-family: 'Geologica', sans-serif;
-  font-size: 14px; font-weight: 300;
+  font-size: var(--fs-body); font-weight: 300;
   outline: none;
   transition: border-color 0.2s;
   -webkit-appearance: none;
@@ -625,9 +640,9 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   gap: 12px;
 }
 .package-banner.hidden { display: none !important; }
-.package-banner-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-.package-banner-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
-.package-banner-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--white); line-height: 1.2; }
+.package-banner-icon { flex-shrink: 0; margin-top: 1px; }
+.package-banner-label { font-size: var(--fs-tag); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.package-banner-name { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-sm); color: var(--white); line-height: 1.2; }
 .package-banner-close { margin-left: auto; flex-shrink: 0; background: none; border: none; color: var(--gray); font-size: 18px; cursor: pointer; padding: 0 0 0 12px; line-height: 1; transition: color 0.2s; }
 .package-banner-close:hover { color: var(--accent); }
 
@@ -647,23 +662,23 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
 
 .success-screen { display: none; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px; gap: 16px; }
 .success-screen.show { display: flex; }
-.success-icon { font-size: 56px; margin-bottom: 8px; }
-.success-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--accent); }
-.success-text { font-size: 14px; color: var(--gray); line-height: 1.8; }
+.success-icon { margin-bottom: 8px; }
+.success-title { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-disp-xl); color: var(--accent); }
+.success-text { font-size: var(--fs-body); color: var(--gray); line-height: 1.8; }
 
 /* ============================================================
    CONTACT
    ============================================================ */
 #contact { display: flex; flex-direction: column; gap: 20px; }
-.contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 10vw, 60px); line-height: 0.95; margin-bottom: 16px; }
+.contact-title { font-family: 'Bebas Neue', sans-serif; font-size: var(--fs-h2); line-height: 0.95; margin-bottom: 16px; }
 .contact-title span { color: var(--accent); }
-.contact-desc { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 24px; max-width: 560px; }
+.contact-desc { font-size: var(--fs-body); color: var(--gray); line-height: 1.8; margin-bottom: 24px; max-width: 560px; }
 .contact-links { display: flex; flex-direction: column; gap: 2px; }
 .contact-link {
   display: flex; justify-content: space-between; align-items: center;
   padding: 16px 20px; background: var(--bg2);
   color: var(--white); text-decoration: none;
-  font-size: 14px; letter-spacing: 0.05em;
+  font-size: var(--fs-body); letter-spacing: 0.05em;
   transition: background 0.2s, color 0.2s;
 }
 .contact-link:hover { background: var(--accent); color: #0a0a0a; }
@@ -683,9 +698,9 @@ footer {
 }
 .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.12em; color: var(--gray); text-decoration: none; }
 .footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-.footer-links a { font-size: 11px; color: var(--gray); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+.footer-links a { font-size: var(--fs-meta); color: var(--gray); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
 .footer-links a:hover { color: var(--accent); }
-.footer-copy { font-size: 11px; color: var(--gray); }
+.footer-copy { font-size: var(--fs-meta); color: var(--gray); }
 
 /* ============================================================
    SCROLL REVEAL
@@ -702,7 +717,7 @@ footer {
   background: var(--accent); color: #0a0a0a;
   border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  font-size: 20px; z-index: 95;
+  z-index: 95;
   transition: transform 0.2s, box-shadow 0.2s, opacity 0.25s;
   box-shadow: 0 4px 20px rgba(200,240,96,0.3);
   opacity: 0; pointer-events: none; transform: scale(0.85);
@@ -749,7 +764,7 @@ footer {
 .chat-msg { max-width: 85%; display: flex; flex-direction: column; gap: 4px; }
 .chat-msg.user { align-self: flex-end; align-items: flex-end; }
 .chat-msg.bot { align-self: flex-start; align-items: flex-start; }
-.chat-bubble { padding: 10px 14px; font-size: 13px; line-height: 1.6; font-family: 'Geologica', sans-serif; }
+.chat-bubble { padding: 10px 14px; font-size: var(--fs-sm); line-height: 1.6; font-family: 'Geologica', sans-serif; }
 .chat-msg.user .chat-bubble { background: var(--accent); color: #0a0a0a; font-weight: 500; }
 .chat-msg.bot .chat-bubble { background: var(--bg3); color: var(--white); border-left: 2px solid var(--accent); }
 .chat-msg-time { font-size: 10px; color: var(--gray); letter-spacing: 0.05em; }
@@ -762,7 +777,7 @@ footer {
 @keyframes typingDot { 0%,60%,100%{opacity:0.4; transform:scale(1)} 30%{opacity:1; transform:scale(1.3)} }
 
 .chat-footer { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; }
-.chat-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); padding: 10px 14px; color: var(--white); font-family: 'Geologica', sans-serif; font-size: 13px; outline: none; resize: none; height: 40px; transition: border-color 0.2s; border-radius: 0; line-height: 1.4; }
+.chat-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); padding: 10px 14px; color: var(--white); font-family: 'Geologica', sans-serif; font-size: var(--fs-sm); outline: none; resize: none; height: 40px; transition: border-color 0.2s; border-radius: 0; line-height: 1.4; }
 .chat-input:focus { border-color: var(--accent); }
 .chat-input::placeholder { color: var(--gray); }
 .chat-send { width: 40px; height: 40px; flex-shrink: 0; background: var(--accent); color: #0a0a0a; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: opacity 0.2s; }
