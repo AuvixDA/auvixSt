@@ -131,18 +131,30 @@ async function handleCallback(cq, env) {
   const toast = (text) => api('answerCallbackQuery', { callback_query_id: cq.id, text });
 
   // «Принять» → перевести заявку в статус «В работе» и показать «Закрыть».
+  // id принявшего кладём в callback_data кнопки «Закрыть» — чтобы закрыть мог
+  // только он (сверяем ниже). Само имя показываем в плашке статуса.
   if (data === 'accept') {
     const who = formatUser(cq.from);
     await setButtons([
       [{ text: `🟢 В работе — ${who}`, callback_data: 'status' }],
-      [{ text: '🔒 Закрыть заявку', callback_data: 'close' }],
+      [{ text: '🔒 Закрыть заявку', callback_data: `close:${cq.from.id}` }],
     ]);
     await toast('Вы приняли заявку ✅');
     return;
   }
 
-  // «Закрыть» → перевести заявку в статус «Закрыто» (кто принял — сохраняем).
-  if (data === 'close') {
+  // «Закрыть» → только тот, кто принял. id принявшего зашит в callback_data
+  // ('close:<id>'); сверяем с тем, кто нажал, чтобы другой случайно не закрыл.
+  if (data === 'close' || data.startsWith('close:')) {
+    const ownerId = data.includes(':') ? data.split(':')[1] : '';
+    if (ownerId && String(cq.from.id) !== ownerId) {
+      await api('answerCallbackQuery', {
+        callback_query_id: cq.id,
+        text: 'Закрыть заявку может только тот, кто её принял.',
+        show_alert: true,
+      });
+      return;
+    }
     const accepter = extractAccepter(msg) || formatUser(cq.from);
     await setButtons([
       [{ text: `☑️ Закрыто — ${accepter}`, callback_data: 'done' }],
