@@ -2,7 +2,7 @@
 // AUVIX STUDIO — Cloudflare Worker для приёма заявок
 // ============================================================
 // Это БЭКЕНД, который принимает заявку с сайта и отправляет её в Telegram,
-// а также обрабатывает нажатие кнопки «Принять заявку» в канале.
+// а также ведёт статус заявки в канале: Новая → В работе → Закрыта.
 // Деплоится отдельно в Cloudflare Workers (адрес в app.js -> WORKER_URL,
 // сейчас: https://auvix.ivankatsan24954.workers.dev/).
 //
@@ -15,14 +15,19 @@
 //      Шлём её вам в личку (env.CHAT_ID) и в канал (CHANNEL_ID).
 //      К сообщению в канале прикрепляем кнопку «✅ Принять заявку».
 //   2) Апдейт от Telegram — тело содержит callback_query (нажатие кнопки).
-//      Меняем кнопку на «✅ Принято — <кто принял>».
+//      Ведём статус заявки прямо в кнопках под сообщением.
+//
+// Жизненный цикл заявки в канале (кнопки под сообщением):
+//   Новая:    [ ✅ Принять заявку ]
+//   В работе: [ 🟢 В работе — Имя (@user) ]  +  [ 🔒 Закрыть заявку ]
+//   Закрыта:  [ ☑️ Закрыто — Имя (@user) ]
 //
 // ── Переменные окружения (Settings → Variables and Secrets) ─────────────
 //   BOT_TOKEN — токен бота от @BotFather (Secret).
 //   CHAT_ID   — ваш личный chat_id, куда заявки шли раньше.
 //
 // ── ВАЖНО, разовая настройка ────────────────────────────────────────────
-// Чтобы кнопка работала, у бота должен быть включён webhook на адрес этого
+// Чтобы кнопки работали, у бота должен быть включён webhook на адрес этого
 // воркера. Один раз откройте в браузере (подставив свой токен):
 //   https://api.telegram.org/bot<ТОКЕН>/setWebhook?url=https://auvix.ivankatsan24954.workers.dev/
 // Проверить: https://api.telegram.org/bot<ТОКЕН>/getWebhookInfo
@@ -58,7 +63,7 @@ export default {
     // (1) Нажатие кнопки в канале — приходит от Telegram как callback_query.
     if (body.callback_query) {
       try {
-        await handleAccept(body.callback_query, env);
+        await handleCallback(body.callback_query, env);
       } catch (_) {
         // Глушим ошибку, чтобы Telegram не слал повторы — ему нужен ответ 200.
       }
@@ -105,8 +110,8 @@ async function handleSubmission(text, env) {
   });
 }
 
-// ── Нажатие кнопки «Принять заявку» в канале ────────────────────────────
-async function handleAccept(cq, env) {
+// ── Нажатия кнопок под заявкой в канале ─────────────────────────────────
+async function handleCallback(cq, env) {
   const api = (method, payload) => fetch(
     `https://api.telegram.org/bot${env.BOT_TOKEN}/${method}`,
     {
@@ -116,40 +121,73 @@ async function handleAccept(cq, env) {
     }
   );
 
-  // Заявку уже приняли (кнопка стала со статусом) — просто сообщаем об этом.
-  if (cq.data === 'taken') {
-    await api('answerCallbackQuery', {
-      callback_query_id: cq.id,
-      text: 'Эту заявку уже приняли.',
-    });
+  const data = cq.data;
+  const msg = cq.message || {};
+  const chatId = msg.chat && msg.chat.id;
+  const messageId = msg.message_id;
+  const setButtons = (rows) => api('editMessageReplyMarkup', {
+    chat_id: chatId, message_id: messageId, reply_markup: { inline_keyboard: rows }
+  });
+  const toast = (text) => api('answerCallbackQuery', { callback_query_id: cq.id, text });
+
+  // «Принять» → перевести заявку в статус «В работе» и показать «Закрыть».
+  if (data === 'accept') {
+    const who = formatUser(cq.from);
+    await setButtons([
+      [{ text: `🟢 В работе — ${who}`, callback_data: 'status' }],
+      [{ text: '🔒 Закрыть заявку', callback_data: 'close' }],
+    ]);
+    await toast('Вы приняли заявку ✅');
     return;
   }
 
-  if (cq.data === 'accept') {
-    const u = cq.from || {};
-    const name = [u.first_name, u.last_name].filter(Boolean).join(' ').trim() || 'без имени';
-    let who = u.username ? `${name} (@${u.username})` : name;
-    if (who.length > 48) who = who.slice(0, 47) + '…'; // не раздуваем кнопку
+  // «Закрыть» → перевести заявку в статус «Закрыто» (кто принял — сохраняем).
+  if (data === 'close') {
+    const accepter = extractAccepter(msg) || formatUser(cq.from);
+    await setButtons([
+      [{ text: `☑️ Закрыто — ${accepter}`, callback_data: 'done' }],
+    ]);
+    await toast('Заявка закрыта ☑️');
+    return;
+  }
 
-    const msg = cq.message || {};
-
-    // Меняем только кнопку → «Принято — кто». Текст заявки не трогаем.
-    await api('editMessageReplyMarkup', {
-      chat_id: msg.chat && msg.chat.id,
-      message_id: msg.message_id,
-      reply_markup: {
-        inline_keyboard: [[{ text: `✅ Принято — ${who}`, callback_data: 'taken' }]]
-      }
-    });
-
-    // Всплывающее подтверждение тому, кто нажал.
-    await api('answerCallbackQuery', {
-      callback_query_id: cq.id,
-      text: 'Вы приняли заявку ✅',
-    });
+  // Нажатия на информационные плашки статуса — просто подсказка, без изменений.
+  if (data === 'status') {
+    await toast('Заявка в работе. Нажмите «Закрыть заявку», когда завершите.');
+    return;
+  }
+  if (data === 'done') {
+    await toast('Эта заявка уже закрыта.');
+    return;
+  }
+  if (data === 'taken') { // старые сообщения по прежней логике «Принято»
+    await toast('Заявка уже принята.');
     return;
   }
 
   // Неизвестная кнопка — просто подтверждаем нажатие.
-  await api('answerCallbackQuery', { callback_query_id: cq.id });
+  await toast('');
+}
+
+// Имя нажавшего для показа в кнопке: «Имя Фамилия (@username)», с ограничением длины.
+function formatUser(u) {
+  u = u || {};
+  const name = [u.first_name, u.last_name].filter(Boolean).join(' ').trim() || 'без имени';
+  let who = u.username ? `${name} (@${u.username})` : name;
+  if (who.length > 48) who = who.slice(0, 47) + '…';
+  return who;
+}
+
+// Достаём «кто принял» из текущей плашки «В работе — ...», чтобы сохранить
+// это имя при закрытии заявки (воркер не хранит состояние — берём из кнопки).
+function extractAccepter(msg) {
+  const rows = msg && msg.reply_markup && msg.reply_markup.inline_keyboard;
+  if (!Array.isArray(rows)) return '';
+  for (const row of rows) {
+    for (const btn of row) {
+      const m = btn && typeof btn.text === 'string' && btn.text.match(/В работе\s*—\s*(.+)$/);
+      if (m) return m[1].trim();
+    }
+  }
+  return '';
 }
