@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Кейсы — AUVIX Studio</title>
 <meta name="description" content="Реальные результаты — кейсы AUVIX Studio по SMM, сайтам и Telegram-ботам.">
+<link rel="canonical" href="https://auvixstudio.ru/cases.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AUVIX Studio">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://auvixstudio.ru/cases.html">
+<meta property="og:title" content="Кейсы — AUVIX Studio">
+<meta property="og:description" content="Реальные результаты — кейсы AUVIX Studio по SMM, сайтам и Telegram-ботам.">
+<meta property="og:image" content="https://auvixstudio.ru/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Кейсы — AUVIX Studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Кейсы — AUVIX Studio">
+<meta name="twitter:description" content="Реальные результаты — кейсы AUVIX Studio по SMM, сайтам и Telegram-ботам.">
+<meta name="twitter:image" content="https://auvixstudio.ru/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&family=Oswald:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -142,10 +162,10 @@
 <script type="module">
   import { db, collection, getDocs, query, orderBy } from './firebase-init.js';
 
-  function esc(str) {
-    return (str || '').toString()
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
+  // Экранирование живёт в app.js — он подключён выше обычным <script defer>,
+  // а defer-скрипты выполняются раньше модулей, так что хелперы уже на месте.
+  const { escText: esc, escAttr, safeUrl } = window.__auvixEsc;
+
   function nl2br(str) { return esc(str).replace(/\n/g, '<br>'); }
 
   // Превращает текст с "* пункт" / "- пункт" в настоящие маркированные списки,
@@ -175,19 +195,22 @@
 
   function renderCase(data, categoryLabel) {
     const images = (data.images || [])
-      .map(url => `<img class="case-img reveal" src="${esc(url)}" alt="${esc(data.title || '')}">`)
+      .map(url => safeUrl(url))
+      .filter(Boolean)
+      .map(url => `<img class="case-img reveal" src="${escAttr(url)}" alt="${escAttr(data.title || '')}">`)
       .join('\n');
 
-    const linkHtml = data.link
+    const link = safeUrl(data.link);
+    const linkHtml = link
       ? `<div class="reveal" style="margin-top: 24px;">
-        <a class="cta-btn" href="${esc(data.link)}" target="_blank" rel="noopener">Смотреть проект →</a>
+        <a class="cta-btn" href="${escAttr(link)}" target="_blank" rel="noopener">Смотреть проект →</a>
       </div>`
       : `<div class="reveal" style="margin-top: 24px;">
         <span class="private-badge"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;"><rect x="3" y="6.5" width="8" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M4.5 6.5V4.5a2.5 2.5 0 015 0v2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Приватный проект — доступ ограничен клиентом</span>
       </div>`;
 
     return `
-    <section class="case-section" id="case-${esc(data._id)}">
+    <section class="case-section" id="case-${escAttr(data._id)}">
       <div class="reveal">
         <div class="case-cat">${esc(categoryLabel)}</div>
         <h2 class="case-title">${nl2br(data.title)}</h2>
@@ -199,12 +222,12 @@
   }
 
   function renderThumb(data, categoryLabel) {
-    const img = (data.images || [])[0];
+    const img = safeUrl((data.images || [])[0]);
     const thumb = img
-      ? `<img class="case-thumb-img" src="${esc(img)}" alt="${esc(data.title || '')}">`
+      ? `<img class="case-thumb-img" src="${escAttr(img)}" alt="${escAttr(data.title || '')}">`
       : `<div class="case-thumb-noimg">Фото в кейсе ниже</div>`;
     return `
-    <a class="case-thumb-card" href="#case-${esc(data._id)}">
+    <a class="case-thumb-card" href="#case-${escAttr(data._id)}">
       ${thumb}
       <div class="case-thumb-body">
         <div class="case-thumb-cat">${esc(categoryLabel)}</div>

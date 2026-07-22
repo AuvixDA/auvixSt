@@ -160,7 +160,8 @@ function clearPackage() {
 
 // ── PLATFORMS ──────────────────────────────────────────────────────────────
 function togglePlatform(btn) {
-  btn.classList.toggle('selected');
+  const selected = btn.classList.toggle('selected');
+  btn.setAttribute('aria-pressed', String(selected));
 }
 function getSelectedPlatforms() {
   return [...document.querySelectorAll('.platform-btn.selected')]
@@ -171,6 +172,15 @@ function getSelectedPlatforms() {
 // Секция #apply может иметь data-direction / data-direction-label —
 // так лид в Telegram сразу помечен направлением (SMM, сайты, боты),
 // с которого он пришёл, и его не нужно разбирать вручную.
+
+// #formContainer — это <form>, поэтому заявка уходит и по Enter в поле,
+// и по клику. Раньше форма была <div> с onclick на кнопке: Enter не
+// срабатывал, и часть заявок молча терялась.
+document.getElementById('formContainer')?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  submitApplication();
+});
+
 async function submitApplication() {
   const applySection = document.getElementById('apply');
   const name = document.getElementById('f_name').value.trim();
@@ -266,7 +276,16 @@ async function submitApplication() {
   } catch (e) {
     btn.disabled = false;
     btn.textContent = 'Отправить заявку →';
-    alert('Ошибка отправки. Напишите напрямую: t.me/idwvw');
+    // Показываем ошибку в самой форме, а не в alert(): нативный диалог
+    // выбивается из оформления, а внутри Telegram Mini App выглядит чужеродно.
+    // Заполненные поля при этом остаются на месте — человеку есть что отправить
+    // повторно, и рядом лежит запасной канал связи.
+    errEl.style.display = 'block';
+    errEl.innerHTML = 'Не удалось отправить заявку — возможно, пропала связь. ' +
+      'Попробуйте ещё раз или напишите напрямую: ' +
+      '<a href="https://t.me/idwvw" target="_blank" rel="noopener" style="color:var(--accent);">t.me/idwvw</a>';
+    errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    tg?.HapticFeedback?.notificationOccurred('error');
   }
 }
 
@@ -363,6 +382,37 @@ function scrollChat() {
 }
 
 function escapeHtml(str) {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-            .replace(/\n/g, '<br>');
+  return escText(str).replace(/\n/g, '<br>');
 }
+
+// ============================================================
+// ОБЩИЕ ХЕЛПЕРЫ ЭКРАНИРОВАНИЯ
+// ============================================================
+// Раньше почти одинаковые esc-функции жили в трёх файлах и успели разъехаться:
+// вариант в cases.html не экранировал кавычки, хотя подставлялся внутрь
+// атрибутов. Держим одну пару на весь сайт.
+
+// Для текста между тегами.
+function escText(str) {
+  return (str || '').toString()
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// Для значения внутри атрибута: кавычки обязательны, иначе значение
+// вроде `" onerror="...` вырвется из атрибута и выполнит код.
+function escAttr(str) {
+  return escText(str)
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Пропускает только http(s). Отсекает javascript:, data: и прочие схемы,
+// которые в href превращаются в исполняемый код.
+function safeUrl(url) {
+  const u = (url || '').toString().trim();
+  return /^https?:\/\//i.test(u) ? u : '';
+}
+
+window.__auvixEsc = { escText, escAttr, safeUrl };

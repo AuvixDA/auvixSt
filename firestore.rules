@@ -1,0 +1,37 @@
+rules_version = '2';
+
+// Правила доступа к Firestore для сайта AUVIX Studio.
+//
+// ВАЖНО: этот файл — исходник правил, он не действует сам по себе.
+// Чтобы правила заработали, их нужно вставить в Firebase Console:
+// Firestore Database → Rules → вставить содержимое → Publish.
+//
+// Админка (admin.html) прячет интерфейс через CSS-класс, но это только
+// удобство: любой может открыть страницу и вызвать Firestore напрямую.
+// Единственная настоящая защита на запись — правила ниже.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /cases/{caseId} {
+      // Кейсы читает публичная страница cases.html — доступ всем.
+      allow read: if true;
+
+      // Писать может только владелец админского аккаунта.
+      //
+      // Проверка именно по email, а не просто `request.auth != null`:
+      // если в Firebase Auth включена регистрация, любой посетитель заведёт
+      // себе аккаунт, получит `auth != null` и сможет писать в базу.
+      // Дополнительно стоит выключить регистрацию:
+      // Authentication → Settings → User actions → снять "Enable create".
+      allow write: if request.auth != null
+                   && request.auth.token.email == 'auvixda@gmail.com';
+    }
+
+    // Всё остальное закрыто. Новые коллекции придётся открывать явно —
+    // это осознанно: забытая открытая коллекция хуже, чем лишний деплой правил.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Админка закрыта метатегом noindex прямо в admin.html.
+# Здесь её намеренно НЕ запрещаем: Disallow помешал бы краулеру
+# зайти на страницу и увидеть этот самый noindex.
+
+Sitemap: https://auvixstudio.ru/sitemap.xml

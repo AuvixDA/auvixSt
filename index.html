@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>AUVIX STUDIO — Контент, сайты и Telegram-боты</title>
 <meta name="description" content="AUVIX Studio — три направления: SMM и дизайн, сайты и PWA, Telegram-боты. Выберите нужное и увидите кейсы и цены только по вашей задаче.">
+<link rel="canonical" href="https://auvixstudio.ru/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AUVIX Studio">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://auvixstudio.ru/">
+<meta property="og:title" content="AUVIX STUDIO — Контент, сайты и Telegram-боты">
+<meta property="og:description" content="AUVIX Studio — три направления: SMM и дизайн, сайты и PWA, Telegram-боты. Выберите нужное и увидите кейсы и цены только по вашей задаче.">
+<meta property="og:image" content="https://auvixstudio.ru/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AUVIX STUDIO — Контент, сайты и Telegram-боты">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AUVIX STUDIO — Контент, сайты и Telegram-боты">
+<meta name="twitter:description" content="AUVIX Studio — три направления: SMM и дизайн, сайты и PWA, Telegram-боты. Выберите нужное и увидите кейсы и цены только по вашей задаче.">
+<meta name="twitter:image" content="https://auvixstudio.ru/og-image.jpg">
 <script>
   // Грузим Telegram Mini App SDK только если сайт реально открыт внутри Telegram —
   // иначе это лишний запрос и спам предупреждений в консоли для обычных посетителей.
@@ -15,8 +33,78 @@
     }
   })();
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&family=Oswald:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+
+<!-- Организация: связывает сайт с профилями в TG/IG/Авито.
+     Отзывы и рейтинг сюда намеренно НЕ вынесены: Google не показывает
+     звёзды по отзывам, которые компания публикует сама о себе. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://auvixstudio.ru/#organization",
+  "name": "AUVIX Studio",
+  "url": "https://auvixstudio.ru/",
+  "logo": "https://auvixstudio.ru/apple-touch-icon.png",
+  "image": "https://auvixstudio.ru/og-image.jpg",
+  "description": "Digital-студия: SMM и дизайн, сайты и PWA, Telegram-боты.",
+  "founder": { "@type": "Person", "name": "Иван" },
+  "email": "auvixda@gmail.com",
+  "areaServed": "RU",
+  "sameAs": [
+    "https://t.me/auvixs",
+    "https://www.instagram.com/ivan988682",
+    "https://www.avito.ru/brands/676eaa5e4c9947e60a90efe94a3f6d5d"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "email": "auvixda@gmail.com",
+    "availableLanguage": ["ru"]
+  }
+}
+</script>
+
+<!-- FAQ: даёт расширенный сниппет в выдаче.
+     Тексты обязаны совпадать с видимыми на странице — иначе разметка
+     считается недостоверной и снимается. Правите FAQ ниже — правьте и здесь. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Как понять, какое направление мне нужно?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Если нужен контент, соцсети или дизайн — вам на страницу «SMM и дизайн». Если нужен сайт или веб-сервис — на «Сайты и PWA». Если нужно, чтобы заявки и заказы обрабатывались автоматически в Telegram — на «Telegram-боты». Не уверены — пишите в общую форму ниже, помогу определиться." }
+    },
+    {
+      "@type": "Question",
+      "name": "Сколько стоят услуги?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Зависит от направления. Пакеты изображений — от 1 500 ₽, ведение под ключ — от 25 000 ₽/мес, сайты — от 10 000 ₽, боты — от 4 000 ₽. Полная сетка цен — на странице «Пакеты и цены»." }
+    },
+    {
+      "@type": "Question",
+      "name": "Можно посмотреть примеры работ до старта?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Да, конечно. Детальные кейсы с фото и результатами — на странице «Кейсы», отфильтрованы по направлению. Портфолио также в Telegram — t.me/auvixs." }
+    },
+    {
+      "@type": "Question",
+      "name": "Кто ведёт проект?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Проект от брифа до сдачи ведёт один и тот же специалист — вы всегда на связи с человеком, который непосредственно делает работу, без передачи между отделами и потери деталей по пути." }
+    },
+    {
+      "@type": "Question",
+      "name": "Гарантируете результат?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Гарантируем качество работы и соблюдение сроков. Конкретные цифры зависят от ниши, бюджета и задачи — говорим честно, без нереалистичных обещаний." }
+    }
+  ]
+}
+</script>
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -304,7 +392,9 @@
 <section id="apply">
   <div class="section-label">Заявка</div>
 
-  <div id="formContainer">
+  <!-- novalidate: валидацию делает submitApplication() — у неё свои сообщения
+       на русском в #formError. required оставлен для скринридеров. -->
+  <form id="formContainer" novalidate>
     <h2 class="apply-title">Не уверены,<br><span>с чего начать?</span></h2>
     <p class="apply-desc">Заполните общую форму — уточню детали и подскажу, какое направление и формат вам подойдут. Если уже знаете, что нужно, быстрее будет через страницу нужного направления: <a href="smm.html" style="color:var(--accent);">SMM</a>, <a href="web.html" style="color:var(--accent);">сайты</a> или <a href="bots.html" style="color:var(--accent);">боты</a>.</p>
 
@@ -315,31 +405,31 @@
         <div class="package-banner-label">Выбранный пакет</div>
         <div class="package-banner-name" id="packageBannerName"></div>
       </div>
-      <button class="package-banner-close" onclick="clearPackage()" title="Убрать">✕</button>
+      <button class="package-banner-close" type="button" onclick="clearPackage()" title="Убрать">✕</button>
     </div>
 
     <div class="form-field">
-      <label class="form-label">Ваше имя *</label>
-      <input type="text" id="f_name" placeholder="Как вас зовут?" autocomplete="name">
+      <label class="form-label" for="f_name">Ваше имя *</label>
+      <input type="text" id="f_name" name="name" placeholder="Как вас зовут?" autocomplete="name" required>
     </div>
 
     <div class="form-field">
-      <label class="form-label">Номер телефона *</label>
-      <input type="tel" id="f_phone" placeholder="+7 999 123 45 67" autocomplete="tel">
+      <label class="form-label" for="f_phone">Номер телефона *</label>
+      <input type="tel" id="f_phone" name="phone" placeholder="+7 999 123 45 67" autocomplete="tel" required>
     </div>
 
     <div class="form-field">
-      <label class="form-label">Telegram / Instagram / другая соцсеть</label>
-      <input type="text" id="f_contact" placeholder="@username">
+      <label class="form-label" for="f_contact">Telegram / Instagram / другая соцсеть</label>
+      <input type="text" id="f_contact" name="contact" placeholder="@username">
     </div>
 
     <div class="form-field">
-      <label class="form-label">О вашем бизнесе *</label>
-      <input type="text" id="f_business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги...">
+      <label class="form-label" for="f_business">О вашем бизнесе *</label>
+      <input type="text" id="f_business" name="business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги..." required>
     </div>
 
     <div class="form-field" id="field_service">
-      <label class="form-label">Что вас интересует</label>
+      <label class="form-label" for="f_service">Что вас интересует</label>
       <select id="f_service">
         <option value="">Выберите...</option>
         <option>SMM под ключ</option>
@@ -353,7 +443,7 @@
     </div>
 
     <div class="form-field" id="field_budget">
-      <label class="form-label">Бюджет</label>
+      <label class="form-label" for="f_budget">Бюджет</label>
       <select id="f_budget">
         <option value="">Выберите...</option>
         <option>до 10 000 ₽</option>
@@ -366,19 +456,21 @@
 
     <div class="form-field">
       <label class="form-label">Платформы</label>
+      <!-- type="button" обязателен: внутри <form> кнопка без type — это
+           type="submit", и клик по платформе отправлял бы заявку. -->
       <div class="platforms-grid">
-        <button class="platform-btn" onclick="togglePlatform(this)">Instagram</button>
-        <button class="platform-btn" onclick="togglePlatform(this)">TikTok</button>
-        <button class="platform-btn" onclick="togglePlatform(this)">Telegram</button>
-        <button class="platform-btn" onclick="togglePlatform(this)">VK</button>
-        <button class="platform-btn" onclick="togglePlatform(this)">YouTube</button>
-        <button class="platform-btn" onclick="togglePlatform(this)">Авито</button>
+        <button class="platform-btn" type="button" aria-pressed="false" onclick="togglePlatform(this)">Instagram</button>
+        <button class="platform-btn" type="button" aria-pressed="false" onclick="togglePlatform(this)">TikTok</button>
+        <button class="platform-btn" type="button" aria-pressed="false" onclick="togglePlatform(this)">Telegram</button>
+        <button class="platform-btn" type="button" aria-pressed="false" onclick="togglePlatform(this)">VK</button>
+        <button class="platform-btn" type="button" aria-pressed="false" onclick="togglePlatform(this)">YouTube</button>
+        <button class="platform-btn" type="button" aria-pressed="false" onclick="togglePlatform(this)">Авито</button>
       </div>
     </div>
 
     <div class="form-field">
-      <label class="form-label">Комментарий (необязательно)</label>
-      <textarea id="f_comment" placeholder="Расскажите подробнее о задаче, целях, пожеланиях..."></textarea>
+      <label class="form-label" for="f_comment">Комментарий (необязательно)</label>
+      <textarea id="f_comment" name="comment" placeholder="Расскажите подробнее о задаче, целях, пожеланиях..."></textarea>
     </div>
 
     <div style="display:flex; align-items:flex-start; gap:12px; background:var(--bg3); border-left:2px solid var(--accent); padding:14px 16px; margin-bottom:4px;">
@@ -395,11 +487,11 @@
       </label>
     </div>
 
-    <button class="submit-btn" id="submitBtn" onclick="submitApplication()">
+    <button class="submit-btn" id="submitBtn" type="submit">
       Отправить заявку →
     </button>
-    <p id="formError" style="color:#ff6b6b; font-size:12px; margin-top:10px; display:none;"></p>
-  </div>
+    <p id="formError" role="alert" style="color:#ff6b6b; font-size:12px; margin-top:10px; display:none;"></p>
+  </form>
 
   <!-- SUCCESS -->
   <div class="success-screen" id="successScreen">

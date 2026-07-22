@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Сайты и PWA — AUVIX Studio</title>
 <meta name="description" content="Лендинги и веб-сервисы под задачу: адаптивная вёрстка, приём заявок в Telegram, PWA-приложения с базой данных и админкой. Кейсы: Амур Гид, Мой транспорт, Pulse.">
+<link rel="canonical" href="https://auvixstudio.ru/web.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-96.png" sizes="96x96" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AUVIX Studio">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://auvixstudio.ru/web.html">
+<meta property="og:title" content="Сайты и PWA — AUVIX Studio">
+<meta property="og:description" content="Лендинги и веб-сервисы под задачу: адаптивная вёрстка, приём заявок в Telegram, PWA-приложения с базой данных и админкой. Кейсы: Амур Гид, Мой транспорт, Pulse.">
+<meta property="og:image" content="https://auvixstudio.ru/og-web.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Сайты и PWA — AUVIX Studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Сайты и PWA — AUVIX Studio">
+<meta name="twitter:description" content="Лендинги и веб-сервисы под задачу: адаптивная вёрстка, приём заявок в Telegram, PWA-приложения с базой данных и админкой. Кейсы: Амур Гид, Мой транспорт, Pulse.">
+<meta name="twitter:image" content="https://auvixstudio.ru/og-web.jpg">
 <script>
   (function () {
     var isTelegram = /tgWebApp/.test(location.href) || !!window.TelegramWebviewProxy || /Telegram/i.test(navigator.userAgent);
@@ -13,6 +31,8 @@
     }
   })();
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300;400;500&family=Oswald:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <!-- Yandex.Metrika counter -->
@@ -211,7 +231,9 @@
 <section id="apply" data-direction="web" data-direction-label="Сайты и PWA">
   <div class="section-label">Заявка</div>
 
-  <div id="formContainer">
+  <!-- novalidate: валидацию делает submitApplication() — у неё свои сообщения
+       на русском в #formError. required оставлен для скринридеров. -->
+  <form id="formContainer" novalidate>
     <h2 class="apply-title">Обсудим<br><span>ваш сайт?</span></h2>
     <p class="apply-desc">Заполните форму — свяжемся с вами в течение дня, предложим решение и назовём стоимость.</p>
 
@@ -221,27 +243,27 @@
         <div class="package-banner-label">Выбранный пакет</div>
         <div class="package-banner-name" id="packageBannerName"></div>
       </div>
-      <button class="package-banner-close" onclick="clearPackage()" title="Убрать">✕</button>
+      <button class="package-banner-close" type="button" onclick="clearPackage()" title="Убрать">✕</button>
     </div>
 
     <div class="form-field">
-      <label class="form-label">Ваше имя *</label>
-      <input type="text" id="f_name" placeholder="Как вас зовут?" autocomplete="name">
+      <label class="form-label" for="f_name">Ваше имя *</label>
+      <input type="text" id="f_name" name="name" placeholder="Как вас зовут?" autocomplete="name" required>
     </div>
     <div class="form-field">
-      <label class="form-label">Номер телефона *</label>
-      <input type="tel" id="f_phone" placeholder="+7 999 123 45 67" autocomplete="tel">
+      <label class="form-label" for="f_phone">Номер телефона *</label>
+      <input type="tel" id="f_phone" name="phone" placeholder="+7 999 123 45 67" autocomplete="tel" required>
     </div>
     <div class="form-field">
-      <label class="form-label">Telegram / Instagram / другая соцсеть</label>
-      <input type="text" id="f_contact" placeholder="@username">
+      <label class="form-label" for="f_contact">Telegram / Instagram / другая соцсеть</label>
+      <input type="text" id="f_contact" name="contact" placeholder="@username">
     </div>
     <div class="form-field">
-      <label class="form-label">О вашем бизнесе *</label>
-      <input type="text" id="f_business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги...">
+      <label class="form-label" for="f_business">О вашем бизнесе *</label>
+      <input type="text" id="f_business" name="business" placeholder="Чем занимаетесь? Кофейня, магазин, услуги..." required>
     </div>
     <div class="form-field" id="field_service">
-      <label class="form-label">Что вас интересует</label>
+      <label class="form-label" for="f_service">Что вас интересует</label>
       <select id="f_service">
         <option value="">Выберите...</option>
         <option>Лендинг</option>
@@ -252,7 +274,7 @@
       </select>
     </div>
     <div class="form-field" id="field_budget">
-      <label class="form-label">Бюджет</label>
+      <label class="form-label" for="f_budget">Бюджет</label>
       <select id="f_budget">
         <option value="">Выберите...</option>
         <option>до 10 000 ₽</option>
@@ -263,8 +285,8 @@
       </select>
     </div>
     <div class="form-field">
-      <label class="form-label">Комментарий (необязательно)</label>
-      <textarea id="f_comment" placeholder="Что должен делать сайт? Какие есть примеры, которые нравятся?"></textarea>
+      <label class="form-label" for="f_comment">Комментарий (необязательно)</label>
+      <textarea id="f_comment" name="comment" placeholder="Что должен делать сайт? Какие есть примеры, которые нравятся?"></textarea>
     </div>
 
     <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
@@ -274,9 +296,9 @@
       </label>
     </div>
 
-    <button class="submit-btn" id="submitBtn" onclick="submitApplication()">Отправить заявку →</button>
-    <p id="formError" style="color:#ff6b6b; font-size:12px; margin-top:10px; display:none;"></p>
-  </div>
+    <button class="submit-btn" id="submitBtn" type="submit">Отправить заявку →</button>
+    <p id="formError" role="alert" style="color:#ff6b6b; font-size:12px; margin-top:10px; display:none;"></p>
+  </form>
 
   <div class="success-screen" id="successScreen">
     <div class="success-icon"><svg width="56" height="56" viewBox="0 0 56 56" fill="none"><circle cx="28" cy="28" r="26" stroke="#c8f060" stroke-width="2"/><path d="M18 28.5L24.5 35L38 20" stroke="#c8f060" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
