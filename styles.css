@@ -375,6 +375,11 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 12px;
 }
+.demo-badge {
+  font-size: var(--fs-tag); letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--danger); margin-bottom: 12px;
+}
+.demo-badge-thumb { margin-bottom: 6px; }
 .case-title {
   font-family: 'Bebas Neue', 'Oswald', sans-serif;
   font-size: var(--fs-h2);

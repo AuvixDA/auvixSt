@@ -51,6 +51,9 @@
   .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
   .field textarea { resize: vertical; min-height: 70px; }
   .field .hint { font-size: 12px; color: var(--gray); margin-top: 6px; }
+  .checkbox-label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
+  .checkbox-label input { width: 16px; height: 16px; accent-color: var(--danger); cursor: pointer; }
+  .demo-tag { color: var(--danger); }
 
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -171,6 +174,14 @@
           <option value="other">Другое</option>
         </select>
         <div class="hint">Влияет на то, в каком фильтре на странице «Кейсы» и на каком лендинге направления появится кейс.</div>
+      </div>
+
+      <div class="field">
+        <label class="checkbox-label">
+          <input type="checkbox" id="fIsDemo">
+          Демо-проект
+        </label>
+        <div class="hint">Отметь, если кейс сделан не для платящего клиента (тестовый/собственный проект для портфолио). На сайте кейс получит красную пометку «Демо-проект».</div>
       </div>
 
       <div class="field">
@@ -301,7 +312,7 @@ async function loadCasesList() {
       ${thumb ? `<img class="case-row-thumb" src="${escapeAttr(thumb)}">` : `<div class="case-row-thumb"></div>`}
       <div class="case-row-info">
         <div class="case-row-title">${escapeText((d.title || '').replace(/\n/g, ' '))}</div>
-        <div class="case-row-meta">${(d.images || []).length} фото${d.link ? ' · есть ссылка' : ''}</div>
+        <div class="case-row-meta">${(d.images || []).length} фото${d.link ? ' · есть ссылка' : ''}${d.isDemo ? ' · <span class="demo-tag">демо</span>' : ''}</div>
       </div>
       <button class="btn secondary small" data-edit="${docSnap.id}">Редактировать</button>`;
     listEl.appendChild(row);
@@ -329,6 +340,7 @@ async function openEditor(caseId) {
     document.getElementById('fDescription').value = d.description || '';
     document.getElementById('fCategory').value = d.category || '';
     document.getElementById('fLink').value = d.link || '';
+    document.getElementById('fIsDemo').checked = !!d.isDemo;
     currentImages = [...(d.images || [])];
     currentPreview = d.preview || '';
   } else {
@@ -337,6 +349,7 @@ async function openEditor(caseId) {
     document.getElementById('fDescription').value = '';
     document.getElementById('fCategory').value = '';
     document.getElementById('fLink').value = '';
+    document.getElementById('fIsDemo').checked = false;
     currentImages = [];
     currentPreview = '';
   }
@@ -437,6 +450,7 @@ document.getElementById('saveCaseBtn').addEventListener('click', async () => {
     description: document.getElementById('fDescription').value.trim(),
     category: document.getElementById('fCategory').value,
     link: document.getElementById('fLink').value.trim(),
+    isDemo: document.getElementById('fIsDemo').checked,
     images: currentImages,
     preview: currentPreview,
     updatedAt: serverTimestamp()

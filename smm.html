@@ -441,7 +441,8 @@
       grid.innerHTML = items.map(data => {
         const img = (data.images||[])[0];
         const thumb = img ? `<img class="case-thumb-img" src="${esc(img)}" alt="${esc(data.title||'')}">` : `<div class="case-thumb-noimg">Фото в кейсе</div>`;
-        return `<a class="case-thumb-card reveal" href="cases.html?filter=smm#case-${esc(data._id)}">${thumb}<div class="case-thumb-body"><div class="case-thumb-cat">${esc(labels.smm||'SMM и дизайн')}</div><div class="case-thumb-title">${esc(firstLine(data.title))}</div><div class="case-thumb-result">${esc(firstLine(data.description))}</div></div></a>`;
+        const demoHtml = data.isDemo ? `<div class="demo-badge demo-badge-thumb">Демо-проект</div>` : '';
+        return `<a class="case-thumb-card reveal" href="cases.html?filter=smm#case-${esc(data._id)}">${thumb}<div class="case-thumb-body"><div class="case-thumb-cat">${esc(labels.smm||'SMM и дизайн')}</div>${demoHtml}<div class="case-thumb-title">${esc(firstLine(data.title))}</div><div class="case-thumb-result">${esc(firstLine(data.description))}</div></div></a>`;
       }).join('\n');
       window.__auvixInitReveal?.();
     } catch(e) {
