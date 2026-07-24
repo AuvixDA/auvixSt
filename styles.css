@@ -74,8 +74,6 @@ nav.scrolled {
   color: var(--white);
   text-decoration: none;
 }
-.logo span { color: var(--accent); }
-
 .nav-right { display: flex; align-items: center; gap: 16px; }
 
 .nav-tg-portfolio, .nav-back {
@@ -395,6 +393,7 @@ section { padding: 64px 20px; border-top: 1px solid var(--border); }
   padding: 10px 20px; font-size: 12px; letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.case-gallery { display: block; }
 .case-img {
   display: block;
   width: auto;
@@ -812,6 +811,11 @@ footer {
   .direction-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
   .case-thumb-grid { grid-template-columns: repeat(2, 1fr); }
   .case-thumb-img { height: 180px; }
+
+  .case-gallery {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+  }
+  .case-gallery .case-img { margin: 0; flex: 0 1 260px; }
   .pricing-table { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; align-items: start; }
   .niche-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
   .done-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }

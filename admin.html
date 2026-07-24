@@ -174,7 +174,16 @@
       </div>
 
       <div class="field">
+        <label>Превью для списка кейсов</label>
+        <div class="hint" style="margin-bottom:8px;">Показывается на плитке в списке «Кейсы» — там фото обрезается под размер карточки. Если не загрузить, возьмётся первое фото из галереи ниже.</div>
+        <div class="gallery-list" id="previewList"></div>
+        <input type="file" id="previewInput" accept="image/*">
+        <div class="upload-status" id="previewUploadStatus"></div>
+      </div>
+
+      <div class="field">
         <label>Фото</label>
+        <div class="hint" style="margin-bottom:8px;">Показываются полностью, без обрезки, когда кейс открыт целиком.</div>
         <div class="gallery-list" id="galleryList"></div>
         <input type="file" id="photoInput" accept="image/*" multiple>
         <div class="upload-status" id="uploadStatus"></div>
@@ -255,6 +264,7 @@ onAuthStateChanged(auth, (user) => {
 
 // ---------- STATE ----------
 let currentImages = [];   // массив URL фото редактируемого кейса
+let currentPreview = '';  // URL превью для плитки в списке кейсов
 let editingCaseId = null; // null = новый кейс
 
 // ---------- VIEW SWITCH ----------
@@ -284,7 +294,7 @@ async function loadCasesList() {
   emptyEl.classList.add('hidden');
   snap.forEach(docSnap => {
     const d = docSnap.data();
-    const thumb = (d.images && d.images[0]) || '';
+    const thumb = d.preview || (d.images && d.images[0]) || '';
     const row = document.createElement('div');
     row.className = 'case-row';
     row.innerHTML = `
@@ -320,6 +330,7 @@ async function openEditor(caseId) {
     document.getElementById('fCategory').value = d.category || '';
     document.getElementById('fLink').value = d.link || '';
     currentImages = [...(d.images || [])];
+    currentPreview = d.preview || '';
   } else {
     document.getElementById('editorHeading').textContent = 'Новый кейс';
     document.getElementById('fTitle').value = '';
@@ -327,10 +338,40 @@ async function openEditor(caseId) {
     document.getElementById('fCategory').value = '';
     document.getElementById('fLink').value = '';
     currentImages = [];
+    currentPreview = '';
   }
   renderGallery();
+  renderPreview();
   showEditorView();
 }
+
+function renderPreview() {
+  const previewEl = document.getElementById('previewList');
+  previewEl.innerHTML = currentPreview ? `
+    <div class="gallery-item">
+      <img src="${escapeAttr(currentPreview)}">
+      <button class="remove-photo" id="removePreviewBtn" title="Удалить превью">✕</button>
+    </div>` : '';
+  document.getElementById('removePreviewBtn')?.addEventListener('click', () => {
+    currentPreview = ''; renderPreview();
+  });
+}
+
+document.getElementById('previewInput').addEventListener('change', async (e) => {
+  const file = (e.target.files || [])[0];
+  if (!file) return;
+  const statusEl = document.getElementById('previewUploadStatus');
+  statusEl.textContent = 'Загружаю превью…';
+  try {
+    currentPreview = await uploadImageToCloudinary(file);
+    renderPreview();
+    statusEl.textContent = 'Загружено ✓';
+  } catch (err) {
+    statusEl.textContent = 'Ошибка загрузки: ' + err.message;
+  } finally {
+    e.target.value = '';
+  }
+});
 
 function renderGallery() {
   const galleryEl = document.getElementById('galleryList');
@@ -397,6 +438,7 @@ document.getElementById('saveCaseBtn').addEventListener('click', async () => {
     category: document.getElementById('fCategory').value,
     link: document.getElementById('fLink').value.trim(),
     images: currentImages,
+    preview: currentPreview,
     updatedAt: serverTimestamp()
   };
   statusEl.textContent = 'Сохраняю…';

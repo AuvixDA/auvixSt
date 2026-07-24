@@ -45,7 +45,7 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a class="logo" href="index.html">AUVIX<span>.</span></a>
+  <a class="logo" href="index.html">AUVIX</a>
   <div class="nav-desktop">
     <a href="index.html">Главная</a>
     <a href="smm.html">SMM</a>
@@ -199,6 +199,7 @@
       .filter(Boolean)
       .map(url => `<img class="case-img reveal" src="${escAttr(url)}" alt="${escAttr(data.title || '')}">`)
       .join('\n');
+    const galleryHtml = images ? `<div class="case-gallery">${images}</div>` : '';
 
     const link = safeUrl(data.link);
     const linkHtml = link
@@ -211,18 +212,20 @@
 
     return `
     <section class="case-section" id="case-${escAttr(data._id)}">
-      <div class="reveal">
-        <div class="case-cat">${esc(categoryLabel)}</div>
-        <h2 class="case-title">${nl2br(data.title)}</h2>
-        <div class="case-desc">${formatDescription(data.description)}</div>
+      <div class="case-body">
+        <div class="reveal">
+          <div class="case-cat">${esc(categoryLabel)}</div>
+          <h2 class="case-title">${nl2br(data.title)}</h2>
+          <div class="case-desc">${formatDescription(data.description)}</div>
+        </div>
+        ${linkHtml}
       </div>
-      ${images}
-      ${linkHtml}
+      ${galleryHtml}
     </section>`;
   }
 
   function renderThumb(data, categoryLabel) {
-    const img = safeUrl((data.images || [])[0]);
+    const img = safeUrl(data.preview || (data.images || [])[0]);
     const thumb = img
       ? `<img class="case-thumb-img" src="${escAttr(img)}" alt="${escAttr(data.title || '')}">`
       : `<div class="case-thumb-noimg">Фото в кейсе ниже</div>`;
