@@ -255,8 +255,13 @@
       <input type="tel" id="f_phone" name="phone" placeholder="+7 999 123 45 67" autocomplete="tel" required>
     </div>
     <div class="form-field">
-      <label class="form-label" for="f_contact">Telegram / Instagram / другая соцсеть</label>
-      <input type="text" id="f_contact" name="contact" placeholder="@username">
+      <label class="form-label" for="f_contact">Удобный мессенджер для связи</label>
+      <select id="f_contact">
+        <option value="">Выберите...</option>
+        <option>Telegram</option>
+        <option>WhatsApp</option>
+        <option>Max</option>
+      </select>
     </div>
     <div class="form-field">
       <label class="form-label" for="f_business">О вашем бизнесе *</label>
@@ -289,12 +294,7 @@
       <textarea id="f_comment" name="comment" placeholder="Что должен делать сайт? Какие есть примеры, которые нравятся?"></textarea>
     </div>
 
-    <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
-      <input type="checkbox" id="f_consent" style="width:16px; height:16px; margin-top:2px; flex-shrink:0; accent-color:var(--accent); cursor:pointer;">
-      <label for="f_consent" style="font-size:12px; color:var(--gray); line-height:1.6; cursor:pointer;">
-        Согласен(на) на обработку персональных данных в соответствии с <a href="privacy-policy.html" target="_blank" style="color:var(--white); text-decoration:underline; text-underline-offset:2px;">Политикой конфиденциальности</a> *
-      </label>
-    </div>
+    <p style="font-size:11px; color:var(--gray); line-height:1.6; margin-bottom:16px;">Нажимая «Отправить заявку», вы соглашаетесь с обработкой персональных данных в соответствии с <a href="privacy-policy.html" target="_blank" style="color:var(--white); text-decoration:underline; text-underline-offset:2px;">Политикой конфиденциальности</a>.</p>
 
     <button class="submit-btn" id="submitBtn" type="submit">Отправить заявку →</button>
     <p id="formError" role="alert" style="color:#ff6b6b; font-size:12px; margin-top:10px; display:none;"></p>
@@ -307,7 +307,7 @@
       <div style="font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:4px;">Выбранный пакет</div>
       <div id="successPackageName" style="font-family:'Bebas Neue','Oswald',sans-serif; font-size:16px; color:var(--white);"></div>
     </div>
-    <div class="success-text">Заявка получена — свяжемся с вами в течение дня, уточним детали и стартуем.<br><br>Или напишите прямо сейчас:</div>
+    <div class="success-text">Заявка отправлена — ожидайте ответа в ближайшее время. Свяжемся с вами в течение дня, уточним детали и стартуем.<br><br>Или можете написать прямо сейчас:</div>
     <a href="https://t.me/idwvw" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#0a0a0a; padding:14px 28px; font-size:13px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; margin-top:8px;">
       Написать в Telegram →
     </a>

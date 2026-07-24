@@ -190,7 +190,6 @@ async function submitApplication() {
   const budget = document.getElementById('f_budget')?.value || '';
   const comment = document.getElementById('f_comment').value.trim();
   const isPromo = document.getElementById('f_promo')?.checked || false;
-  const hasConsent = document.getElementById('f_consent').checked;
   const platforms = getSelectedPlatforms();
 
   const errEl = document.getElementById('formError');
@@ -203,11 +202,6 @@ async function submitApplication() {
   if (phoneDigits.length < 10) {
     errEl.style.display = 'block';
     errEl.textContent = 'Введите корректный номер телефона (минимум 10 цифр).';
-    return;
-  }
-  if (!hasConsent) {
-    errEl.style.display = 'block';
-    errEl.textContent = 'Подтвердите согласие на обработку персональных данных.';
     return;
   }
   errEl.style.display = 'none';
@@ -236,7 +230,7 @@ async function submitApplication() {
     `━━━━━━━━━━━━━━━━━━`,
     `👤 *Клиент:* ${clientLine}`,
     `📞 *Телефон:* ${phone}`,
-    contact ? `💬 *Соцсеть:* ${contact}` : '',
+    contact ? `💬 *Мессенджер:* ${contact}` : '',
     tgUsername ? `🤖 *TG (Mini App):* ${tgUsername}` : '',
     `🏢 *Бизнес:* ${business}`,
     ``,
@@ -266,7 +260,9 @@ async function submitApplication() {
         if (successPackageBlock) successPackageBlock.style.display = 'block';
       }
       document.getElementById('formContainer').style.display = 'none';
-      document.getElementById('successScreen').classList.add('show');
+      const successScreen = document.getElementById('successScreen');
+      successScreen.classList.add('show');
+      successScreen.scrollIntoView({ behavior: 'smooth', block: 'center' });
       tg?.MainButton.hide();
       tg?.HapticFeedback?.notificationOccurred('success');
     } else {
