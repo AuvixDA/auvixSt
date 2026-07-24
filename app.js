@@ -36,6 +36,31 @@ function scrollToApply() {
   }
 }
 
+// ── PROMO VIDEO MODAL ────────────────────────────────────────────────────
+// Видео грузится только при открытии (src ставится лениво), а не сразу
+// со страницей — модалка и кнопка есть только на главной, поэтому на
+// остальных страницах функции просто не находят элемент и ничего не делают.
+function openPromoVideo() {
+  const modal = document.getElementById('videoModal');
+  const videoEl = document.getElementById('promoVideoEl');
+  if (!modal || !videoEl) return;
+  if (!videoEl.src) videoEl.src = videoEl.dataset.src;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  videoEl.play().catch(() => {});
+}
+function closePromoVideo() {
+  const modal = document.getElementById('videoModal');
+  const videoEl = document.getElementById('promoVideoEl');
+  if (!modal) return;
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  videoEl?.pause();
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePromoVideo();
+});
+
 // ── MOBILE NAV ────────────────────────────────────────────────────────────
 function toggleMobileNav() {
   const nav = document.getElementById('mobileNav');

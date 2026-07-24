@@ -181,9 +181,30 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l10-5-3 5 3 5-10-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
         </a>
       </div>
+      <button class="video-teaser" onclick="openPromoVideo()">
+        <span class="video-teaser-thumb">
+          <img src="https://res.cloudinary.com/vhtsxtc2/video/upload/so_1,c_fill,w_120,h_120,q_auto,f_auto/auvix_promo_v8_iozrl4.jpg" alt="">
+          <span class="video-teaser-play">▶</span>
+        </span>
+        <span>
+          <span class="video-teaser-label" style="display:block;">Видео о студии</span>
+          <span class="video-teaser-sub">45 секунд — чем мы занимаемся</span>
+        </span>
+      </button>
     </div>
   </div>
 </section>
+
+<!-- PROMO VIDEO MODAL -->
+<div class="video-modal" id="videoModal">
+  <div class="video-modal-backdrop" onclick="closePromoVideo()"></div>
+  <div class="video-modal-box">
+    <button class="video-modal-close" onclick="closePromoVideo()" aria-label="Закрыть">✕</button>
+    <video id="promoVideoEl" controls playsinline
+      poster="https://res.cloudinary.com/vhtsxtc2/video/upload/so_1,q_auto,f_auto/auvix_promo_v8_iozrl4.jpg"
+      data-src="https://res.cloudinary.com/vhtsxtc2/video/upload/v1784899276/auvix_promo_v8_iozrl4.mp4"></video>
+  </div>
+</div>
 
 <!-- DIRECTIONS -->
 <section id="directions">
