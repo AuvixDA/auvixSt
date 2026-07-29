@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Трекер тренировок</title>
+  <meta name="description" content="Личный трекер тренировок: упражнения, веса, история и аналитика прогресса.">
+  <meta name="theme-color" content="#12141a">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Трекер тренировок</h1>
+  </header>
+
+  <main class="app-main">
+    <section id="panel-log" class="tab-panel active"></section>
+    <section id="panel-library" class="tab-panel"></section>
+    <section id="panel-history" class="tab-panel"></section>
+    <section id="panel-analytics" class="tab-panel"></section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-tab="log">
+      <span class="nav-icon">📝</span>
+      <span>Сегодня</span>
+    </button>
+    <button class="nav-btn" data-tab="library">
+      <span class="nav-icon">🏋️</span>
+      <span>Упражнения</span>
+    </button>
+    <button class="nav-btn" data-tab="history">
+      <span class="nav-icon">📅</span>
+      <span>История</span>
+    </button>
+    <button class="nav-btn" data-tab="analytics">
+      <span class="nav-icon">📈</span>
+      <span>Аналитика</span>
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

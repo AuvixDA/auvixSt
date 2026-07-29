@@ -1,0 +1,19 @@
+{
+  "name": "Трекер тренировок",
+  "short_name": "Тренировки",
+  "description": "Личный трекер тренировок: упражнения, веса, история и аналитика прогресса",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#12141a",
+  "theme_color": "#12141a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
